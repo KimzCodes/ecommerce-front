@@ -1,12 +1,12 @@
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
-import Category from "./components/Category";
-import Item from "./components/Item";
+
+import { ShoppingCardItem, Item, Category } from "./components/ecom-ui";
 function App() {
   return (
     <Container>
       <Header />
-
+      <ShoppingCardItem />
       <div className="grid">
         <Category />
         <Category />

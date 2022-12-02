@@ -1,0 +1,12 @@
+.item img {
+  width: 120px;
+}
+
+.item h2,
+.item h3 {
+  font-size: 13px;
+}
+
+.item h2 {
+  margin-top: 9px;
+}
