@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./state";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -10,6 +12,9 @@ import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import Items from "./pages/Items";
 import ErrorPage from "./pages/ErrorPage";
+import NewCollections from "./pages/NewCollections";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -18,12 +23,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
+      { path: "new-collections", element: <NewCollections /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
       {
-        path: "/categories",
+        path: "categories",
         element: <Categories />,
       },
       {
-        path: "/categories/:id/items",
+        path: "categories/:id/items",
         element: <Items />,
         loader: ({ params }) => {
           if (isNaN(params.id)) {
@@ -39,4 +47,8 @@ const router = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={router} />);
+root.render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);
