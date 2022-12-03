@@ -47,6 +47,7 @@ nav {
 .secNav li {
   padding: 10px 0 10px 0;
   margin: 0px 5px 0 5px;
+  position: relative;
 }
 
 .mainNav li a,
@@ -56,7 +57,13 @@ nav {
   font-size: 14px;
 }
 
-.mainNav li a:hover,
-.secNav li a:hover {
-  text-decoration: underline;
+.activeLink::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: white;
+  height: 2px;
+  width: 100%;
+
+  bottom: 2;
 }

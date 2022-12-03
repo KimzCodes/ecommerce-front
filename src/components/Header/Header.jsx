@@ -1,7 +1,8 @@
+import { NavLink } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import shoppingCardImg from "../../assets/shopping-card.svg";
 
-import styles from "./header.module.css";
+import styles from "./styles.module.css";
 
 const Header = () => {
   const {
@@ -11,7 +12,9 @@ const Header = () => {
     header,
     mainNav,
     secNav,
+    activeLink,
   } = styles;
+
   return (
     <header className={header}>
       <div className={headerTop}>
@@ -27,21 +30,36 @@ const Header = () => {
       <nav>
         <ul className={mainNav}>
           <li>
-            <a href="/">Home</a>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? activeLink : undefined)}
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <a href="/">Shopping</a>
+            <NavLink
+              to="/categories"
+              className={({ isActive }) => (isActive ? activeLink : undefined)}
+            >
+              Categories
+            </NavLink>
           </li>
           <li>
-            <a href="/">About us</a>
+            <NavLink
+              to="/new-collections"
+              className={({ isActive }) => (isActive ? activeLink : undefined)}
+            >
+              New Collections
+            </NavLink>
           </li>
         </ul>
         <ul className={secNav}>
           <li>
-            <a href="/">Login</a>
+            <NavLink to="/login">Login</NavLink>
           </li>
           <li>
-            <a href="/">Register</a>
+            <NavLink to="/register">Register</NavLink>
           </li>
         </ul>
       </nav>
