@@ -6,6 +6,7 @@ import { Category } from "../components/ecom-ui";
 const Categories = () => {
   const dispatch = useDispatch();
   const { loading, error, records } = useSelector((state) => state.categories);
+
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
