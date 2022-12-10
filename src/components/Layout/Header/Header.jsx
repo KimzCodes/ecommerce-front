@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Badge } from "react-bootstrap";
-import shoppingCardImg from "../../assets/shopping-card.svg";
+import shoppingCardImg from "../../../assets/shopping-card.svg";
 
 import styles from "./styles.module.css";
 
