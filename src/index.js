@@ -31,12 +31,12 @@ const router = createBrowserRouter([
         element: <Categories />,
       },
       {
-        path: "categories/:id/items",
+        path: "categories/:prefix/items",
         element: <Items />,
         loader: ({ params }) => {
-          if (isNaN(params.id)) {
+          if (!isNaN(params.prefix)) {
             throw new Response("Bad Request", {
-              statusText: "Item not found",
+              statusText: "Category not found",
               status: 400,
             });
           }
