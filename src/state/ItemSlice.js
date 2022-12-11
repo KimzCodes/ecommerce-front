@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getCategories = createAsyncThunk(
-  "categories/getCategories",
-  async (_, thunkAPI) => {
+export const filterItems = createAsyncThunk(
+  "items/filterItems",
+  async (prefix, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch("http://localhost:5000/category");
+      const res = await fetch(
+        `http://localhost:5000/items?cat_prefix=${prefix}`
+      );
       const data = await res.json();
       return data;
     } catch (error) {
@@ -13,26 +15,25 @@ export const getCategories = createAsyncThunk(
     }
   }
 );
-
 const initialState = { loading: false, error: null, records: [] };
 
-const categorySlice = createSlice({
-  name: "categories",
+const itemSlice = createSlice({
+  name: "items",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(getCategories.pending, (state) => {
+    builder.addCase(filterItems.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getCategories.fulfilled, (state, action) => {
+    builder.addCase(filterItems.fulfilled, (state, action) => {
       state.loading = false;
       state.records = action.payload;
     });
-    builder.addCase(getCategories.rejected, (state, action) => {
+    builder.addCase(filterItems.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default categorySlice.reducer;
+export default itemSlice.reducer;
