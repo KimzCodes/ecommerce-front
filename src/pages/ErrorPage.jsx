@@ -3,7 +3,6 @@ import { Button, Container } from "react-bootstrap";
 
 const ErrorPage = () => {
   const error = useRouteError();
-  console.log(error);
 
   return (
     <Container>

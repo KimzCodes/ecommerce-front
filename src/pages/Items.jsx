@@ -10,7 +10,7 @@ const Items = () => {
   const { prefix } = useParams();
 
   const { loading, error, records } = useSelector((state) => state.items);
-  console.log(records);
+
   useEffect(() => {
     dispatch(filterItems(prefix));
   }, [dispatch, prefix]);
