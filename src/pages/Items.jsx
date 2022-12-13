@@ -18,7 +18,7 @@ const Items = () => {
   return (
     <div>
       <GridList error={error} loading={loading} items={records}>
-        <Item />
+        <Item actionType="add" />
       </GridList>
     </div>
   );
