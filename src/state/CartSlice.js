@@ -20,6 +20,7 @@ const cartSlice = createSlice({
 export const totalCartQuantity = createSelector(
   (state) => state.cart.items,
   (items) => {
+    console.log("fired");
     let totalQuantity = 0;
 
     for (const id in items) {
