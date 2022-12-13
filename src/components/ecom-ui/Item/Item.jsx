@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import styles from "./styles.module.css";
 
 const Item = ({ btnText, actionType, id, title, price, img }) => {
+  console.log("id", id);
   const { item } = styles;
   const dispatch = useDispatch();
   const actionHandler = () => {

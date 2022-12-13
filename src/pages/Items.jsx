@@ -13,6 +13,10 @@ const Items = () => {
 
   useEffect(() => {
     dispatch(filterItems(prefix));
+
+    return () => {
+      dispatch({ type: "items/cleanRecords" });
+    };
   }, [dispatch, prefix]);
 
   return (
