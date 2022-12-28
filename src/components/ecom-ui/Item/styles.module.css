@@ -1,11 +1,19 @@
 .item {
   width: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .item img {
   width: 100%;
   background-color: #f2f2f2;
   height: 180px;
+}
+
+.item h2 {
+  height: 30px;
+  margin-bottom: 10px;
 }
 
 .item h2,
@@ -15,4 +23,8 @@
 
 .item h2 {
   margin-top: 9px;
+}
+
+.button {
+  width: 100%;
 }
