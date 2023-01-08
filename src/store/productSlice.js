@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const filterItems = createAsyncThunk(
-  "items/filterItems",
+export const filterProducts = createAsyncThunk(
+  "products/filterProducts",
   async (prefix, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -17,8 +17,8 @@ export const filterItems = createAsyncThunk(
 );
 const initialState = { loading: false, error: null, records: [] };
 
-const itemSlice = createSlice({
-  name: "items",
+const productSlice = createSlice({
+  name: "products",
   initialState,
   reducers: {
     cleanRecords(state) {
@@ -26,19 +26,19 @@ const itemSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(filterItems.pending, (state) => {
+    builder.addCase(filterProducts.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(filterItems.fulfilled, (state, action) => {
+    builder.addCase(filterProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.records = action.payload;
     });
-    builder.addCase(filterItems.rejected, (state, action) => {
+    builder.addCase(filterProducts.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
   },
 });
 
-export default itemSlice.reducer;
+export default productSlice.reducer;

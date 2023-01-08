@@ -12,8 +12,8 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import categories from "./categorySlice";
-import items from "./ItemSlice";
-import cart from "./CartSlice";
+import products from "./productSlice";
+import cart from "./cartSlice";
 
 const persistConfig = {
   key: "ecom",
@@ -22,7 +22,7 @@ const persistConfig = {
   whitelist: ["cart"],
 };
 
-const rootReducer = combineReducers({ categories, items, cart });
+const rootReducer = combineReducers({ categories, products, cart });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCategories } from "../state/categorySlice";
+import { getCategories } from "../store/categorySlice";
 import { Category } from "../components/ecom-ui";
 import { GridList } from "../components/Layout";
 
@@ -14,7 +14,7 @@ const Categories = () => {
 
   return (
     <div>
-      <GridList items={records} loading={loading} error={error}>
+      <GridList records={records} loading={loading} error={error}>
         <Category />
       </GridList>
     </div>

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const Item = ({ btnText, actionType, id, title, price, img, max }) => {
+const Product = ({ btnText, actionType, id, title, price, img, max }) => {
   const { item, button } = styles;
   const [disabled, setDisabled] = useState(false);
   const [btnClicked, setBtnClicked] = useState(0);
@@ -51,4 +51,4 @@ const Item = ({ btnText, actionType, id, title, price, img, max }) => {
   );
 };
 
-export default Item;
+export default Product;

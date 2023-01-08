@@ -9,7 +9,7 @@
   justify-content: space-between;
 }
 
-.shoppingCard {
+.shoppingCart {
   position: relative;
 }
 .shoppingCartCounter {
@@ -67,7 +67,7 @@ nav {
   bottom: 2;
 }
 
-.bumpCard {
+.bumpCart {
   animation: bump 300ms ease-out;
 }
 

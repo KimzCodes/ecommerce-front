@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterItems } from "../state/ItemSlice";
+import { filterProducts } from "../store/productSlice";
 import { useParams } from "react-router-dom";
-import { Item } from "../components/ecom-ui";
+import { Product } from "../components/ecom-ui";
 import { GridList } from "../components/Layout";
 
 const Items = () => {
   const dispatch = useDispatch();
   const { prefix } = useParams();
 
-  const { loading, error, records } = useSelector((state) => state.items);
+  const { loading, error, records } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(filterItems(prefix));
+    dispatch(filterProducts(prefix));
 
     return () => {
       dispatch({ type: "items/cleanRecords" });
@@ -21,8 +21,8 @@ const Items = () => {
 
   return (
     <div>
-      <GridList error={error} loading={loading} items={records}>
-        <Item actionType="add" />
+      <GridList error={error} loading={loading} records={records}>
+        <Product actionType="add" />
       </GridList>
     </div>
   );

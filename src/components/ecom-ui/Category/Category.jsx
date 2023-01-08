@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 const Category = ({ prefix, title, img }) => {
   const { category, categoryImg, categoryTitle, categoryLink } = styles;
   return (
-    <Link to={`${prefix}/items`} className={categoryLink}>
+    <Link to={`${prefix}/products`} className={categoryLink}>
       <div className={category}>
         <div className={categoryImg}>
           <img src={img} alt={title} />

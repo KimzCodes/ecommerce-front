@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { totalCartQuantity, closeReachToMax } from "../../../state/CartSlice";
+import { totalCartQuantity, closeReachToMax } from "../../../store/cartSlice";
 
 import { NavLink } from "react-router-dom";
 import { Badge, Alert } from "react-bootstrap";
-import shoppingCardImg from "../../../assets/shopping-card.svg";
+import shoppingCartImg from "../../../assets/shopping-card.svg";
 
 import styles from "./styles.module.css";
 import { useCallback } from "react";
 
 const Header = () => {
   const {
-    shoppingCard,
+    shoppingCart,
     shoppingCartCounter,
     headerTop,
     header,
     mainNav,
     secNav,
     activeLink,
-    bumpCard,
+    bumpCart,
     notification,
   } = styles;
 
   const dispatch = useDispatch();
-  const [isAnimateCard, setIsAnimateCard] = useState(false);
+  const [isAnimateCart, setIsAnimateCart] = useState(false);
   const totalQuantity = useSelector(totalCartQuantity);
   const reachToMax = useSelector((state) => state.cart.reachToMax);
-  const cardClasses = `${shoppingCartCounter} ${isAnimateCard ? bumpCard : ""}`;
+  const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
 
   const closeReachToMaxHandler = useCallback(() => {
     dispatch(closeReachToMax());
@@ -34,9 +34,9 @@ const Header = () => {
 
   useEffect(() => {
     if (totalQuantity === 0) return;
-    setIsAnimateCard(true);
+    setIsAnimateCart(true);
     const debounce = setTimeout(() => {
-      setIsAnimateCard(false);
+      setIsAnimateCart(false);
     }, 300);
 
     return () => {
@@ -70,9 +70,9 @@ const Header = () => {
         <h1>
           Our <Badge bg="info">Ecom</Badge>
         </h1>
-        <div className={shoppingCard}>
-          <img alt="" src={shoppingCardImg} width="30" />
-          <div className={cardClasses}>{totalQuantity}</div>
+        <div className={shoppingCart}>
+          <img alt="" src={shoppingCartImg} width="30" />
+          <div className={cartClasses}>{totalQuantity}</div>
         </div>
       </div>
 

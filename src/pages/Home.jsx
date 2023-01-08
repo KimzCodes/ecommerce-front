@@ -1,15 +1,15 @@
-import { Item } from "../components/ecom-ui";
+import { Product } from "../components/ecom-ui";
 
 const Home = () => {
   return (
     <div className="grid">
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
+      <Product />
     </div>
   );
 };

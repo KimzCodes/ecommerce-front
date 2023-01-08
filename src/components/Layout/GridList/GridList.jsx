@@ -3,19 +3,19 @@ import Loading from "../Loading/Loading";
 
 import styles from "./styles.module.css";
 
-const GridList = ({ children, items, error, loading }) => {
+const GridList = ({ children, records, error, loading }) => {
   const { grid } = styles;
 
-  const renderItem = items.map((item) =>
+  const renderElements = records.map((record) =>
     cloneElement(children, {
-      key: item.id,
-      ...item,
+      key: record.id,
+      ...record,
     })
   );
 
   return (
     <Loading error={error} loading={loading}>
-      <div className={grid}>{renderItem}</div>
+      <div className={grid}>{renderElements}</div>
     </Loading>
   );
 };

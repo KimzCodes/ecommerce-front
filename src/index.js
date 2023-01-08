@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./state";
+import { store, persistor } from "./store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -11,7 +11,7 @@ import "./index.css";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
-import Items from "./pages/Items";
+import Products from "./pages/Products";
 import ErrorPage from "./pages/ErrorPage";
 import NewCollections from "./pages/NewCollections";
 import Login from "./pages/Login";
@@ -32,8 +32,8 @@ const router = createBrowserRouter([
         element: <Categories />,
       },
       {
-        path: "categories/:prefix/items",
-        element: <Items />,
+        path: "categories/:prefix/products",
+        element: <Products />,
         loader: ({ params }) => {
           if (!isNaN(params.prefix)) {
             throw new Response("Bad Request", {

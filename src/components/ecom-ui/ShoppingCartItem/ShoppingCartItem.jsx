@@ -1,13 +1,13 @@
-import Item from "../Item/Item";
+import Product from "../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const ShoppingCardItem = () => {
-  const { cardItem, cardItemSelection } = styles;
+const ShoppingCartItem = () => {
+  const { cartItem, cartItemSelection } = styles;
   return (
-    <div className={cardItem}>
-      <Item btnText="Remove" />
-      <div className={cardItemSelection}>
+    <div className={cartItem}>
+      <Product btnText="Remove" />
+      <div className={cartItemSelection}>
         <Form.Select aria-label="Default select example">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -18,4 +18,4 @@ const ShoppingCardItem = () => {
   );
 };
 
-export default ShoppingCardItem;
+export default ShoppingCartItem;
