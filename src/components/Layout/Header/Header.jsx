@@ -91,7 +91,7 @@ const Header = () => {
         {reachToMax ? (
           <Alert
             variant="info"
-            onClose={dispatch(closeReachToMax())}
+            onClose={() => dispatch(closeReachToMax())}
             dismissible
           >
             <p>Sorry, you reached to maximum limit.</p>
