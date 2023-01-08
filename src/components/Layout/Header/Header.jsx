@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { totalCartQuantity } from "../../../state/CartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { totalCartQuantity, closeReachToMax } from "../../../state/CartSlice";
 
 import { NavLink } from "react-router-dom";
-import { Badge } from "react-bootstrap";
+import { Badge, Alert } from "react-bootstrap";
 import shoppingCardImg from "../../../assets/shopping-card.svg";
 
 import styles from "./styles.module.css";
@@ -18,11 +18,13 @@ const Header = () => {
     secNav,
     activeLink,
     bumpCard,
+    notification,
   } = styles;
 
+  const dispatch = useDispatch();
   const [isAnimateCard, setIsAnimateCard] = useState(false);
   const totalQuantity = useSelector(totalCartQuantity);
-
+  const reachToMax = useSelector((state) => state.cart.reachedToMax);
   const cardClasses = `${shoppingCartCounter} ${isAnimateCard ? bumpCard : ""}`;
 
   useEffect(() => {
@@ -36,6 +38,7 @@ const Header = () => {
       clearTimeout(debounce);
     };
   }, [totalQuantity]);
+
   return (
     <header className={header}>
       <div className={headerTop}>
@@ -84,6 +87,17 @@ const Header = () => {
           </li>
         </ul>
       </nav>
+      <div className={notification}>
+        {reachToMax ? (
+          <Alert
+            variant="info"
+            onClose={dispatch(closeReachToMax())}
+            dismissible
+          >
+            <p>Sorry, you reached to maximum limit.</p>
+          </Alert>
+        ) : null}
+      </div>
     </header>
   );
 };

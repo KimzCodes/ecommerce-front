@@ -6,7 +6,7 @@ export const filterItems = createAsyncThunk(
     const { rejectWithValue } = thunkAPI;
     try {
       const res = await fetch(
-        `http://localhost:5000/items?cat_prefix=${prefix}`
+        `http://localhost:5005/items?cat_prefix=${prefix}`
       );
       const data = await res.json();
       return data;
