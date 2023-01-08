@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Product } from "../components/ecom-ui";
 import { GridList } from "../components/Layout";
 
-const Items = () => {
+const Products = () => {
   const dispatch = useDispatch();
   const { prefix } = useParams();
 
@@ -28,4 +28,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default Products;
