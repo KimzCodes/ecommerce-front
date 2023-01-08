@@ -7,6 +7,7 @@ import { Badge, Alert } from "react-bootstrap";
 import shoppingCardImg from "../../../assets/shopping-card.svg";
 
 import styles from "./styles.module.css";
+import { useCallback } from "react";
 
 const Header = () => {
   const {
@@ -24,8 +25,12 @@ const Header = () => {
   const dispatch = useDispatch();
   const [isAnimateCard, setIsAnimateCard] = useState(false);
   const totalQuantity = useSelector(totalCartQuantity);
-  const reachToMax = useSelector((state) => state.cart.reachedToMax);
+  const reachToMax = useSelector((state) => state.cart.reachToMax);
   const cardClasses = `${shoppingCartCounter} ${isAnimateCard ? bumpCard : ""}`;
+
+  const closeReachToMaxMessage = useCallback(() => {
+    dispatch(closeReachToMax());
+  }, [dispatch]);
 
   useEffect(() => {
     if (totalQuantity === 0) return;
@@ -38,6 +43,26 @@ const Header = () => {
       clearTimeout(debounce);
     };
   }, [totalQuantity]);
+
+  useEffect(() => {
+    if (!reachToMax) {
+      return;
+    }
+
+    const debounce = setTimeout(closeReachToMaxMessage, 3500);
+
+    return () => {
+      clearTimeout(debounce);
+    };
+  }, [reachToMax, closeReachToMaxMessage]);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", closeReachToMaxMessage);
+
+    return () => {
+      window.addEventListener("beforeunload", closeReachToMaxMessage);
+    };
+  });
 
   return (
     <header className={header}>
@@ -89,11 +114,7 @@ const Header = () => {
       </nav>
       <div className={notification}>
         {reachToMax ? (
-          <Alert
-            variant="info"
-            onClose={() => dispatch(closeReachToMax())}
-            dismissible
-          >
+          <Alert variant="info" onClose={closeReachToMaxMessage} dismissible>
             <p>Sorry, you reached to maximum limit.</p>
           </Alert>
         ) : null}

@@ -1,22 +1,22 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 
-const initialState = { items: {}, reachedToMax: false };
+const initialState = { items: {}, reachToMax: false };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     closeReachToMax(state) {
-      state.reachedToMax = false;
+      state.reachToMax = false;
     },
     addToCart(state, action) {
       const id = action.payload.id;
       const max = action.payload.max;
       if (state.items[id] === max) {
-        state.reachedToMax = true;
+        state.reachToMax = true;
       } else {
-        if (state.reachedToMax) {
-          state.reachedToMax = false;
+        if (state.reachToMax) {
+          state.reachToMax = false;
         }
 
         if (state.items[id]) {
