@@ -28,7 +28,7 @@ const Header = () => {
   const reachToMax = useSelector((state) => state.cart.reachToMax);
   const cardClasses = `${shoppingCartCounter} ${isAnimateCard ? bumpCard : ""}`;
 
-  const closeReachToMaxMessage = useCallback(() => {
+  const closeReachToMaxHandler = useCallback(() => {
     dispatch(closeReachToMax());
   }, [dispatch]);
 
@@ -49,18 +49,18 @@ const Header = () => {
       return;
     }
 
-    const debounce = setTimeout(closeReachToMaxMessage, 3500);
+    const debounce = setTimeout(closeReachToMaxHandler, 3500);
 
     return () => {
       clearTimeout(debounce);
     };
-  }, [reachToMax, closeReachToMaxMessage]);
+  }, [reachToMax, closeReachToMaxHandler]);
 
   useEffect(() => {
-    window.addEventListener("beforeunload", closeReachToMaxMessage);
+    window.addEventListener("beforeunload", closeReachToMaxHandler);
 
     return () => {
-      window.addEventListener("beforeunload", closeReachToMaxMessage);
+      window.addEventListener("beforeunload", closeReachToMaxHandler);
     };
   });
 
@@ -114,7 +114,7 @@ const Header = () => {
       </nav>
       <div className={notification}>
         {reachToMax ? (
-          <Alert variant="info" onClose={closeReachToMaxMessage} dismissible>
+          <Alert variant="info" onClose={closeReachToMaxHandler} dismissible>
             <p>Sorry, you reached to maximum limit.</p>
           </Alert>
         ) : null}
