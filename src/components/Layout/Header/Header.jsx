@@ -50,19 +50,13 @@ const Header = () => {
     }
 
     const debounce = setTimeout(closeReachToMaxHandler, 3500);
-
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [reachToMax, closeReachToMaxHandler]);
-
-  useEffect(() => {
     window.addEventListener("beforeunload", closeReachToMaxHandler);
 
     return () => {
+      clearTimeout(debounce);
       window.addEventListener("beforeunload", closeReachToMaxHandler);
     };
-  });
+  }, [reachToMax, closeReachToMaxHandler]);
 
   return (
     <header className={header}>
