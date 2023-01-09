@@ -24,8 +24,7 @@ const ShoppingCart = () => {
       return (
         <ShoppingCartItem
           key={el.id}
-          data={el}
-          quantity={quantity}
+          data={{ ...el, quantity }}
           changeQuantityHandler={changeQuantityHandler}
         />
       );
