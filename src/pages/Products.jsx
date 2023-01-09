@@ -22,7 +22,7 @@ const Products = () => {
   return (
     <div>
       <GridList error={error} loading={loading} records={records}>
-        <Product actionType="add" />
+        <Product />
       </GridList>
     </div>
   );

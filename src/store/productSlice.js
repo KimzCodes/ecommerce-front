@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { removeItem } from "./cartSlice";
 
 export const filterProducts = createAsyncThunk(
   "products/filterProducts",
@@ -79,6 +80,12 @@ const productSlice = createSlice({
     builder.addCase(filterByCartItems.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    });
+
+    //listen to remove cart item
+    builder.addCase(removeItem, (state, action) => {
+      const id = action.payload;
+      state.records = state.records.filter((el) => el.id !== id);
     });
   },
 });

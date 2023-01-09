@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../../store/cartSlice";
+import { addToCart, removeItem } from "../../../store/cartSlice";
 
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const Product = ({ btnText, actionType, id, title, price, img, max }) => {
+const Product = ({
+  btnText,
+  actionType = "add",
+  id,
+  title,
+  price,
+  img,
+  max,
+}) => {
   const { item, button } = styles;
   const [disabled, setDisabled] = useState(false);
   const [btnClicked, setBtnClicked] = useState(0);
@@ -27,6 +35,10 @@ const Product = ({ btnText, actionType, id, title, price, img, max }) => {
     if (actionType === "add") {
       dispatch(addToCart({ id, max }));
       setBtnClicked((prev) => prev + 1);
+    }
+
+    if (actionType === "remove") {
+      dispatch(removeItem(id));
     }
   };
 

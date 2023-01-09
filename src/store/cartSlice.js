@@ -30,6 +30,10 @@ const cartSlice = createSlice({
         }
       }
     },
+    removeItem(state, action) {
+      const id = action.payload;
+      delete state.items[id];
+    },
   },
 });
 
@@ -45,6 +49,7 @@ export const totalCartQuantity = createSelector(
   }
 );
 
-export const { closeReachToMax, addToCart, changeQuantity } = cartSlice.actions;
+export const { closeReachToMax, addToCart, changeQuantity, removeItem } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

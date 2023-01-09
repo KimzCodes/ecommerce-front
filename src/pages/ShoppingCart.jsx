@@ -20,19 +20,19 @@ const ShoppingCart = () => {
     [dispatch]
   );
 
-  const shoppingCartList =
-    products.length &&
-    products.map((el) => {
-      const quantity = items[el.id];
-      return (
-        <ShoppingCartItem
-          key={el.id}
-          data={el}
-          quantity={quantity}
-          changeQuantityHandler={changeQuantityHandler}
-        />
-      );
-    });
+  const shoppingCartList = products.length
+    ? products.map((el) => {
+        const quantity = items[el.id];
+        return (
+          <ShoppingCartItem
+            key={el.id}
+            data={el}
+            quantity={quantity}
+            changeQuantityHandler={changeQuantityHandler}
+          />
+        );
+      })
+    : "Your cart is empty";
 
   return <div>{shoppingCartList}</div>;
 };
