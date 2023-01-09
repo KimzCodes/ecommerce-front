@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { totalCartQuantity, closeReachToMax } from "../../../store/cartSlice";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Badge, Alert } from "react-bootstrap";
 import shoppingCartImg from "../../../assets/shopping-card.svg";
 
@@ -64,10 +64,12 @@ const Header = () => {
         <h1>
           Our <Badge bg="info">Ecom</Badge>
         </h1>
-        <div className={shoppingCart}>
-          <img alt="" src={shoppingCartImg} width="30" />
-          <div className={cartClasses}>{totalQuantity}</div>
-        </div>
+        <Link to="shopping-cart">
+          <div className={shoppingCart}>
+            <img alt="" src={shoppingCartImg} width="30" />
+            <div className={cartClasses}>{totalQuantity}</div>
+          </div>
+        </Link>
       </div>
 
       <nav>

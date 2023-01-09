@@ -9,6 +9,10 @@ const cartSlice = createSlice({
     closeReachToMax(state) {
       state.reachToMax = false;
     },
+    changeQuantity(state, action) {
+      const { id, quantity } = action.payload;
+      state.items[id] = quantity;
+    },
     addToCart(state, action) {
       const id = action.payload.id;
       const max = action.payload.max;
@@ -41,6 +45,6 @@ export const totalCartQuantity = createSelector(
   }
 );
 
-export const { closeReachToMax, addToCart } = cartSlice.actions;
+export const { closeReachToMax, addToCart, changeQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

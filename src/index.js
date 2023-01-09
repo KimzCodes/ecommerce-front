@@ -12,6 +12,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import Products from "./pages/Products";
+import ShoppingCart from "./pages/ShoppingCart";
 import ErrorPage from "./pages/ErrorPage";
 import NewCollections from "./pages/NewCollections";
 import Login from "./pages/Login";
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "new-collections", element: <NewCollections /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      { path: "shopping-cart", element: <ShoppingCart /> },
       {
         path: "categories",
         element: <Categories />,

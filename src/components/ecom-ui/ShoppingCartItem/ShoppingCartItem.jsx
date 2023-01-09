@@ -2,16 +2,29 @@ import Product from "../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const ShoppingCartItem = () => {
-  const { cartItem, cartItemSelection } = styles;
+const ShoppingCartItem = ({ data, changeQuantityHandler }) => {
+  const { cartItem, cartItemSelection, quantity } = styles;
+  const options = Array(data.max)
+    .fill(1)
+    .map((_, idx) => {
+      const value = ++idx;
+      return (
+        <option value={value} key={value}>
+          {value}
+        </option>
+      );
+    });
   return (
     <div className={cartItem}>
-      <Product btnText="Remove" />
+      <Product btnText="Remove" {...data} />
       <div className={cartItemSelection}>
-        <Form.Select aria-label="Default select example">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+        <Form.Select
+          value={quantity}
+          onChange={(e) =>
+            changeQuantityHandler({ quantity: +e.target.value, id: data.id })
+          }
+        >
+          {options}
         </Form.Select>
       </div>
     </div>
