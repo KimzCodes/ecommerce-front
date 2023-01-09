@@ -1,8 +1,10 @@
+import { memo } from "react";
 import Product from "../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const ShoppingCartItem = ({ data, changeQuantityHandler }) => {
+const ShoppingCartItem = ({ data, changeQuantityHandler, quantity }) => {
+  console.log("item");
   const { cartItem, cartItemSelection } = styles;
   const options = Array(data.max)
     .fill(1)
@@ -19,7 +21,7 @@ const ShoppingCartItem = ({ data, changeQuantityHandler }) => {
       <Product btnText="Remove" {...data} />
       <div className={cartItemSelection}>
         <Form.Select
-          value={data.quantity}
+          value={quantity}
           onChange={(e) =>
             changeQuantityHandler({ quantity: +e.target.value, id: data.id })
           }
@@ -31,4 +33,4 @@ const ShoppingCartItem = ({ data, changeQuantityHandler }) => {
   );
 };
 
-export default ShoppingCartItem;
+export default memo(ShoppingCartItem);

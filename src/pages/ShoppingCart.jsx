@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCartItems } from "../store/productSlice";
 import { changeQuantity } from "../store/cartSlice";
@@ -13,9 +13,12 @@ const ShoppingCart = () => {
     dispatch(filterByCartItems());
   }, [dispatch]);
 
-  const changeQuantityHandler = (data) => {
-    dispatch(changeQuantity(data));
-  };
+  const changeQuantityHandler = useCallback(
+    (data) => {
+      dispatch(changeQuantity(data));
+    },
+    [dispatch]
+  );
 
   const shoppingCartList =
     products.length &&
@@ -24,7 +27,8 @@ const ShoppingCart = () => {
       return (
         <ShoppingCartItem
           key={el.id}
-          data={{ ...el, quantity }}
+          data={el}
+          quantity={quantity}
           changeQuantityHandler={changeQuantityHandler}
         />
       );
