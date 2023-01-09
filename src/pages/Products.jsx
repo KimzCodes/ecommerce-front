@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterProducts } from "../store/productSlice";
+import { filterProducts, cleanRecords } from "../store/productSlice";
 import { useParams } from "react-router-dom";
 import { Product } from "../components/ecom-ui";
 import { GridList } from "../components/Layout";
@@ -15,7 +15,7 @@ const Products = () => {
     dispatch(filterProducts(prefix));
 
     return () => {
-      dispatch({ type: "items/cleanRecords" });
+      dispatch(cleanRecords());
     };
   }, [dispatch, prefix]);
 

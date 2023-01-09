@@ -40,5 +40,5 @@ const productSlice = createSlice({
     });
   },
 });
-
+export const { cleanRecords } = productSlice.actions;
 export default productSlice.reducer;

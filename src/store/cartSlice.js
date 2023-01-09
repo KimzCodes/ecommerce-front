@@ -41,6 +41,6 @@ export const totalCartQuantity = createSelector(
   }
 );
 
-export const { closeReachToMax } = cartSlice.actions;
+export const { closeReachToMax, addToCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

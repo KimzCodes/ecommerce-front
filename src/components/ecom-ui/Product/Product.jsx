@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { addToCart } from "../../../store/cartSlice";
+
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
@@ -23,7 +25,7 @@ const Product = ({ btnText, actionType, id, title, price, img, max }) => {
 
   const actionHandler = () => {
     if (actionType === "add") {
-      dispatch({ type: "cart/addToCart", payload: { id, max } });
+      dispatch(addToCart({ id, max }));
       setBtnClicked((prev) => prev + 1);
     }
   };
