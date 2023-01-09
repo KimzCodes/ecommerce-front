@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
 const ShoppingCartItem = ({ data, changeQuantityHandler }) => {
-  const { cartItem, cartItemSelection, quantity } = styles;
+  const { cartItem, cartItemSelection } = styles;
   const options = Array(data.max)
     .fill(1)
     .map((_, idx) => {
@@ -19,7 +19,7 @@ const ShoppingCartItem = ({ data, changeQuantityHandler }) => {
       <Product btnText="Remove" {...data} />
       <div className={cartItemSelection}>
         <Form.Select
-          value={quantity}
+          value={data.quantity}
           onChange={(e) =>
             changeQuantityHandler({ quantity: +e.target.value, id: data.id })
           }
