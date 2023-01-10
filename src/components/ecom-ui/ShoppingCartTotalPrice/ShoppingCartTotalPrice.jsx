@@ -1,12 +1,12 @@
 import styles from "./styles.module.css";
 
-const ShoppingCartTotalPrice = () => {
+const ShoppingCartTotalPrice = ({ totalPrice }) => {
   const { total } = styles;
 
   return (
     <div className={total}>
       <span>TotalPrice</span>
-      <span>$10</span>
+      <span>${totalPrice}</span>
     </div>
   );
 };
