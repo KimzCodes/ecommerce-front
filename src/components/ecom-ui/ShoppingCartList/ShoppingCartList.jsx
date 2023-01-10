@@ -1,8 +1,6 @@
 import ShoppingCartItem from "../ShoppingCartItem/ShoppingCartItem";
 
 const ShoppingCartList = ({ products, items, changeQuantityHandler }) => {
-  console.log("item");
-
   const shoppingCartList = products.length
     ? products.map((el) => {
         const quantity = items[el.id];
