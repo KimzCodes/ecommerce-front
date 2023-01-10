@@ -37,7 +37,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const totalCartQuantity = createSelector(
+export const cartTotalQuantity = createSelector(
   (state) => state.cart.items,
   (items) => {
     let totalQuantity = 0;
@@ -49,15 +49,14 @@ export const totalCartQuantity = createSelector(
   }
 );
 
-export const totalCartPrice = createSelector(
+export const cartTotalPrice = createSelector(
   (state) => state.cart.items,
   (state) => state.products.records,
   (items, records) => {
     let price = 0;
     for (const record of records) {
-      price = price + record.price * items[record.id];
+      price += record.price * items[record.id];
     }
-
     return price.toFixed(2);
   }
 );
