@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { cartTotalQuantity, closeReachToMax } from "../../../store/cartSlice";
+import { totalCartQuantity, closeReachToMax } from "../../../store/cartSlice";
 
 import { NavLink, Link } from "react-router-dom";
 import { Badge, Alert } from "react-bootstrap";
@@ -24,7 +24,7 @@ const Header = () => {
 
   const dispatch = useDispatch();
   const [isAnimateCart, setIsAnimateCart] = useState(false);
-  const totalQuantity = useSelector(cartTotalQuantity);
+  const totalQuantity = useSelector(totalCartQuantity);
   const reachToMax = useSelector((state) => state.cart.reachToMax);
   const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
 
