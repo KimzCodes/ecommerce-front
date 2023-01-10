@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 
 const ShoppingCartItem = ({ data, changeQuantityHandler, quantity }) => {
   const { cartItem, cartItemSelection } = styles;
+
   const options = Array(data.max)
     .fill(1)
     .map((_, idx) => {

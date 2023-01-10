@@ -2,12 +2,13 @@ import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCartItems } from "../store/productSlice";
 import { changeQuantity } from "../store/cartSlice";
-import { ShoppingCartItem } from "../components/ecom-ui";
+import { ShoppingCartList } from "../components/ecom-ui";
+import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.items);
-  const products = useSelector((state) => state.products.records);
+  const { records, loading, error } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(filterByCartItems());
@@ -20,21 +21,17 @@ const ShoppingCart = () => {
     [dispatch]
   );
 
-  const shoppingCartList = products.length
-    ? products.map((el) => {
-        const quantity = items[el.id];
-        return (
-          <ShoppingCartItem
-            key={el.id}
-            data={el}
-            quantity={quantity}
-            changeQuantityHandler={changeQuantityHandler}
-          />
-        );
-      })
-    : "Your cart is empty";
-
-  return <div>{shoppingCartList}</div>;
+  return (
+    <div>
+      <Loading loading={loading} error={error}>
+        <ShoppingCartList
+          items={items}
+          products={records}
+          changeQuantityHandler={changeQuantityHandler}
+        />
+      </Loading>
+    </div>
+  );
 };
 
 export default ShoppingCart;
