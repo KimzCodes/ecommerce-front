@@ -1,48 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { cartTotalQuantity, closeReachToMax } from "../../../store/cartSlice";
+import { closeReachToMax } from "../../../store/cartSlice";
 
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Badge, Alert } from "react-bootstrap";
-import shoppingCartImg from "../../../assets/shopping-card.svg";
 
 import styles from "./styles.module.css";
 import { useCallback } from "react";
+import HeaderShoppingCart from "../HeaderShoppingCart/HeaderShoppingCart";
 
 const Header = () => {
   const {
-    shoppingCart,
-    shoppingCartCounter,
     headerTop,
     header,
     mainNav,
     secNav,
     activeLink,
-    bumpCart,
+
     notification,
   } = styles;
 
   const dispatch = useDispatch();
-  const [isAnimateCart, setIsAnimateCart] = useState(false);
-  const totalQuantity = useSelector(cartTotalQuantity);
   const reachToMax = useSelector((state) => state.cart.reachToMax);
-  const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
 
   const closeReachToMaxHandler = useCallback(() => {
     dispatch(closeReachToMax());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (totalQuantity === 0) return;
-    setIsAnimateCart(true);
-    const debounce = setTimeout(() => {
-      setIsAnimateCart(false);
-    }, 300);
-
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [totalQuantity]);
 
   useEffect(() => {
     if (!reachToMax) {
@@ -64,12 +47,7 @@ const Header = () => {
         <h1>
           Our <Badge bg="info">Ecom</Badge>
         </h1>
-        <Link to="shopping-cart">
-          <div className={shoppingCart}>
-            <img alt="" src={shoppingCartImg} width="30" />
-            <div className={cartClasses}>{totalQuantity}</div>
-          </div>
-        </Link>
+        <HeaderShoppingCart />
       </div>
 
       <nav>

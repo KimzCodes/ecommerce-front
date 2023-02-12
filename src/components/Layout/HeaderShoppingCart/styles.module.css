@@ -1,0 +1,38 @@
+.shoppingCart {
+  position: relative;
+}
+
+.shoppingCartCounter {
+  background-color: #0dcaf0;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid;
+  position: absolute;
+  top: -15px;
+  right: 11px;
+  font-size: 12px;
+}
+
+.bumpCart {
+  animation: bump 300ms ease-out;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(0.8);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
