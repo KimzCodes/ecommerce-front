@@ -1,45 +1,11 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { closeReachToMax } from "../../../store/cartSlice";
-
 import { NavLink } from "react-router-dom";
-import { Badge, Alert } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 
 import styles from "./styles.module.css";
-import { useCallback } from "react";
 import HeaderShoppingCart from "../HeaderShoppingCart/HeaderShoppingCart";
 
 const Header = () => {
-  const {
-    headerTop,
-    header,
-    mainNav,
-    secNav,
-    activeLink,
-
-    notification,
-  } = styles;
-
-  const dispatch = useDispatch();
-  const reachToMax = useSelector((state) => state.cart.reachToMax);
-
-  const closeReachToMaxHandler = useCallback(() => {
-    dispatch(closeReachToMax());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (!reachToMax) {
-      return;
-    }
-
-    const debounce = setTimeout(closeReachToMaxHandler, 3500);
-    window.addEventListener("beforeunload", closeReachToMaxHandler);
-
-    return () => {
-      clearTimeout(debounce);
-      window.addEventListener("beforeunload", closeReachToMaxHandler);
-    };
-  }, [reachToMax, closeReachToMaxHandler]);
+  const { headerTop, header, mainNav, secNav, activeLink } = styles;
 
   return (
     <header className={header}>
@@ -86,13 +52,6 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <div className={notification}>
-        {reachToMax ? (
-          <Alert variant="info" onClose={closeReachToMaxHandler} dismissible>
-            <p>Sorry, you reached to maximum limit.</p>
-          </Alert>
-        ) : null}
-      </div>
     </header>
   );
 };
