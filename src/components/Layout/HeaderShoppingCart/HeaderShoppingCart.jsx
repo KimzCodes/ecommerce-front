@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../store/cartSlice";
-import { Link } from "react-router-dom";
-import styles from "./styles.module.css";
+import { CartDrop } from "../../ecom-ui";
 import shoppingCartImg from "../../../assets/shopping-card.svg";
+import styles from "./styles.module.css";
 
 const HeaderShoppingCart = () => {
   const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
@@ -24,13 +24,26 @@ const HeaderShoppingCart = () => {
     };
   }, [totalQuantity]);
 
+  useEffect(() => {
+    const cartDrop = document.getElementById("cartDrop");
+
+    document.body.addEventListener("click", function (event) {
+      if (cartDrop.contains(event.target)) {
+        console.log("inside");
+      } else {
+        console.log("outside");
+      }
+    });
+  }, []);
+
   return (
-    <Link to="shopping-cart">
+    <div>
       <div className={shoppingCart}>
         <img alt="" src={shoppingCartImg} width="30" />
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
-    </Link>
+      <CartDrop />
+    </div>
   );
 };
 

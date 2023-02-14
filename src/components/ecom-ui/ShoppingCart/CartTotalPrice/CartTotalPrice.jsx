@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-const ShoppingCartTotalPrice = ({ totalPrice }) => {
+const CartTotalPrice = ({ totalPrice }) => {
   const { total } = styles;
 
   return (
@@ -11,4 +11,4 @@ const ShoppingCartTotalPrice = ({ totalPrice }) => {
   );
 };
 
-export default ShoppingCartTotalPrice;
+export default CartTotalPrice;
