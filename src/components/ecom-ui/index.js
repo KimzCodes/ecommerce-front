@@ -1,13 +1,7 @@
 import Category from "./Category/Category";
-import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
+import CartItem from "./ShoppingCartPage/CartItem/CartItem";
 import Product from "./Product/Product";
-import ShoppingCartList from "./ShoppingCartList/ShoppingCartList";
-import ShoppingCartTotalPrice from "./ShoppingCartTotalPrice/ShoppingCartTotalPrice";
+import CartList from "./ShoppingCartPage/CartList/CartList";
+import CartTotalPrice from "./ShoppingCartPage/CartTotalPrice/CartTotalPrice";
 
-export {
-  Category,
-  ShoppingCartItem,
-  Product,
-  ShoppingCartList,
-  ShoppingCartTotalPrice,
-};
+export { Category, CartItem, Product, CartList, CartTotalPrice };

@@ -1,9 +1,9 @@
 import { memo } from "react";
-import Product from "../Product/Product";
+import Product from "../../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const ShoppingCartItem = ({ data, changeQuantityHandler, quantity }) => {
+const CartItem = ({ data, changeQuantityHandler, quantity }) => {
   const { cartItem, cartItemSelection } = styles;
 
   const options = Array(data.max)
@@ -33,4 +33,4 @@ const ShoppingCartItem = ({ data, changeQuantityHandler, quantity }) => {
   );
 };
 
-export default memo(ShoppingCartItem);
+export default memo(CartItem);

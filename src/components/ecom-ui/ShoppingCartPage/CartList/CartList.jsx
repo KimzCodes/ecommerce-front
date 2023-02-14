@@ -1,11 +1,11 @@
-import ShoppingCartItem from "../ShoppingCartItem/ShoppingCartItem";
+import CartItem from "../CartItem/CartItem";
 
-const ShoppingCartList = ({ products, items, changeQuantityHandler }) => {
+const CartList = ({ products, items, changeQuantityHandler }) => {
   const shoppingCartList = products.length
     ? products.map((el) => {
         const quantity = items[el.id];
         return (
-          <ShoppingCartItem
+          <CartItem
             key={el.id}
             data={el}
             quantity={quantity}
@@ -18,4 +18,4 @@ const ShoppingCartList = ({ products, items, changeQuantityHandler }) => {
   return <div>{shoppingCartList}</div>;
 };
 
-export default ShoppingCartList;
+export default CartList;
