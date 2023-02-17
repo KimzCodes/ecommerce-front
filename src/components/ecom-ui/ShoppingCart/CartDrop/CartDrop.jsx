@@ -1,26 +1,13 @@
-import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { filterByCartItems } from "../../../../store/productSlice";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
 import styles from "./styles.module.css";
 
-const CartDrop = () => {
+const CartDrop = ({ items, records, loading, error }) => {
   const { container, button, cartItems, cartItem } = styles;
-  const { pathname } = useLocation();
+
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items);
-  const { records, loading, error } = useSelector((state) => state.products);
-  const cleanPathName = pathname.replace(/\//, "");
-
-  useEffect(() => {
-    if (cleanPathName === "shopping-cart") return;
-    dispatch(filterByCartItems());
-  }, [dispatch, cleanPathName]);
 
   const itemsList =
     records.length === 0 ? (

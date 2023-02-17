@@ -1,17 +1,33 @@
 import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
-import { cartTotalQuantity } from "../../../store/cartSlice";
-import { CartDrop } from "../../ecom-ui";
-import shoppingCartImg from "../../../assets/shopping-card.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { cartTotalQuantity } from "../../../../store/cartSlice";
+import { filterByCartItems } from "../../../../store/productSlice";
+import { CartDrop } from "../..";
+import { useLocation } from "react-router-dom";
+
+import shoppingCartImg from "../../../../assets/shopping-card.svg";
 import styles from "./styles.module.css";
 
-const HeaderShoppingCart = () => {
+const CartHeaderLogo = () => {
   const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
+
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const divEl = useRef();
+
   const [openCartDrop, setOpenCartDrop] = useState(false);
   const [isAnimateCart, setIsAnimateCart] = useState(false);
   const totalQuantity = useSelector(cartTotalQuantity);
+  const items = useSelector((state) => state.cart.items);
+  const { records, loading, error } = useSelector((state) => state.products);
+
+  const cleanPathName = pathname.replace(/\//, "");
   const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
+
+  useEffect(() => {
+    if (cleanPathName === "shopping-cart") return;
+    dispatch(filterByCartItems());
+  }, [dispatch, cleanPathName]);
 
   useEffect(() => {
     if (totalQuantity === 0) return;
@@ -30,12 +46,10 @@ const HeaderShoppingCart = () => {
       if (!divEl.current) {
         return;
       }
-
       if (!divEl.current.contains(event.target)) {
         setOpenCartDrop(false);
       }
     };
-
     document.addEventListener("click", handler, true);
 
     return () => {
@@ -52,9 +66,16 @@ const HeaderShoppingCart = () => {
         <img alt="" src={shoppingCartImg} width="30" />
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
-      {openCartDrop ? <CartDrop /> : null}
+      {openCartDrop ? (
+        <CartDrop
+          items={items}
+          records={records}
+          loading={loading}
+          error={error}
+        />
+      ) : null}
     </div>
   );
 };
 
-export default HeaderShoppingCart;
+export default CartHeaderLogo;
