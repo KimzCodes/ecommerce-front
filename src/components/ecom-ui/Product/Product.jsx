@@ -48,6 +48,7 @@ const Product = ({
       <h2>{title}</h2>
       <h3>{price} EGP</h3>
       <Button
+        id="product-button"
         variant="info"
         onClick={actionHandler}
         disabled={disabled}
