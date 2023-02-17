@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../store/cartSlice";
 import { CartDrop } from "../../ecom-ui";
@@ -7,7 +7,8 @@ import styles from "./styles.module.css";
 
 const HeaderShoppingCart = () => {
   const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
-
+  const divEl = useRef();
+  const [openCartDrop, setOpenCartDrop] = useState(false);
   const [isAnimateCart, setIsAnimateCart] = useState(false);
   const totalQuantity = useSelector(cartTotalQuantity);
   const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
@@ -25,24 +26,33 @@ const HeaderShoppingCart = () => {
   }, [totalQuantity]);
 
   useEffect(() => {
-    const cartDrop = document.getElementById("cartDrop");
-
-    document.body.addEventListener("click", function (event) {
-      if (cartDrop.contains(event.target)) {
-        console.log("inside");
-      } else {
-        console.log("outside");
+    const handler = (event) => {
+      if (!divEl.current) {
+        return;
       }
-    });
+
+      if (!divEl.current.contains(event.target)) {
+        setOpenCartDrop(false);
+      }
+    };
+
+    document.addEventListener("click", handler, true);
+
+    return () => {
+      document.addEventListener("click", handler, true);
+    };
   }, []);
 
   return (
-    <div>
-      <div className={shoppingCart}>
+    <div id="shopping-cart-logo" ref={divEl}>
+      <div
+        className={shoppingCart}
+        onClick={() => setOpenCartDrop((prev) => !prev)}
+      >
         <img alt="" src={shoppingCartImg} width="30" />
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
-      <CartDrop />
+      {openCartDrop ? <CartDrop /> : null}
     </div>
   );
 };

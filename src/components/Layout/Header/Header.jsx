@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 
@@ -16,7 +15,6 @@ const Header = () => {
         </h1>
         <HeaderShoppingCart />
       </div>
-
       <nav>
         <ul className={mainNav}>
           <li>
