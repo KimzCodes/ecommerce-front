@@ -1,5 +1,5 @@
 import { useEffect, memo } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { filterByCartItems } from "../../../../store/productSlice";
 
@@ -11,16 +11,13 @@ const CartDrop = ({ close }) => {
   const { container, button, cartItems, cartItem } = styles;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const items = useSelector((state) => state.cart.items);
   const { records, loading, error } = useSelector((state) => state.products);
-  const cleanPathName = pathname.replace(/\//, "");
 
   useEffect(() => {
-    if (cleanPathName === "shopping-cart") return;
     dispatch(filterByCartItems());
-  }, [dispatch, cleanPathName]);
+  }, [dispatch]);
 
   const itemsList =
     records.length === 0 ? (
