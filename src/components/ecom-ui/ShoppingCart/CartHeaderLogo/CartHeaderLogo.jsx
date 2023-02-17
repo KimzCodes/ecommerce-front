@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { cartTotalQuantity } from "../../../store/cartSlice";
+import { cartTotalQuantity } from "../../../../store/cartSlice";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import shoppingCartImg from "../../../assets/shopping-card.svg";
+import shoppingCartImg from "../../../../assets/shopping-card.svg";
 
-const HeaderShoppingCart = () => {
+const CartHeaderLogo = () => {
   const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
 
   const [isAnimateCart, setIsAnimateCart] = useState(false);
@@ -34,4 +34,4 @@ const HeaderShoppingCart = () => {
   );
 };
 
-export default HeaderShoppingCart;
+export default CartHeaderLogo;
