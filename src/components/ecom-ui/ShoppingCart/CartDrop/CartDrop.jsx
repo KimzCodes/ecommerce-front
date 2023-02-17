@@ -1,13 +1,43 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, memo } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { filterByCartItems } from "../../../../store/productSlice";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
 import styles from "./styles.module.css";
 
-const CartDrop = ({ items, records, loading, error }) => {
+const CartDrop = ({ close }) => {
   const { container, button, cartItems, cartItem } = styles;
-
+  const divEl = useRef();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const items = useSelector((state) => state.cart.items);
+  const { records, loading, error } = useSelector((state) => state.products);
+  const cleanPathName = pathname.replace(/\//, "");
+
+  useEffect(() => {
+    if (cleanPathName === "shopping-cart") return;
+    dispatch(filterByCartItems());
+  }, [dispatch, cleanPathName]);
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (!divEl.current) {
+        return;
+      }
+      if (!divEl.current.contains(event.target)) {
+        close();
+      }
+    };
+    document.addEventListener("click", handler, true);
+
+    return () => {
+      document.addEventListener("click", handler, true);
+    };
+  }, [close]);
 
   const itemsList =
     records.length === 0 ? (
@@ -27,20 +57,21 @@ const CartDrop = ({ items, records, loading, error }) => {
         );
       })
     );
+
+  const navigateHandler = () => {
+    close();
+    navigate("shopping-cart");
+  };
   return (
-    <div className={container} id="cartDrop">
+    <div className={container} id="cartDrop" ref={divEl}>
       <Loading loading={loading} error={error}>
         <div className={cartItems}> {itemsList}</div>
       </Loading>
-      <Button
-        className={button}
-        variant="dark"
-        onClick={() => navigate("shopping-cart")}
-      >
+      <Button className={button} variant="dark" onClick={navigateHandler}>
         Go to checkout
       </Button>
     </div>
   );
 };
 
-export default CartDrop;
+export default memo(CartDrop);
