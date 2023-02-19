@@ -5,9 +5,9 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 
+import "./API/axios-global";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import "./API/axios-global";
 
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
