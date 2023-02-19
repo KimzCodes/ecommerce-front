@@ -8,7 +8,6 @@ import styles from "./styles.module.css";
 
 const CartHeaderLogo = () => {
   const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
-
   const divEl = useRef();
   const [openCartDrop, setOpenCartDrop] = useState(false);
   const [isAnimateCart, setIsAnimateCart] = useState(false);
@@ -33,6 +32,8 @@ const CartHeaderLogo = () => {
   }, []);
 
   useEffect(() => {
+    if (!openCartDrop) return;
+
     const handler = (event) => {
       if (!divEl.current) {
         return;
@@ -50,7 +51,7 @@ const CartHeaderLogo = () => {
     return () => {
       document.addEventListener("click", handler, true);
     };
-  }, [closeCartDrop]);
+  }, [closeCartDrop, openCartDrop]);
 
   return (
     <div id="shopping-cart-logo" ref={divEl}>

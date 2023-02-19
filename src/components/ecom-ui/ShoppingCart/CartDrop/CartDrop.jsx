@@ -17,7 +17,6 @@ const CartDrop = ({ close }) => {
   const { items, cartRecordsFullInfo, loading, error } = useSelector(
     (state) => state.cart
   );
-  console.log(pathname);
 
   useEffect(() => {
     if (cleanPathName === "shopping-cart") return;
