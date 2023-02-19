@@ -1,7 +1,7 @@
 import { useEffect, memo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByCartItems } from "../../../../store/productSlice";
+import { getRecordsByCartItems } from "../../../../store/cartSlice";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
@@ -11,19 +11,24 @@ const CartDrop = ({ close }) => {
   const { container, button, cartItems, cartItem } = styles;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const cleanPathName = pathname.substr(1);
 
-  const items = useSelector((state) => state.cart.items);
-  const { records, loading, error } = useSelector((state) => state.products);
+  const { items, cartRecordsFullInfo, loading, error } = useSelector(
+    (state) => state.cart
+  );
+  console.log(pathname);
 
   useEffect(() => {
-    dispatch(filterByCartItems());
-  }, [dispatch]);
+    if (cleanPathName === "shopping-cart") return;
+    dispatch(getRecordsByCartItems());
+  }, [dispatch, cleanPathName]);
 
   const itemsList =
-    records.length === 0 ? (
+    cartRecordsFullInfo.length === 0 ? (
       <div>Your cart is empty</div>
     ) : (
-      records.map((el) => {
+      cartRecordsFullInfo.map((el) => {
         const quantity = items[el.id];
 
         return (

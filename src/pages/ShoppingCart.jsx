@@ -1,18 +1,22 @@
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByCartItems } from "../store/productSlice";
-import { changeQuantity, cartTotalPrice } from "../store/cartSlice";
+import {
+  changeQuantity,
+  cartTotalPrice,
+  getRecordsByCartItems,
+} from "../store/cartSlice";
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items);
-  const { records, loading, error } = useSelector((state) => state.products);
+  const { items, cartRecordsFullInfo, loading, error } = useSelector(
+    (state) => state.cart
+  );
   const totalPrice = useSelector(cartTotalPrice);
 
   useEffect(() => {
-    dispatch(filterByCartItems());
+    dispatch(getRecordsByCartItems());
   }, [dispatch]);
 
   const changeQuantityHandler = useCallback(
@@ -27,7 +31,7 @@ const ShoppingCart = () => {
       <Loading loading={loading} error={error}>
         <CartList
           items={items}
-          products={records}
+          products={cartRecordsFullInfo}
           changeQuantityHandler={changeQuantityHandler}
         />
         <CartTotalPrice totalPrice={totalPrice} />

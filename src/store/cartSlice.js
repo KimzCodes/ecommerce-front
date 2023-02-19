@@ -1,6 +1,42 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createSelector,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
 
-const initialState = { items: {}, reachToMax: false };
+export const getRecordsByCartItems = createAsyncThunk(
+  "products/getRecordsByCartItems",
+  async (_, thunkAPI) => {
+    const { getState, rejectWithValue } = thunkAPI;
+    const {
+      cart: { items },
+    } = getState();
+
+    if (!Object.keys(items).length) {
+      return [];
+    }
+
+    const ids = Object.keys(items)
+      .map((el) => `id=${el}`)
+      .join("&");
+
+    try {
+      const res = await fetch(`http://localhost:5005/items?${ids}`);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+const initialState = {
+  loading: false,
+  error: null,
+  items: {},
+  reachToMax: false,
+  cartRecordsFullInfo: [],
+};
 
 const cartSlice = createSlice({
   name: "cart",
@@ -33,7 +69,25 @@ const cartSlice = createSlice({
     removeItem(state, action) {
       const id = action.payload;
       delete state.items[id];
+      state.cartRecordsFullInfo = state.cartRecordsFullInfo.filter(
+        (el) => el.id !== id
+      );
     },
+  },
+  extraReducers: (builder) => {
+    //filter by cart items
+    builder.addCase(getRecordsByCartItems.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getRecordsByCartItems.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cartRecordsFullInfo = action.payload;
+    });
+    builder.addCase(getRecordsByCartItems.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   },
 });
 
@@ -50,9 +104,8 @@ export const cartTotalQuantity = createSelector(
 );
 
 export const cartTotalPrice = createSelector(
-  (state) => state.cart.items,
-  (state) => state.products.records,
-  (items, records) => {
+  (state) => state.cart,
+  ({ items, cartRecordsFullInfo: records }) => {
     let price = 0;
     for (const record of records) {
       price += record.price * items[record.id];
