@@ -31,6 +31,25 @@ const CartHeaderLogo = () => {
     };
   }, [closeCartDrop]);
 
+  const closeCartDrop = useCallback(() => {
+    setOpenCartDrop(false);
+  }, []);
+
+  useEffect(() => {
+    if (!openCartDrop) return;
+
+    const handler = (event) => {
+      if (!divEl.current.contains(event.target)) {
+        closeCartDrop();
+      }
+    };
+    document.addEventListener("click", handler, true);
+
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, [closeCartDrop, openCartDrop]);
+
   useEffect(() => {
     if (totalQuantity === 0) return;
     setIsAnimateCart(true);
