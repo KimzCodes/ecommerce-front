@@ -12,16 +12,15 @@ const CartDrop = ({ close }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const cleanPathName = pathname.substr(1);
 
   const { items, cartRecordsFullInfo, loading, error } = useSelector(
     (state) => state.cart
   );
 
   useEffect(() => {
-    if (cleanPathName === "shopping-cart") return;
+    if (pathname === "shopping-cart") return;
     dispatch(getRecordsByCartItems());
-  }, [dispatch, cleanPathName]);
+  }, [dispatch, pathname]);
 
   const itemsList =
     cartRecordsFullInfo.length === 0 ? (
