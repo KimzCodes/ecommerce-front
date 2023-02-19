@@ -1,20 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-export const getCategories = createAsyncThunk(
-  "categories/getCategories",
-  async (_, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      const res = await fetch("http://localhost:5005/category");
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
-const initialState = { loading: false, error: null, records: [] };
+import { createSlice } from "@reduxjs/toolkit";
+import { getCategories } from "./asyncThunk";
+import initialState from "./initialState";
 
 const categorySlice = createSlice({
   name: "categories",
@@ -34,5 +20,5 @@ const categorySlice = createSlice({
     });
   },
 });
-
+export { getCategories };
 export default categorySlice.reducer;

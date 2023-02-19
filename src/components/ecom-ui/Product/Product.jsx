@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart, removeItem } from "../../../store/cartSlice";
+import { addToCart, removeItem } from "../../../store/cart/cartSlice";
 
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";

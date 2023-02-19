@@ -1,27 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { removeItem } from "./cartSlice";
-
-export const filterProducts = createAsyncThunk(
-  "products/filterProducts",
-  async (prefix, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
-    try {
-      const res = await fetch(
-        `http://localhost:5005/items?cat_prefix=${prefix}`
-      );
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
-const initialState = {
-  loading: false,
-  error: null,
-  records: [],
-};
+import { createSlice } from "@reduxjs/toolkit";
+import initialState from "./initialState";
+import { filterProducts } from "./asyncThunk";
 
 const productSlice = createSlice({
   name: "products",
@@ -48,4 +27,5 @@ const productSlice = createSlice({
   },
 });
 export const { cleanRecords } = productSlice.actions;
+export { filterProducts };
 export default productSlice.reducer;

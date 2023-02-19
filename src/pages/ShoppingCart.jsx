@@ -4,7 +4,7 @@ import {
   changeQuantity,
   cartTotalPrice,
   getRecordsByCartItems,
-} from "../store/cartSlice";
+} from "../store/cart/cartSlice";
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 

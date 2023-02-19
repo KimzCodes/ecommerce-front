@@ -1,7 +1,7 @@
 import { useEffect, memo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getRecordsByCartItems } from "../../../../store/cartSlice";
+import { getRecordsByCartItems } from "../../../../store/cart/cartSlice";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";

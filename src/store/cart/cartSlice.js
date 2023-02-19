@@ -1,42 +1,6 @@
-import {
-  createSlice,
-  createSelector,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
-
-export const getRecordsByCartItems = createAsyncThunk(
-  "products/getRecordsByCartItems",
-  async (_, thunkAPI) => {
-    const { getState, rejectWithValue } = thunkAPI;
-    const {
-      cart: { items },
-    } = getState();
-
-    if (!Object.keys(items).length) {
-      return [];
-    }
-
-    const ids = Object.keys(items)
-      .map((el) => `id=${el}`)
-      .join("&");
-
-    try {
-      const res = await fetch(`http://localhost:5005/items?${ids}`);
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
-const initialState = {
-  loading: false,
-  error: null,
-  items: {},
-  reachToMax: false,
-  cartRecordsFullInfo: [],
-};
+import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { getRecordsByCartItems } from "./asyncThunk";
+import initialState from "./initialState";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -116,5 +80,5 @@ export const cartTotalPrice = createSelector(
 
 export const { closeReachToMax, addToCart, changeQuantity, removeItem } =
   cartSlice.actions;
-
+export { getRecordsByCartItems };
 export default cartSlice.reducer;
