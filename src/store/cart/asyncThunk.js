@@ -1,7 +1,8 @@
+import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getRecordsByCartItems = createAsyncThunk(
-  "products/getRecordsByCartItems",
+  "cart/getRecordsByCartItems",
   async (_, thunkAPI) => {
     const { getState, rejectWithValue } = thunkAPI;
     const {
@@ -17,8 +18,7 @@ export const getRecordsByCartItems = createAsyncThunk(
       .join("&");
 
     try {
-      const res = await fetch(`http://localhost:5005/items?${ids}`);
-      const data = await res.json();
+      const { data } = await axios.get(`/items?${ids}`);
       return data;
     } catch (error) {
       return rejectWithValue(error);

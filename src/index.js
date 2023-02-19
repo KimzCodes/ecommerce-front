@@ -7,6 +7,7 @@ import { store, persistor } from "./store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import "./API/global";
 
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";

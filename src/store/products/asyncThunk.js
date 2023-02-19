@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const filterProducts = createAsyncThunk(
@@ -5,10 +6,7 @@ export const filterProducts = createAsyncThunk(
   async (prefix, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      const res = await fetch(
-        `http://localhost:5005/items?cat_prefix=${prefix}`
-      );
-      const data = await res.json();
+      const { data } = await axios.get(`/items?cat_prefix=${prefix}`);
       return data;
     } catch (error) {
       return rejectWithValue(error);
