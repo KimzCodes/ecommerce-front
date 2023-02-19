@@ -18,7 +18,7 @@ const CartDrop = ({ close }) => {
   );
 
   useEffect(() => {
-    if (pathname === "shopping-cart") return;
+    if (pathname === "/shopping-cart") return;
     dispatch(getRecordsByCartItems());
   }, [dispatch, pathname]);
 
