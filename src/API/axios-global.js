@@ -8,6 +8,6 @@ axios.defaults.baseURL = "http://localhost:5005";
 // });
 
 //custom
-// const instance = axios.create({
+//axios.create({
 //   baseURL: "https://api.example.com",
 // });
