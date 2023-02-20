@@ -9,7 +9,7 @@ export const getCategories = createAsyncThunk(
       const { data } = await axios.get("/category");
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );

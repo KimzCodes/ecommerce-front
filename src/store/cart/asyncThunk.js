@@ -21,7 +21,7 @@ export const getRecordsByCartItems = createAsyncThunk(
       const { data } = await axios.get(`/items?${ids}`);
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );

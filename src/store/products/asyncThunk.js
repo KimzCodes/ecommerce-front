@@ -9,7 +9,7 @@ export const filterProducts = createAsyncThunk(
       const { data } = await axios.get(`/items?cat_prefix=${prefix}`);
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   }
 );
