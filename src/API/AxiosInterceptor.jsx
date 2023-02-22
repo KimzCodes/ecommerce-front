@@ -5,15 +5,26 @@ const AxiosInterceptor = ({ children }) => {
   useEffect(() => {
     //response
     const interceptor = axios.interceptors.response.use(
-      function (response) {
+      async (response) => {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
+
         return response;
       },
-      function (error) {
+      async (error) => {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
-        return Promise.reject(error);
+        try {
+          if (error.config.url.indexOf("test") > -1) {
+            return Promise.reject(error);
+          } else {
+            await axios.get("http://localhost:5005/test");
+            return Promise.reject(error);
+          }
+        } catch (error) {
+          console.log(error);
+          return Promise.reject(error);
+        }
       }
     );
 
