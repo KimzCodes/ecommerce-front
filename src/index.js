@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 import "./API/axios-global";
 
+import AxiosInterceptor from "./API/AxiosInterceptor";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -53,8 +54,10 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <RouterProvider router={router} />
-    </PersistGate>
+    <AxiosInterceptor>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </AxiosInterceptor>
   </Provider>
 );
