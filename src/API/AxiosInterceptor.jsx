@@ -1,7 +1,11 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { tracking } from "../store/global/globalSlice";
 import axios from "axios";
+
 const AxiosInterceptor = ({ children }) => {
-  console.log("S");
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const myInterceptor = axios.interceptors.response.use(
       (response) => {
@@ -14,10 +18,7 @@ const AxiosInterceptor = ({ children }) => {
           if (error.config.url.includes("tracking")) {
             return Promise.reject(error);
           } else {
-            await axios.post("http://localhost:5005/tracking", {
-              message: error.message,
-              endPoint: error.config.url,
-            });
+            dispatch(tracking(error));
             return Promise.reject(error);
           }
         } catch (error) {
@@ -30,7 +31,7 @@ const AxiosInterceptor = ({ children }) => {
     return () => {
       axios.interceptors.request.eject(myInterceptor);
     };
-  }, []);
+  }, [dispatch]);
   return <div>{children}</div>;
 };
 
