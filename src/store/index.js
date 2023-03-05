@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+import auth from "./auth/authSlice";
 import categories from "./categories/categoriesSlice";
 import products from "./products/productsSlice";
 import cart from "./cart/cartSlice";
@@ -20,10 +21,16 @@ const persistConfig = {
   key: "ecom",
   version: 1,
   storage,
-  whitelist: ["cart"],
+  whitelist: ["cart", "auth"],
 };
 
-const rootReducer = combineReducers({ categories, products, cart, global });
+const rootReducer = combineReducers({
+  categories,
+  products,
+  cart,
+  global,
+  auth,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -1,8 +1,14 @@
-import { Button, Form, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginSchema } from "../util/validationSchema";
+import { useDispatch } from "react-redux";
+import { login } from "../store/auth/authSlice";
+import { Button, Form, Row, Col } from "react-bootstrap";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -10,7 +16,11 @@ const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      dispatch(login(values))
+        .unwrap()
+        .then(() => {
+          navigate("/");
+        });
     },
   });
   return (
