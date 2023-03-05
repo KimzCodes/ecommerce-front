@@ -28,7 +28,7 @@ const Register = () => {
               type="text"
               onChange={formik.handleChange}
               value={formik.values.fname}
-              isInvalid={!!formik.errors.fname}
+              isInvalid={formik.touched.fname && formik.errors.fname}
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.fname}
@@ -41,7 +41,7 @@ const Register = () => {
               type="text"
               onChange={formik.handleChange}
               value={formik.values.lname}
-              isInvalid={!!formik.errors.lname}
+              isInvalid={formik.touched.lname && formik.errors.lname}
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.lname}
@@ -54,7 +54,7 @@ const Register = () => {
               name="email"
               onChange={formik.handleChange}
               value={formik.values.email}
-              isInvalid={!!formik.errors.email}
+              isInvalid={formik.touched.email && formik.errors.email}
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.email}
@@ -68,7 +68,7 @@ const Register = () => {
               name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
-              isInvalid={!!formik.errors.password}
+              isInvalid={formik.touched.password && formik.errors.password}
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.password}
@@ -82,7 +82,9 @@ const Register = () => {
               name="passwordConf"
               onChange={formik.handleChange}
               value={formik.values.passwordConf}
-              isInvalid={!!formik.errors.passwordConf}
+              isInvalid={
+                formik.touched.passwordConf && formik.errors.passwordConf
+              }
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.passwordConf}

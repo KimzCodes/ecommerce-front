@@ -24,7 +24,7 @@ const Login = () => {
               name="email"
               onChange={formik.handleChange}
               value={formik.values.email}
-              isInvalid={!!formik.errors.email}
+              isInvalid={formik.touched.email && formik.errors.email}
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.email}
@@ -38,7 +38,7 @@ const Login = () => {
               name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
-              isInvalid={!!formik.errors.password}
+              isInvalid={formik.errors.password && formik.errors.password}
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.password}
