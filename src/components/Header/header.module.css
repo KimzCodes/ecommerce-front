@@ -47,6 +47,7 @@ nav {
 .secNav li {
   padding: 10px 0 10px 0;
   margin: 0px 5px 0 5px;
+  position: relative;
 }
 
 .mainNav li a,
@@ -58,5 +59,44 @@ nav {
 
 .mainNav li a:hover,
 .secNav li a:hover {
-  text-decoration: underline;
+}
+
+.active::after {
+  content: '';
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: orangered;
+  position: absolute;
+}
+
+.bumbCard {
+  animation: bump 300ms ease-out;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(0.8);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.notifcation {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 20px;
+  filter: drop-shadow(2px 2px 20px rgba(0, 0, 0, 0.2));
 }

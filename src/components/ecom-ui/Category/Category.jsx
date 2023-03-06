@@ -1,17 +1,17 @@
-import styles from "./styles.module.css";
+import { Link } from 'react-router-dom';
+import styles from './styles.module.css';
 
-const Category = () => {
+const Category = ({ title, img, id, prefix }) => {
   const { category, categoryImg, categoryTitle } = styles;
   return (
-    <div className={category}>
-      <div className={categoryImg}>
-        <img
-          src="https://cdn-eu.dynamicyield.com/api/9876644/images/244c68ad42d8b__hp-w12-22032022-h_m-women_shirts-blouses.jpg"
-          alt=""
-        />
+    <Link to={`${prefix}/items`}>
+      <div className={category}>
+        <div className={categoryImg}>
+          <img src={img} alt='' />
+        </div>
+        <h4 className={categoryTitle}>{title}</h4>
       </div>
-      <h4 className={categoryTitle}>Title</h4>
-    </div>
+    </Link>
   );
 };
 

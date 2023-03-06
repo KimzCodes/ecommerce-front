@@ -1,0 +1,11 @@
+.loadingWrapper {
+  text-align: center;
+  color: red;
+}
+.errorWrapper {
+  width: fit-content;
+  padding: 0.5rem;
+  background-color: red;
+  color: #fff;
+  border-radius: 50px;
+}

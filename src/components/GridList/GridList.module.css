@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  justify-items: space-between;
+  row-gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  align-items: center;
+}
+.grid a {
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: filter 0.3s;
+}
+.grid a:hover {
+  filter: drop-shadow(8px 16px 12px rgba(0, 0, 0, 0.3));
+}
