@@ -46,6 +46,7 @@ const CartHeaderLogo = () => {
         closeCartDrop();
       }
     };
+
     document.addEventListener("click", handler, true);
 
     return () => {
