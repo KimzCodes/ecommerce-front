@@ -1,13 +1,15 @@
+import { loginSchema } from "../util/validationSchema";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { loginSchema } from "../util/validationSchema";
-import { useDispatch } from "react-redux";
-import { login } from "../store/auth/authSlice";
 import { Button, Form, Row, Col } from "react-bootstrap";
+import { LoadingBtn } from "../components/Layout";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
   const formik = useFormik({
     initialValues: {
@@ -23,6 +25,7 @@ const Login = () => {
         });
     },
   });
+  console.log(error);
   return (
     <Row className="justify-content-md-center">
       <Col xs={6} span={3}>
@@ -54,9 +57,11 @@ const Login = () => {
               {formik.errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <LoadingBtn loading={loading} error={error}>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </LoadingBtn>
         </Form>
       </Col>
     </Row>
