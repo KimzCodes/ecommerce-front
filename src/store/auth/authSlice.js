@@ -16,9 +16,9 @@ const authSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.userInfo = action.payload.user;
     });
-    builder.addCase(login.rejected, (state) => {
-      state.loading = true;
-      state.error = null;
+    builder.addCase(login.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });
