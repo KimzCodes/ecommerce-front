@@ -8,12 +8,12 @@ import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
-  const { items, loading, error } = useSelector((state) => state.cart);
+  const items = useSelector((state) => state.cart.items);
   const totalPrice = useSelector(cartTotalPrice);
 
   const {
-    recordsLoading,
-    recordsError,
+    recordsLoading: loading,
+    recordsError: error,
     records: cartRecordsFullInfo,
     sendRequest,
   } = useGetProducts(items);
@@ -29,12 +29,9 @@ const ShoppingCart = () => {
     [dispatch]
   );
 
-  const isLoading = loading || recordsLoading;
-  const isError = error || recordsError;
-
   return (
     <div>
-      <Loading loading={isLoading} error={isError}>
+      <Loading loading={loading} error={error}>
         <CartList
           items={items}
           products={cartRecordsFullInfo}

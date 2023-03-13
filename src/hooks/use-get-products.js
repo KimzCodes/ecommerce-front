@@ -6,6 +6,10 @@ const useGetProducts = (idsArray) => {
   const [records, setRecords] = useState([]);
 
   const sendRequest = useCallback(async () => {
+    if (!Object.keys(idsArray).length) {
+      return;
+    }
+
     setRecordsLoading(true);
     setRecordsError(null);
 
