@@ -21,7 +21,7 @@ const ShoppingCart = () => {
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
-  console.log("x");
+
   const changeQuantityHandler = useCallback(
     (data) => {
       dispatch(changeQuantity(data));
