@@ -1,24 +1,27 @@
 import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeQuantity,
-  cartTotalPrice,
-  getRecordsByCartItems,
-} from "../store/cartSlice";
+import { changeQuantity, cartTotalPrice } from "../store/cartSlice";
+import useGetProducts from "../hooks/use-get-products";
+
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
-  const { items, cartRecordsFullInfo, loading, error } = useSelector(
-    (state) => state.cart
-  );
+  const { items, loading, error } = useSelector((state) => state.cart);
   const totalPrice = useSelector(cartTotalPrice);
 
-  useEffect(() => {
-    dispatch(getRecordsByCartItems());
-  }, [dispatch]);
+  const {
+    recordsLoading,
+    recordsError,
+    records: cartRecordsFullInfo,
+    sendRequest,
+  } = useGetProducts(items);
 
+  useEffect(() => {
+    sendRequest();
+  }, [sendRequest]);
+  console.log("x");
   const changeQuantityHandler = useCallback(
     (data) => {
       dispatch(changeQuantity(data));
@@ -26,9 +29,12 @@ const ShoppingCart = () => {
     [dispatch]
   );
 
+  const isLoading = loading || recordsLoading;
+  const isError = error || recordsError;
+
   return (
     <div>
-      <Loading loading={loading} error={error}>
+      <Loading loading={isLoading} error={isError}>
         <CartList
           items={items}
           products={cartRecordsFullInfo}
