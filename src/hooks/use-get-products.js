@@ -4,7 +4,7 @@ const useGetProducts = (idsArray) => {
   const [recordsLoading, setRecordsLoading] = useState(false);
   const [recordsError, setRecordsError] = useState(null);
   const [records, setRecords] = useState([]);
-  console.log("h");
+
   const sendRequest = useCallback(async () => {
     setRecordsLoading(true);
     setRecordsError(null);

@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
+import useGetProducts from "../hooks/use-get-products";
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, cartTotalPrice } from "../store/cartSlice";
-import useGetProducts from "../hooks/use-get-products";
 
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";

@@ -1,41 +1,10 @@
-import {
-  createSlice,
-  createSelector,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
-
-export const getRecordsByCartItems = createAsyncThunk(
-  "products/getRecordsByCartItems",
-  async (_, thunkAPI) => {
-    const { getState, rejectWithValue } = thunkAPI;
-    const {
-      cart: { items },
-    } = getState();
-
-    if (!Object.keys(items).length) {
-      return [];
-    }
-
-    const ids = Object.keys(items)
-      .map((el) => `id=${el}`)
-      .join("&");
-
-    try {
-      const res = await fetch(`http://localhost:5005/items?${ids}`);
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
   error: null,
   items: {},
   reachToMax: false,
-  cartRecordsFullInfo: [],
 };
 
 const cartSlice = createSlice({
@@ -73,21 +42,6 @@ const cartSlice = createSlice({
         (el) => el.id !== id
       );
     },
-  },
-  extraReducers: (builder) => {
-    //filter by cart items
-    builder.addCase(getRecordsByCartItems.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getRecordsByCartItems.fulfilled, (state, action) => {
-      state.loading = false;
-      state.cartRecordsFullInfo = action.payload;
-    });
-    builder.addCase(getRecordsByCartItems.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
   },
 });
 

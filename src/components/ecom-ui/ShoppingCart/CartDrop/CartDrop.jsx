@@ -1,7 +1,8 @@
 import { useEffect, memo } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import useGetProducts from "../../../../hooks/use-get-products";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
 import styles from "./styles.module.css";
@@ -10,8 +11,6 @@ const CartDrop = ({ close }) => {
   const { container, button, cartItems, cartItem } = styles;
 
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-
   const { items, loading, error } = useSelector((state) => state.cart);
 
   const {
@@ -21,11 +20,9 @@ const CartDrop = ({ close }) => {
     sendRequest,
   } = useGetProducts(items);
 
-  console.log(cartRecordsFullInfo);
-
   useEffect(() => {
     sendRequest();
-  }, [sendRequest, pathname]);
+  }, [sendRequest]);
 
   const navigateHandler = () => {
     close();
