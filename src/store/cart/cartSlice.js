@@ -38,21 +38,6 @@ const cartSlice = createSlice({
       );
     },
   },
-  extraReducers: (builder) => {
-    //filter by cart items
-    builder.addCase(getRecordsByCartItems.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(getRecordsByCartItems.fulfilled, (state, action) => {
-      state.loading = false;
-      state.cartRecordsFullInfo = action.payload;
-    });
-    builder.addCase(getRecordsByCartItems.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    });
-  },
 });
 
 export const cartTotalQuantity = createSelector(
