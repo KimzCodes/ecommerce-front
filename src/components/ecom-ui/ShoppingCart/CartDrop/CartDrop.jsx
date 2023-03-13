@@ -9,8 +9,8 @@ import styles from "./styles.module.css";
 
 const CartDrop = ({ close }) => {
   const { container, button, cartItems, cartItem } = styles;
-
   const navigate = useNavigate();
+
   const { items, loading, error } = useSelector((state) => state.cart);
 
   const {
