@@ -16,7 +16,7 @@ const useGetProducts = (idsArray) => {
     try {
       const res = await fetch(`http://localhost:5005/items?${ids}`);
       const data = await res.json();
-      setRecords((prev) => [...prev, ...data]);
+      setRecords(data);
     } catch (error) {
       setRecordsError(error.message || "Can not get items full data");
     }
