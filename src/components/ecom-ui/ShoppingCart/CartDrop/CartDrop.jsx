@@ -1,7 +1,7 @@
 import { useEffect, memo } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getRecordsByCartItems } from "../../../../store/cart/cartSlice";
+import useGetProducts from "../../../../hooks/use-get-products";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
@@ -9,18 +9,28 @@ import styles from "./styles.module.css";
 
 const CartDrop = ({ close }) => {
   const { container, button, cartItems, cartItem } = styles;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
 
-  const { items, cartRecordsFullInfo, loading, error } = useSelector(
-    (state) => state.cart
-  );
+  const navigate = useNavigate();
+  const { items, loading, error } = useSelector((state) => state.cart);
+
+  const {
+    recordsLoading,
+    recordsError,
+    records: cartRecordsFullInfo,
+    sendRequest,
+  } = useGetProducts(items);
 
   useEffect(() => {
-    if (pathname === "/shopping-cart") return;
-    dispatch(getRecordsByCartItems());
-  }, [dispatch, pathname]);
+    sendRequest();
+  }, [sendRequest]);
+
+  const navigateHandler = () => {
+    close();
+    navigate("shopping-cart");
+  };
+
+  const isLoading = loading || recordsLoading;
+  const isError = error || recordsError;
 
   const itemsList =
     cartRecordsFullInfo.length === 0 ? (
@@ -41,13 +51,9 @@ const CartDrop = ({ close }) => {
       })
     );
 
-  const navigateHandler = () => {
-    close();
-    navigate("shopping-cart");
-  };
   return (
     <div className={container} id="cartDrop">
-      <Loading loading={loading} error={error}>
+      <Loading loading={isLoading} error={isError}>
         <div className={cartItems}> {itemsList}</div>
       </Loading>
       <Button className={button} variant="dark" onClick={navigateHandler}>

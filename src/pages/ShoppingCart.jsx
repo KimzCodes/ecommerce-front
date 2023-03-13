@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import useGetProducts from "../hooks/use-get-products";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeQuantity,
@@ -10,14 +11,19 @@ import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
-  const { items, cartRecordsFullInfo, loading, error } = useSelector(
-    (state) => state.cart
-  );
+  const { items, loading, error } = useSelector((state) => state.cart);
   const totalPrice = useSelector(cartTotalPrice);
 
+  const {
+    recordsLoading,
+    recordsError,
+    records: cartRecordsFullInfo,
+    sendRequest,
+  } = useGetProducts(items);
+
   useEffect(() => {
-    dispatch(getRecordsByCartItems());
-  }, [dispatch]);
+    sendRequest();
+  }, [sendRequest]);
 
   const changeQuantityHandler = useCallback(
     (data) => {
@@ -26,9 +32,12 @@ const ShoppingCart = () => {
     [dispatch]
   );
 
+  const isLoading = loading || recordsLoading;
+  const isError = error || recordsError;
+
   return (
     <div>
-      <Loading loading={loading} error={error}>
+      <Loading loading={isLoading} error={isError}>
         <CartList
           items={items}
           products={cartRecordsFullInfo}
