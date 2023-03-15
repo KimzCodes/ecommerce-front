@@ -1,23 +1,20 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart, removeItem } from "../../../store/cartSlice";
-
+import { useState, useEffect, memo } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
 const Product = ({
-  btnText,
-  actionType = "add",
   id,
   title,
   price,
   img,
   max,
+  btnText,
+  actionType = "add",
+  selectedItem,
 }) => {
   const { item, button } = styles;
   const [disabled, setDisabled] = useState(false);
   const [btnClicked, setBtnClicked] = useState(0);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (btnClicked === 0) return;
@@ -30,15 +27,14 @@ const Product = ({
       clearTimeout(debounce);
     };
   }, [btnClicked]);
-
-  const actionHandler = () => {
+  console.log("prod");
+  const clickActionHandler = () => {
     if (actionType === "add") {
-      dispatch(addToCart({ id, max }));
       setBtnClicked((prev) => prev + 1);
+      selectedItem({ id, max, actionType: "add" });
     }
-
     if (actionType === "remove") {
-      dispatch(removeItem(id));
+      selectedItem({ id, actionType: "remove" });
     }
   };
 
@@ -50,7 +46,7 @@ const Product = ({
       <Button
         id="product-button"
         variant="info"
-        onClick={actionHandler}
+        onClick={clickActionHandler}
         disabled={disabled}
         className={button}
       >
@@ -66,4 +62,4 @@ const Product = ({
   );
 };
 
-export default Product;
+export default memo(Product);

@@ -36,9 +36,6 @@ const cartSlice = createSlice({
     removeItem(state, action) {
       const id = action.payload;
       delete state.items[id];
-      state.cartRecordsFullInfo = state.cartRecordsFullInfo.filter(
-        (el) => el.id !== id
-      );
     },
   },
 });

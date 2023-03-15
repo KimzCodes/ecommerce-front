@@ -21,7 +21,7 @@ const ShoppingCart = () => {
   const totalPrice = useSelector((state) =>
     cartTotalPrice(state, cartRecordsFullInfo)
   );
-  console.log(totalPrice);
+
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
@@ -33,6 +33,10 @@ const ShoppingCart = () => {
     [dispatch]
   );
 
+  const removeItemHandler = useCallback((data) => {
+    console.log(data);
+  }, []);
+
   return (
     <div>
       <Loading loading={loading} error={error}>
@@ -40,6 +44,7 @@ const ShoppingCart = () => {
           items={items}
           products={cartRecordsFullInfo}
           changeQuantityHandler={changeQuantityHandler}
+          removeItemHandler={removeItemHandler}
         />
         <CartTotalPrice totalPrice={totalPrice} />
       </Loading>
