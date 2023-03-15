@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import useGetProducts from "../hooks/use-get-products";
+import useGetProductsByItems from "../hooks/use-get-products-by-items";
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, cartTotalPrice } from "../store/cartSlice";
 
@@ -8,16 +8,20 @@ import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
+
   const items = useSelector((state) => state.cart.items);
-  const totalPrice = useSelector(cartTotalPrice);
 
   const {
-    recordsLoading: loading,
-    recordsError: error,
+    loading,
+    error,
     records: cartRecordsFullInfo,
     sendRequest,
-  } = useGetProducts(items);
+  } = useGetProductsByItems(items);
 
+  const totalPrice = useSelector((state) =>
+    cartTotalPrice(state, cartRecordsFullInfo)
+  );
+  console.log(totalPrice);
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);

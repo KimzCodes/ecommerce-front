@@ -1,8 +1,6 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
-  loading: false,
-  error: null,
   items: {},
   reachToMax: false,
 };
@@ -58,8 +56,9 @@ export const cartTotalQuantity = createSelector(
 );
 
 export const cartTotalPrice = createSelector(
-  (state) => state.cart,
-  ({ items, cartRecordsFullInfo: records }) => {
+  (state) => state.cart.items,
+  (_, records) => records,
+  (items, records) => {
     let price = 0;
     for (const record of records) {
       price += record.price * items[record.id];

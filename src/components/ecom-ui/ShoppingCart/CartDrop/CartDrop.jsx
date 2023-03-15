@@ -1,5 +1,5 @@
 import { useEffect, memo } from "react";
-import useGetProducts from "../../../../hooks/use-get-products";
+import useGetProductsByItems from "../../../../hooks/use-get-products-by-items";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -11,26 +11,23 @@ const CartDrop = ({ close }) => {
   const { container, button, cartItems, cartItem } = styles;
 
   const navigate = useNavigate();
-  const { items, loading, error } = useSelector((state) => state.cart);
+  const items = useSelector((state) => state.cart.items);
 
   const {
-    recordsLoading,
-    recordsError,
+    loading,
+    error,
     records: cartRecordsFullInfo,
     sendRequest,
-  } = useGetProducts(items);
+  } = useGetProductsByItems(items, true);
 
   useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
+    sendRequest(items);
+  }, [sendRequest, items]);
 
   const navigateHandler = () => {
     close();
     navigate("shopping-cart");
   };
-
-  const isLoading = loading || recordsLoading;
-  const isError = error || recordsError;
 
   const itemsList =
     cartRecordsFullInfo.length === 0 ? (
@@ -53,7 +50,7 @@ const CartDrop = ({ close }) => {
 
   return (
     <div className={container} id="cartDrop">
-      <Loading loading={isLoading} error={isError}>
+      <Loading loading={loading} error={error}>
         <div className={cartItems}> {itemsList}</div>
       </Loading>
       <Button className={button} variant="dark" onClick={navigateHandler}>
