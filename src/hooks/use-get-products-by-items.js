@@ -33,7 +33,11 @@ const useGetProductsByItems = (items, autoRender = false) => {
     setIsRendered(true);
   }, [isRendered, autoRender, items]);
 
-  return { loading, error, records, sendRequest };
+  const removeItem = useCallback((id) => {
+    setRecords((prev) => prev.filter((el) => el.id !== id));
+  }, []);
+
+  return { loading, error, records, sendRequest, removeItem };
 };
 
 export default useGetProductsByItems;

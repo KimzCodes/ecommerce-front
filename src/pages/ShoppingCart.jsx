@@ -15,6 +15,7 @@ const ShoppingCart = () => {
     loading,
     error,
     records: cartRecordsFullInfo,
+    removeItem,
     sendRequest,
   } = useGetProductsByItems(items);
 
@@ -33,9 +34,13 @@ const ShoppingCart = () => {
     [dispatch]
   );
 
-  const removeItemHandler = useCallback((data) => {
-    console.log(data);
-  }, []);
+  const removeItemHandler = useCallback(
+    (data) => {
+      const { id } = data;
+      removeItem(id);
+    },
+    [removeItem]
+  );
 
   return (
     <div>

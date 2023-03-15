@@ -27,7 +27,7 @@ const Product = ({
       clearTimeout(debounce);
     };
   }, [btnClicked]);
-  console.log("prod");
+
   const clickActionHandler = () => {
     if (actionType === "add") {
       setBtnClicked((prev) => prev + 1);

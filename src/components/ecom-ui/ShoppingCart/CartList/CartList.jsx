@@ -1,3 +1,4 @@
+import { memo } from "react";
 import CartItem from "../CartItem/CartItem";
 
 const CartList = ({
@@ -24,4 +25,4 @@ const CartList = ({
   return <div>{shoppingCartList}</div>;
 };
 
-export default CartList;
+export default memo(CartList);
