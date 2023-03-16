@@ -2,7 +2,6 @@ import { memo } from "react";
 import CartItem from "../CartItem/CartItem";
 
 const CartList = ({ products, changeQuantityHandler, removeItemHandler }) => {
-  console.log("list");
   const shoppingCartList = products.length
     ? products.map((el) => {
         return (
@@ -19,4 +18,4 @@ const CartList = ({ products, changeQuantityHandler, removeItemHandler }) => {
   return <div>{shoppingCartList}</div>;
 };
 
-export default CartList;
+export default memo(CartList);

@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { useSelector } from "react-redux";
 import { itemQuantityById } from "../../../../store/cartSlice";
 import Product from "../../Product/Product";
@@ -42,4 +41,4 @@ const CartItem = ({ data, changeQuantityHandler, removeItemHandler }) => {
   );
 };
 
-export default memo(CartItem);
+export default CartItem;

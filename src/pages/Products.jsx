@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 import { Product } from "../components/ecom-ui";
 import { GridList } from "../components/Layout";
-import { useCallback } from "react";
 
 const Products = () => {
   const dispatch = useDispatch();

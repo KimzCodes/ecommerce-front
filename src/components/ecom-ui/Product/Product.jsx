@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
@@ -62,4 +62,4 @@ const Product = ({
   );
 };
 
-export default memo(Product);
+export default Product;
