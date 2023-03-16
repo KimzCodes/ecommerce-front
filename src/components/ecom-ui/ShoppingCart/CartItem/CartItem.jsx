@@ -21,7 +21,7 @@ const CartItem = ({
         </option>
       );
     });
-  console.log("cart item");
+
   return (
     <div className={cartItem}>
       <Product

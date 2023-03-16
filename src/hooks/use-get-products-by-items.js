@@ -24,6 +24,7 @@ const useGetProductsByItems = (items, autoRender = false) => {
     try {
       const res = await fetch(`http://localhost:5005/items?${ids}`);
       const data = await res.json();
+
       setRecords(data);
     } catch (error) {
       setError(error.message || "Can not get items full data");
