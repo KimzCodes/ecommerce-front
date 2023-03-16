@@ -8,7 +8,7 @@ const Header = () => {
   const { headerTop, header, mainNav, secNav, activeLink } = styles;
 
   return (
-    <header className={header}>
+    <header class Name={header}>
       <div className={headerTop}>
         <h1>
           Our <Badge bg="info">Ecom</Badge>

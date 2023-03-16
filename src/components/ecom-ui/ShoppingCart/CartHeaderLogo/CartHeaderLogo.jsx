@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../../store/cart/cartSlice";
 import { CartDrop } from "../..";
 
-import shoppingCartImg from "../../../../assets/shopping-card.svg";
+import { ReactComponent as ReactLogo } from "../../../../assets/shopping-cart/logo.svg";
 import styles from "./styles.module.css";
 
 const CartHeaderLogo = () => {
@@ -59,7 +59,8 @@ const CartHeaderLogo = () => {
         className={shoppingCart}
         onClick={() => setOpenCartDrop((prev) => !prev)}
       >
-        <img alt="" src={shoppingCartImg} width="30" />
+        <ReactLogo style={{ width: "30px" }} />
+
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
       {openCartDrop ? <CartDrop close={closeCartDrop} /> : null}
