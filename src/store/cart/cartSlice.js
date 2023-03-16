@@ -1,5 +1,4 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
-import { getRecordsByCartItems } from "./asyncThunk";
 import initialState from "./initialState";
 
 const cartSlice = createSlice({
@@ -33,9 +32,6 @@ const cartSlice = createSlice({
     removeItem(state, action) {
       const id = action.payload;
       delete state.items[id];
-      state.cartRecordsFullInfo = state.cartRecordsFullInfo.filter(
-        (el) => el.id !== id
-      );
     },
   },
 });
@@ -53,8 +49,9 @@ export const cartTotalQuantity = createSelector(
 );
 
 export const cartTotalPrice = createSelector(
-  (state) => state.cart,
-  ({ items, cartRecordsFullInfo: records }) => {
+  (state) => state.cart.items,
+  (_, records) => records,
+  (items, records) => {
     let price = 0;
     for (const record of records) {
       price += record.price * items[record.id];
@@ -63,7 +60,15 @@ export const cartTotalPrice = createSelector(
   }
 );
 
+export const itemQuantityById = createSelector(
+  (state) => state.cart.items,
+  (_, id) => id,
+  (items, id) => {
+    return items[id];
+  }
+);
+
 export const { closeReachToMax, addToCart, changeQuantity, removeItem } =
   cartSlice.actions;
-export { getRecordsByCartItems };
+
 export default cartSlice.reducer;
