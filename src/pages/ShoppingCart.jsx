@@ -5,7 +5,7 @@ import {
   changeQuantity,
   cartTotalPrice,
   removeItem as removeItemFromCartSlice,
-} from "../store/cartSlice";
+} from "../store/cart/cartSlice";
 
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";

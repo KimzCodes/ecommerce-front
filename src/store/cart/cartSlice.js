@@ -1,5 +1,4 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
-import { getRecordsByCartItems } from "./asyncThunk";
 import initialState from "./initialState";
 
 const cartSlice = createSlice({
@@ -71,5 +70,5 @@ export const itemQuantityById = createSelector(
 
 export const { closeReachToMax, addToCart, changeQuantity, removeItem } =
   cartSlice.actions;
-export { getRecordsByCartItems };
+
 export default cartSlice.reducer;
