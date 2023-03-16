@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const useGetProductsByItems = (autoRender = false) => {
-  const items = useSelector((state) => state.cart.items);
+  const cartItems = useSelector((state) => state.cart.items);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [records, setRecords] = useState([]);
@@ -13,13 +13,13 @@ const useGetProductsByItems = (autoRender = false) => {
       return;
     }
 
-    if (!Object.keys(items).length) {
+    if (!Object.keys(cartItems).length) {
       return;
     }
 
     setLoading(true);
     setError(null);
-    const ids = Object.keys(items)
+    const ids = Object.keys(cartItems)
       .map((el) => `id=${el}`)
       .join("&");
 
@@ -34,7 +34,7 @@ const useGetProductsByItems = (autoRender = false) => {
 
     setLoading(false);
     setIsRendered(true);
-  }, [isRendered, autoRender, items]);
+  }, [isRendered, autoRender, cartItems]);
 
   const removeItem = useCallback((id) => {
     setRecords((prev) => prev.filter((el) => el.id !== id));
@@ -44,7 +44,7 @@ const useGetProductsByItems = (autoRender = false) => {
     sendRequest();
   }, [sendRequest]);
 
-  return { loading, error, records, removeItem };
+  return { loading, error, records, cartItems, removeItem };
 };
 
 export default useGetProductsByItems;
