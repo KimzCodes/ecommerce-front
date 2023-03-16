@@ -1,7 +1,6 @@
-import { useEffect, memo } from "react";
+import { memo } from "react";
 import useGetProductsByItems from "../../../../hooks/use-get-products-by-items";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
@@ -12,12 +11,7 @@ const CartDrop = ({ close }) => {
 
   const navigate = useNavigate();
 
-  const {
-    loading,
-    error,
-    records: cartRecordsFullInfo,
-    cartItems,
-  } = useGetProductsByItems(true);
+  const { loading, error, products, cartItems } = useGetProductsByItems(true);
 
   const navigateHandler = () => {
     close();
@@ -25,10 +19,10 @@ const CartDrop = ({ close }) => {
   };
 
   const cartItemsList =
-    cartRecordsFullInfo.length === 0 ? (
+    products.length === 0 ? (
       <div>Your cart is empty</div>
     ) : (
-      cartRecordsFullInfo.map((el) => {
+      products.map((el) => {
         const quantity = cartItems[el.id];
 
         return (

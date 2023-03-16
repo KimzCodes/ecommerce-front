@@ -5,7 +5,7 @@ const useGetProductsByItems = (autoRender = false) => {
   const cartItems = useSelector((state) => state.cart.items);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [records, setRecords] = useState([]);
+  const [products, setProducts] = useState([]);
   const [isRendered, setIsRendered] = useState(false);
 
   const sendRequest = useCallback(async () => {
@@ -27,7 +27,7 @@ const useGetProductsByItems = (autoRender = false) => {
       const res = await fetch(`http://localhost:5005/items?${ids}`);
       const data = await res.json();
 
-      setRecords(data);
+      setProducts(data);
     } catch (error) {
       setError(error.message || "Can not get items full data");
     }
@@ -37,14 +37,14 @@ const useGetProductsByItems = (autoRender = false) => {
   }, [isRendered, autoRender, cartItems]);
 
   const removeItem = useCallback((id) => {
-    setRecords((prev) => prev.filter((el) => el.id !== id));
+    setProducts((prev) => prev.filter((el) => el.id !== id));
   }, []);
 
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
 
-  return { loading, error, records, cartItems, removeItem };
+  return { loading, error, products, cartItems, removeItem };
 };
 
 export default useGetProductsByItems;

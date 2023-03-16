@@ -13,16 +13,9 @@ import { Loading } from "../components/Layout";
 const ShoppingCart = () => {
   const dispatch = useDispatch();
 
-  const {
-    loading,
-    error,
-    records: cartRecordsFullInfo,
-    removeItem,
-  } = useGetProductsByItems();
+  const { loading, error, products, removeItem } = useGetProductsByItems();
 
-  const totalPrice = useSelector((state) =>
-    cartTotalPrice(state, cartRecordsFullInfo)
-  );
+  const totalPrice = useSelector((state) => cartTotalPrice(state, products));
 
   const changeQuantityHandler = useCallback(
     (data) => {
@@ -44,7 +37,7 @@ const ShoppingCart = () => {
     <div>
       <Loading loading={loading} error={error}>
         <CartList
-          products={cartRecordsFullInfo}
+          products={products}
           changeQuantityHandler={changeQuantityHandler}
           removeItemHandler={removeItemHandler}
         />
