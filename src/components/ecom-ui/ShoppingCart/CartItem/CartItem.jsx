@@ -1,15 +1,13 @@
 import { memo } from "react";
+import { useSelector } from "react-redux";
+import { itemQuantityById } from "../../../../store/cartSlice";
 import Product from "../../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const CartItem = ({
-  data,
-  quantity,
-  changeQuantityHandler,
-  removeItemHandler,
-}) => {
+const CartItem = ({ data, changeQuantityHandler, removeItemHandler }) => {
   const { cartItem, cartItemSelection } = styles;
+  const quantity = useSelector((state) => itemQuantityById(state, data.id));
 
   const options = Array(data.max)
     .fill(1)

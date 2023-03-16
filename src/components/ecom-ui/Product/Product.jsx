@@ -38,8 +38,6 @@ const Product = ({
     }
   };
 
-  console.log("prod");
-
   return (
     <div className={item}>
       <img src={img} alt={title} />

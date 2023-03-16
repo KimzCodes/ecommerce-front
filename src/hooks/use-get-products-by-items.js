@@ -1,6 +1,8 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-const useGetProductsByItems = (items, autoRender = false) => {
+const useGetProductsByItems = (autoRender = false) => {
+  const items = useSelector((state) => state.cart.items);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [records, setRecords] = useState([]);
@@ -38,7 +40,11 @@ const useGetProductsByItems = (items, autoRender = false) => {
     setRecords((prev) => prev.filter((el) => el.id !== id));
   }, []);
 
-  return { loading, error, records, sendRequest, removeItem };
+  useEffect(() => {
+    sendRequest();
+  }, [sendRequest]);
+
+  return { loading, error, records, removeItem };
 };
 
 export default useGetProductsByItems;
