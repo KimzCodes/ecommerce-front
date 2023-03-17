@@ -36,12 +36,16 @@ const ShoppingCart = () => {
   return (
     <div>
       <Loading loading={loading} error={error}>
-        <CartList
-          products={products}
-          changeQuantityHandler={changeQuantityHandler}
-          removeItemHandler={removeItemHandler}
-        />
-        <CartTotalPrice totalPrice={totalPrice} />
+        {totalPrice > 0 ? (
+          <>
+            <CartList
+              products={products}
+              changeQuantityHandler={changeQuantityHandler}
+              removeItemHandler={removeItemHandler}
+            />
+            <CartTotalPrice totalPrice={totalPrice} />
+          </>
+        ) : null}
       </Loading>
     </div>
   );

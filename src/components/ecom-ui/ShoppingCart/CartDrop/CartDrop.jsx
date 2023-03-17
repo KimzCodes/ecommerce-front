@@ -11,7 +11,7 @@ const CartDrop = ({ close }) => {
 
   const navigate = useNavigate();
 
-  const { loading, error, products, cartItems } = useGetProductsByItems(true);
+  const { loading, error, products, cartItems } = useGetProductsByItems();
 
   const navigateHandler = () => {
     close();
@@ -19,7 +19,7 @@ const CartDrop = ({ close }) => {
   };
 
   const cartItemsList =
-    products.length === 0 ? (
+    cartItems.length === 0 ? (
       <div>Your cart is empty</div>
     ) : (
       products.map((el) => {

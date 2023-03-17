@@ -39,10 +39,7 @@ const CartHeaderIcon = () => {
         return;
       }
 
-      if (
-        !divEl.current.contains(event.target) &&
-        event.target.id !== "product-button"
-      ) {
+      if (!divEl.current.contains(event.target)) {
         closeCartDrop();
       }
     };

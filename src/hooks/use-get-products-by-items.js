@@ -1,18 +1,13 @@
 import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const useGetProductsByItems = (autoRender = false) => {
+const useGetProductsByItems = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
-  const [isRendered, setIsRendered] = useState(false);
 
   const sendRequest = useCallback(async () => {
-    if (isRendered && !autoRender) {
-      return;
-    }
-
     if (!Object.keys(cartItems).length) {
       return;
     }
@@ -33,8 +28,7 @@ const useGetProductsByItems = (autoRender = false) => {
     }
 
     setLoading(false);
-    setIsRendered(true);
-  }, [isRendered, autoRender, cartItems]);
+  }, [cartItems]);
 
   const removeItem = useCallback((id) => {
     setProducts((prev) => prev.filter((el) => el.id !== id));
