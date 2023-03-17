@@ -2,18 +2,18 @@ import { NavLink } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 
 import styles from "./styles.module.css";
-import { CartHeaderLogo } from "../../ecom-ui";
+import { CartHeaderIcon } from "../../ecom-ui";
 
 const Header = () => {
   const { headerTop, header, mainNav, secNav, activeLink } = styles;
 
   return (
-    <header class Name={header}>
+    <header className={header}>
       <div className={headerTop}>
         <h1>
           Our <Badge bg="info">Ecom</Badge>
         </h1>
-        <CartHeaderLogo />
+        <CartHeaderIcon />
       </div>
       <nav>
         <ul className={mainNav}>

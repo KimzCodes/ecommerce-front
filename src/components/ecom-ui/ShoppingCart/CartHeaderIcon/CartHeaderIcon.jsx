@@ -6,7 +6,7 @@ import { CartDrop } from "../..";
 import { ReactComponent as ReactLogo } from "../../../../assets/shopping-cart/logo.svg";
 import styles from "./styles.module.css";
 
-const CartHeaderLogo = () => {
+const CartHeaderIcon = () => {
   const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
   const divEl = useRef();
   const [openCartDrop, setOpenCartDrop] = useState(false);
@@ -54,13 +54,12 @@ const CartHeaderLogo = () => {
   }, [closeCartDrop, openCartDrop]);
 
   return (
-    <div id="shopping-cart-logo" ref={divEl}>
+    <div id="shopping-cart-icon" ref={divEl}>
       <div
         className={shoppingCart}
         onClick={() => setOpenCartDrop((prev) => !prev)}
       >
-        <ReactLogo style={{ width: "30px" }} />
-
+        <ReactLogo />
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
       {openCartDrop ? <CartDrop close={closeCartDrop} /> : null}
@@ -68,4 +67,4 @@ const CartHeaderLogo = () => {
   );
 };
 
-export default CartHeaderLogo;
+export default CartHeaderIcon;

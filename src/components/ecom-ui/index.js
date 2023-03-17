@@ -4,7 +4,7 @@ import Product from "./Product/Product";
 import CartList from "./ShoppingCart/CartList/CartList";
 import CartTotalPrice from "./ShoppingCart/CartTotalPrice/CartTotalPrice";
 import CartDrop from "./ShoppingCart/CartDrop/CartDrop";
-import CartHeaderLogo from "./ShoppingCart/CartHeaderLogo/CartHeaderLogo";
+import CartHeaderIcon from "./ShoppingCart/CartHeaderIcon/CartHeaderIcon";
 
 export {
   Category,
@@ -13,5 +13,5 @@ export {
   CartList,
   CartTotalPrice,
   CartDrop,
-  CartHeaderLogo,
+  CartHeaderIcon,
 };
