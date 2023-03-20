@@ -1,43 +1,28 @@
-import { useEffect, memo } from "react";
-import useGetProducts from "../../../../hooks/use-get-products";
+import { memo } from "react";
+import useGetProductsByItems from "../../../../hooks/use-get-products-by-items";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
+import CartEmpty from "../CartEmpty/CartEmpty";
 import styles from "./styles.module.css";
 
 const CartDrop = ({ close }) => {
-  const { container, button, cartItems, cartItem } = styles;
+  const { container, button, cartList, cartItem } = styles;
+
   const navigate = useNavigate();
 
-  const { items, loading, error } = useSelector((state) => state.cart);
-
-  const {
-    recordsLoading,
-    recordsError,
-    records: cartRecordsFullInfo,
-    sendRequest,
-  } = useGetProducts(items);
-
-  useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
+  const { loading, error, products, cartItems } = useGetProductsByItems();
 
   const navigateHandler = () => {
     close();
     navigate("shopping-cart");
   };
 
-  const isLoading = loading || recordsLoading;
-  const isError = error || recordsError;
-
-  const itemsList =
-    cartRecordsFullInfo.length === 0 ? (
-      <div>Your cart is empty</div>
-    ) : (
-      cartRecordsFullInfo.map((el) => {
-        const quantity = items[el.id];
+  const cartItemsList =
+    products.length > 0 ? (
+      products.map((el) => {
+        const quantity = cartItems[el.id];
 
         return (
           <div className={cartItem} key={el.id}>
@@ -49,12 +34,14 @@ const CartDrop = ({ close }) => {
           </div>
         );
       })
+    ) : (
+      <CartEmpty size="small" />
     );
 
   return (
     <div className={container} id="cartDrop">
-      <Loading loading={isLoading} error={isError}>
-        <div className={cartItems}> {itemsList}</div>
+      <Loading loading={loading} error={error}>
+        <div className={cartList}> {cartItemsList}</div>
       </Loading>
       <Button className={button} variant="dark" onClick={navigateHandler}>
         Go to checkout
