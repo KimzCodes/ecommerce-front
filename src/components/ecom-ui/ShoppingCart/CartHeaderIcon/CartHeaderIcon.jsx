@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../../store/cart/cartSlice";
 import { CartDrop } from "../..";
 
-import shoppingCartImg from "../../../../assets/shopping-card.svg";
+import { ReactComponent as ReactLogo } from "../../../../assets/shopping-cart/logo.svg";
 import styles from "./styles.module.css";
 
-const CartHeaderLogo = () => {
+const CartHeaderIcon = () => {
   const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
   const divEl = useRef();
   const [openCartDrop, setOpenCartDrop] = useState(false);
@@ -39,10 +39,7 @@ const CartHeaderLogo = () => {
         return;
       }
 
-      if (
-        !divEl.current.contains(event.target) &&
-        event.target.id !== "product-button"
-      ) {
+      if (!divEl.current.contains(event.target)) {
         closeCartDrop();
       }
     };
@@ -55,12 +52,12 @@ const CartHeaderLogo = () => {
   }, [closeCartDrop, openCartDrop]);
 
   return (
-    <div id="shopping-cart-logo" ref={divEl}>
+    <div id="shopping-cart-icon" ref={divEl}>
       <div
         className={shoppingCart}
         onClick={() => setOpenCartDrop((prev) => !prev)}
       >
-        <img alt="" src={shoppingCartImg} width="30" />
+        <ReactLogo />
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
       {openCartDrop ? <CartDrop close={closeCartDrop} /> : null}
@@ -68,4 +65,4 @@ const CartHeaderLogo = () => {
   );
 };
 
-export default CartHeaderLogo;
+export default CartHeaderIcon;
