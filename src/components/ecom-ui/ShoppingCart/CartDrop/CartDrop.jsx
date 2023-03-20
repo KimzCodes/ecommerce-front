@@ -11,7 +11,7 @@ const CartDrop = ({ close }) => {
 
   const navigate = useNavigate();
 
-  const { loading, error, products, cartItems } = useGetProductsByItems(true);
+  const { loading, error, products, cartItems } = useGetProductsByItems();
 
   const navigateHandler = () => {
     close();
