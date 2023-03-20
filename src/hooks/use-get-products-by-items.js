@@ -3,23 +3,24 @@ import { useSelector } from "react-redux";
 
 const useGetProductsByItems = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
 
   const sendRequest = useCallback(async () => {
     if (!Object.keys(cartItems).length) {
+      setLoading(false);
       return;
     }
 
-    setLoading(true);
-    setError(null);
     const ids = Object.keys(cartItems)
       .map((el) => `id=${el}`)
       .join("&");
 
     try {
-      const res = await fetch(`http://localhost:5005/items?${ids}`);
+      setError(null);
+      setLoading(true);
+      const res = await fetch(`http://localhost:5009/items?${ids}`);
       const data = await res.json();
 
       setProducts(data);
@@ -38,7 +39,7 @@ const useGetProductsByItems = () => {
     sendRequest();
   }, [sendRequest]);
 
-  return { loading, error, products, cartItems, removeItem };
+  return { loading, error, products, cartItems, removeItem, sendRequest };
 };
 
 export default useGetProductsByItems;
