@@ -9,10 +9,6 @@
   justify-content: space-between;
 }
 
-.topnav h1 {
-  font-size: 28px;
-}
-
 nav {
   background-color: black;
   display: flex;
