@@ -3,16 +3,16 @@ import { useSelector } from "react-redux";
 
 const useGetProductsByItems = () => {
   const cartItems = useSelector((state) => state.cart.items);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
 
   const sendRequest = useCallback(async () => {
     if (!Object.keys(cartItems).length) {
+      setLoading(false);
       return;
     }
 
-    setLoading(true);
     setError(null);
     const ids = Object.keys(cartItems)
       .map((el) => `id=${el}`)
