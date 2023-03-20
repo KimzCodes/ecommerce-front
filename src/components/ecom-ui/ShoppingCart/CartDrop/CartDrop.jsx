@@ -19,23 +19,24 @@ const CartDrop = ({ close }) => {
     navigate("shopping-cart");
   };
 
-  const cartItemsList = !cartItems.length ? (
-    <CartEmpty size="small" />
-  ) : (
-    products.map((el) => {
-      const quantity = cartItems[el.id];
+  const cartItemsList =
+    products.length > 0 ? (
+      products.map((el) => {
+        const quantity = cartItems[el.id];
 
-      return (
-        <div className={cartItem} key={el.id}>
-          <img src={el.img} alt={el.title} />
-          <h2>{el.title}</h2>
-          <h3>
-            {el.price} EGP X {quantity}
-          </h3>
-        </div>
-      );
-    })
-  );
+        return (
+          <div className={cartItem} key={el.id}>
+            <img src={el.img} alt={el.title} />
+            <h2>{el.title}</h2>
+            <h3>
+              {el.price} EGP X {quantity}
+            </h3>
+          </div>
+        );
+      })
+    ) : (
+      <CartEmpty size="small" />
+    );
 
   return (
     <div className={container} id="cartDrop">
