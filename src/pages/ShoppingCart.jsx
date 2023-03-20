@@ -7,7 +7,7 @@ import {
   removeItem as removeItemFromCartSlice,
 } from "../store/cart/cartSlice";
 
-import { CartList, CartTotalPrice } from "../components/ecom-ui";
+import { CartList, CartTotalPrice, CartEmpty } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
@@ -36,7 +36,7 @@ const ShoppingCart = () => {
   return (
     <div>
       <Loading loading={loading} error={error}>
-        {totalPrice > 0 ? (
+        {products.length > 0 ? (
           <>
             <CartList
               products={products}
@@ -45,7 +45,9 @@ const ShoppingCart = () => {
             />
             <CartTotalPrice totalPrice={totalPrice} />
           </>
-        ) : null}
+        ) : (
+          <CartEmpty />
+        )}
       </Loading>
     </div>
   );

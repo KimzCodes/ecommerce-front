@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
+import CartEmpty from "../CartEmpty/CartEmpty";
 import styles from "./styles.module.css";
 
 const CartDrop = ({ close }) => {
@@ -18,24 +19,23 @@ const CartDrop = ({ close }) => {
     navigate("shopping-cart");
   };
 
-  const cartItemsList =
-    cartItems.length === 0 ? (
-      <div>Your cart is empty</div>
-    ) : (
-      products.map((el) => {
-        const quantity = cartItems[el.id];
+  const cartItemsList = !cartItems.length ? (
+    <CartEmpty size="small" />
+  ) : (
+    products.map((el) => {
+      const quantity = cartItems[el.id];
 
-        return (
-          <div className={cartItem} key={el.id}>
-            <img src={el.img} alt={el.title} />
-            <h2>{el.title}</h2>
-            <h3>
-              {el.price} EGP X {quantity}
-            </h3>
-          </div>
-        );
-      })
-    );
+      return (
+        <div className={cartItem} key={el.id}>
+          <img src={el.img} alt={el.title} />
+          <h2>{el.title}</h2>
+          <h3>
+            {el.price} EGP X {quantity}
+          </h3>
+        </div>
+      );
+    })
+  );
 
   return (
     <div className={container} id="cartDrop">
