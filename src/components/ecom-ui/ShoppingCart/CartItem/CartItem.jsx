@@ -1,10 +1,12 @@
-import { memo } from "react";
+import { useSelector } from "react-redux";
+import { itemQuantityById } from "../../../../store/cart/cartSlice";
 import Product from "../../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const CartItem = ({ data, changeQuantityHandler, quantity }) => {
+const CartItem = ({ data, changeQuantityHandler, removeItemHandler }) => {
   const { cartItem, cartItemSelection } = styles;
+  const quantity = useSelector((state) => itemQuantityById(state, data.id));
 
   const options = Array(data.max)
     .fill(1)
@@ -16,9 +18,15 @@ const CartItem = ({ data, changeQuantityHandler, quantity }) => {
         </option>
       );
     });
+
   return (
     <div className={cartItem}>
-      <Product btnText="Remove" actionType="remove" {...data} />
+      <Product
+        btnText="Remove"
+        actionType="remove"
+        {...data}
+        selectedItem={removeItemHandler}
+      />
       <div className={cartItemSelection}>
         <Form.Select
           value={quantity}
@@ -33,4 +41,4 @@ const CartItem = ({ data, changeQuantityHandler, quantity }) => {
   );
 };
 
-export default memo(CartItem);
+export default CartItem;
