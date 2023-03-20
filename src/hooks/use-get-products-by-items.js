@@ -26,6 +26,8 @@ const useGetProductsByItems = () => {
     } catch (error) {
       setError(error.message || "Can not get items full data");
     }
+
+    setLoading(false);
   }, [cartItems]);
 
   const removeItem = useCallback((id) => {
