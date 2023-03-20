@@ -13,13 +13,14 @@ const useGetProductsByItems = () => {
       return;
     }
 
-    setError(null);
     const ids = Object.keys(cartItems)
       .map((el) => `id=${el}`)
       .join("&");
 
     try {
-      const res = await fetch(`http://localhost:5005/items?${ids}`);
+      setError(null);
+      setLoading(true);
+      const res = await fetch(`http://localhost:5009/items?${ids}`);
       const data = await res.json();
 
       setProducts(data);
@@ -38,7 +39,7 @@ const useGetProductsByItems = () => {
     sendRequest();
   }, [sendRequest]);
 
-  return { loading, error, products, cartItems, removeItem };
+  return { loading, error, products, cartItems, removeItem, sendRequest };
 };
 
 export default useGetProductsByItems;
