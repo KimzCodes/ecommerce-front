@@ -13,8 +13,7 @@ import { Loading } from "../components/Layout";
 const ShoppingCart = () => {
   const dispatch = useDispatch();
 
-  const { loading, error, products, removeItem, sendRequest } =
-    useGetProductsByItems();
+  const { loading, error, products, removeItem } = useGetProductsByItems();
 
   const totalPrice = useSelector((state) => cartTotalPrice(state, products));
 
@@ -50,7 +49,6 @@ const ShoppingCart = () => {
           <CartEmpty />
         )}
       </Loading>
-      <button onClick={sendRequest}>try</button>
     </div>
   );
 };

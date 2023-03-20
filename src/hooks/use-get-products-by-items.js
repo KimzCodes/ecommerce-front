@@ -20,7 +20,7 @@ const useGetProductsByItems = () => {
     try {
       setError(null);
       setLoading(true);
-      const res = await fetch(`http://localhost:5009/items?${ids}`);
+      const res = await fetch(`http://localhost:5005/items?${ids}`);
       const data = await res.json();
 
       setProducts(data);
