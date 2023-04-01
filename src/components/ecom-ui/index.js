@@ -1,15 +1,17 @@
 import Category from "./Category/Category";
-import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 import Product from "./Product/Product";
-import ShoppingCartList from "./ShoppingCartList/ShoppingCartList";
-import ShoppingCartTotalPrice from "./ShoppingCartTotalPrice/ShoppingCartTotalPrice";
+import CartList from "./ShoppingCart/CartList/CartList";
+import CartItem from "./ShoppingCart/CartItem/CartItem";
+import CartTotalPrice from "./ShoppingCart/CartTotalPrice/CartTotalPrice";
 import CartHeaderLogo from "./ShoppingCart/CartHeaderLogo/CartHeaderLogo";
+import CartDrop from "./ShoppingCart/CartDrop/CartDrop";
 
 export {
   Category,
-  ShoppingCartItem,
   Product,
-  ShoppingCartList,
-  ShoppingCartTotalPrice,
+  CartList,
+  CartItem,
+  CartDrop,
+  CartTotalPrice,
   CartHeaderLogo,
 };

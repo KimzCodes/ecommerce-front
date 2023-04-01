@@ -2,10 +2,7 @@ import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByCartItems } from "../store/productSlice";
 import { changeQuantity, cartTotalPrice } from "../store/cartSlice";
-import {
-  ShoppingCartList,
-  ShoppingCartTotalPrice,
-} from "../components/ecom-ui";
+import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 
 const ShoppingCart = () => {
@@ -28,12 +25,12 @@ const ShoppingCart = () => {
   return (
     <div>
       <Loading loading={loading} error={error}>
-        <ShoppingCartList
+        <CartList
           items={items}
           products={records}
           changeQuantityHandler={changeQuantityHandler}
         />
-        <ShoppingCartTotalPrice totalPrice={totalPrice} />
+        <CartTotalPrice totalPrice={totalPrice} />
       </Loading>
     </div>
   );

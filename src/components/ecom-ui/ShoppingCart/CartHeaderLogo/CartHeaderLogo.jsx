@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../../store/cartSlice";
-import { Link } from "react-router-dom";
-import styles from "./styles.module.css";
+import { CartDrop } from "../../";
 import shoppingCartImg from "../../../../assets/shopping-card.svg";
+import styles from "./styles.module.css";
+
+const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
 
 const CartHeaderLogo = () => {
-  const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
-
+  const [openCartDrop, setOpenCartDrop] = useState(false);
   const [isAnimateCart, setIsAnimateCart] = useState(false);
   const totalQuantity = useSelector(cartTotalQuantity);
   const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
@@ -25,12 +26,16 @@ const CartHeaderLogo = () => {
   }, [totalQuantity]);
 
   return (
-    <Link to="shopping-cart">
-      <div className={shoppingCart}>
+    <div>
+      <div
+        className={shoppingCart}
+        onClick={() => setOpenCartDrop((prev) => !prev)}
+      >
         <img alt="" src={shoppingCartImg} width="30" />
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
-    </Link>
+      {openCartDrop ? <CartDrop /> : null}
+    </div>
   );
 };
 

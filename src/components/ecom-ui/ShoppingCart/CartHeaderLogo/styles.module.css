@@ -1,5 +1,6 @@
 .shoppingCart {
   position: relative;
+  cursor: pointer;
 }
 
 .shoppingCartCounter {
