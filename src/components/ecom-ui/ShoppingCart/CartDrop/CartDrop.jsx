@@ -7,8 +7,8 @@ import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
 import styles from "./styles.module.css";
 
+const { container, button, cartItems, cartItem } = styles;
 const CartDrop = ({ close }) => {
-  const { container, button, cartItems, cartItem } = styles;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
