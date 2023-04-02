@@ -1,4 +1,4 @@
-import { useEffect, memo } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { filterByCartItems } from "../../../../store/productSlice";
@@ -54,4 +54,4 @@ const CartDrop = ({ close }) => {
   );
 };
 
-export default memo(CartDrop);
+export default CartDrop;
