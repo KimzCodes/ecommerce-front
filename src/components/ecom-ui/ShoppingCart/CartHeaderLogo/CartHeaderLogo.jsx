@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../../store/cartSlice";
 import { CartDrop } from "../../";
@@ -8,10 +8,28 @@ import styles from "./styles.module.css";
 const { shoppingCart, shoppingCartCounter, bumpCart } = styles;
 
 const CartHeaderLogo = () => {
+  const divEl = useRef();
   const [openCartDrop, setOpenCartDrop] = useState(false);
   const [isAnimateCart, setIsAnimateCart] = useState(false);
   const totalQuantity = useSelector(cartTotalQuantity);
   const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
+
+  const closeCartDrop = useCallback(() => {
+    setOpenCartDrop(false);
+  }, []);
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (!divEl.current.contains(event.target)) {
+        closeCartDrop();
+      }
+    };
+    document.addEventListener("click", handler, true);
+
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, [closeCartDrop]);
 
   useEffect(() => {
     if (totalQuantity === 0) return;
@@ -26,7 +44,7 @@ const CartHeaderLogo = () => {
   }, [totalQuantity]);
 
   return (
-    <div>
+    <div ref={divEl}>
       <div
         className={shoppingCart}
         onClick={() => setOpenCartDrop((prev) => !prev)}
@@ -34,7 +52,7 @@ const CartHeaderLogo = () => {
         <img alt="" src={shoppingCartImg} width="30" />
         <div className={cartClasses}>{totalQuantity}</div>
       </div>
-      {openCartDrop ? <CartDrop /> : null}
+      {openCartDrop ? <CartDrop close={closeCartDrop} /> : null}
     </div>
   );
 };
