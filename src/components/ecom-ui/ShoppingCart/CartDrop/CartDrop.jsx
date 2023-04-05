@@ -1,30 +1,23 @@
-import { useEffect } from "react";
+import useGetProductsByItems from "../../../../hooks/use-get-products-by-items";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { filterByCartItems } from "../../../../store/productSlice";
 
 import { Button } from "react-bootstrap";
 import { Loading } from "../../../Layout";
 import styles from "./styles.module.css";
 
-const { container, button, cartItems, cartItem } = styles;
+const { container, button, cartList, cartItem } = styles;
+
 const CartDrop = ({ close }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const items = useSelector((state) => state.cart.items);
-  const { records, loading, error } = useSelector((state) => state.products);
-
-  useEffect(() => {
-    dispatch(filterByCartItems());
-  }, [dispatch]);
+  const { loading, error, products, cartItemsID } = useGetProductsByItems();
 
   const itemsList =
-    records.length === 0 ? (
+    products.length === 0 ? (
       <div>Your cart is empty</div>
     ) : (
-      records.map((el) => {
-        const quantity = items[el.id];
+      products.map((el) => {
+        const quantity = cartItemsID[el.id];
 
         return (
           <div className={cartItem} key={el.id}>
@@ -45,7 +38,7 @@ const CartDrop = ({ close }) => {
   return (
     <div className={container} id="cartDrop">
       <Loading loading={loading} error={error}>
-        <div className={cartItems}> {itemsList}</div>
+        <div className={cartList}> {itemsList}</div>
       </Loading>
       <Button className={button} variant="dark" onClick={navigateHandler}>
         Go to checkout
