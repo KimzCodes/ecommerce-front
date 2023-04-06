@@ -51,7 +51,7 @@ export const cartTotalQuantity = createSelector(
 
 export const cartTotalPrice = createSelector(
   (state) => state.cart.items,
-  (state) => state.products.records,
+  (_, records) => records,
   (items, records) => {
     let price = 0;
     for (const record of records) {

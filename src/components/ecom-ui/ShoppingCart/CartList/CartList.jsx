@@ -1,6 +1,11 @@
 import CartItem from "../CartItem/CartItem";
 
-const CartList = ({ products, items, changeQuantityHandler }) => {
+const CartList = ({
+  products,
+  items,
+  changeQuantityHandler,
+  removeProductHandler,
+}) => {
   const shoppingCartList = products.length
     ? products.map((el) => {
         const quantity = items[el.id];
@@ -10,6 +15,7 @@ const CartList = ({ products, items, changeQuantityHandler }) => {
             data={el}
             quantity={quantity}
             changeQuantityHandler={changeQuantityHandler}
+            removeProductHandler={removeProductHandler}
           />
         );
       })

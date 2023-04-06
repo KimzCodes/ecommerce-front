@@ -1,7 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { removeItem } from "../store/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const useGetProductsByItems = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
@@ -28,11 +30,19 @@ const useGetProductsByItems = () => {
     setLoading(false);
   }, [cartItemsID]);
 
+  const removeRecord = useCallback(
+    (id) => {
+      setProducts((prev) => prev.filter((el) => el.id !== id));
+      dispatch(removeItem(id));
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     sendRequest();
   }, [sendRequest]);
 
-  return { loading, error, products, cartItemsID, sendRequest };
+  return { loading, error, products, cartItemsID, sendRequest, removeRecord };
 };
 
 export default useGetProductsByItems;

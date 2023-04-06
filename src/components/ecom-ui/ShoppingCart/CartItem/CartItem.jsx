@@ -3,7 +3,12 @@ import Product from "../../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const CartItem = ({ data, changeQuantityHandler, quantity }) => {
+const CartItem = ({
+  data,
+  changeQuantityHandler,
+  removeProductHandler,
+  quantity,
+}) => {
   const { cartItem, cartItemSelection } = styles;
 
   const options = Array(data.max)
@@ -18,7 +23,12 @@ const CartItem = ({ data, changeQuantityHandler, quantity }) => {
     });
   return (
     <div className={cartItem}>
-      <Product btnText="Remove" actionType="remove" {...data} />
+      <Product
+        btnText="Remove"
+        actionType="remove"
+        {...data}
+        selectedProduct={removeProductHandler}
+      />
       <div className={cartItemSelection}>
         <Form.Select
           value={quantity}

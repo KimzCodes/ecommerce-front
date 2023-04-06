@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 import { filterProducts, cleanRecords } from "../store/productSlice";
 import { useParams } from "react-router-dom";
 import { Product } from "../components/ecom-ui";
@@ -19,9 +20,19 @@ const Products = () => {
     };
   }, [dispatch, prefix]);
 
+  const selectedProduct = (data) => {
+    const { id, max } = data;
+    dispatch(addToCart({ id, max }));
+  };
+
   return (
     <div>
-      <GridList error={error} loading={loading} records={records}>
+      <GridList
+        error={error}
+        loading={loading}
+        records={records}
+        selectedProduct={selectedProduct}
+      >
         <Product />
       </GridList>
     </div>
