@@ -1,7 +1,13 @@
 import { memo } from "react";
 import CartItem from "../CartItem/CartItem";
 
-const CartList = ({ products, changeQuantityHandler, removeItemHandler }) => {
+const CartList = ({
+  products,
+
+  changeQuantityHandler,
+  removeProductHandler,
+}) => {
+  console.log("list");
   const shoppingCartList = products.length
     ? products.map((el) => {
         return (
@@ -9,7 +15,7 @@ const CartList = ({ products, changeQuantityHandler, removeItemHandler }) => {
             key={el.id}
             data={el}
             changeQuantityHandler={changeQuantityHandler}
-            removeItemHandler={removeItemHandler}
+            removeProductHandler={removeProductHandler}
           />
         );
       })
