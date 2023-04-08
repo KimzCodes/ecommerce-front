@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { removeItem, changeQuantity } from "../store/cart/cartSlice";
+import { removeItem, changeQuantity, totalPrice } from "../store/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const useGetProductsByItems = () => {
@@ -8,6 +8,7 @@ const useGetProductsByItems = () => {
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
   const cartItemsID = useSelector((state) => state.cart.items);
+  const cartTotalPrice = useSelector((state) => totalPrice(state, products));
 
   const cartLoadProducts = useCallback(async () => {
     if (!Object.keys(cartItemsID).length) {
@@ -21,9 +22,7 @@ const useGetProductsByItems = () => {
     setLoading(true);
     setError(null);
     try {
-      setError(null);
-      setLoading(true);
-      const res = await fetch(`http://localhost:5009/items?${ids}`);
+      const res = await fetch(`http://localhost:5005/items?${ids}`);
       const data = await res.json();
       setProducts(data);
     } catch (error) {
@@ -57,6 +56,7 @@ const useGetProductsByItems = () => {
     error,
     products,
     cartItemsID,
+    cartTotalPrice,
     cartLoadProducts,
     cartRemoveRecord,
     cartChangeQuantity,

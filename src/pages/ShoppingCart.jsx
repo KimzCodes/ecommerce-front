@@ -1,15 +1,17 @@
 import useGetProductsByItems from "../hooks/use-get-products-by-items";
-import { useSelector } from "react-redux";
-import { cartTotalPrice } from "../store/cart/cartSlice";
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 import { useCallback } from "react";
 
 const ShoppingCart = () => {
-  const { loading, error, products, cartRemoveRecord, cartChangeQuantity } =
-    useGetProductsByItems();
-
-  const totalPrice = useSelector((state) => cartTotalPrice(state, products));
+  const {
+    loading,
+    error,
+    products,
+    cartTotalPrice,
+    cartRemoveRecord,
+    cartChangeQuantity,
+  } = useGetProductsByItems();
 
   const changeQuantityHandler = useCallback(
     (data) => {
@@ -34,7 +36,7 @@ const ShoppingCart = () => {
           changeQuantityHandler={changeQuantityHandler}
           removeProductHandler={removeProductHandler}
         />
-        <CartTotalPrice totalPrice={totalPrice} />
+        <CartTotalPrice totalPrice={cartTotalPrice} />
       </Loading>
     </div>
   );

@@ -48,7 +48,7 @@ export const cartTotalQuantity = createSelector(
   }
 );
 
-export const cartTotalPrice = createSelector(
+export const totalPrice = createSelector(
   (state) => state.cart.items,
   (_, records) => records,
   (items, records) => {
