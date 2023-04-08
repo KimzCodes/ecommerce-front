@@ -1,37 +1,29 @@
-import { useCallback } from "react";
 import useGetProductsByItems from "../hooks/use-get-products-by-items";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  changeQuantity,
-  cartTotalPrice,
-  removeItem as removeItemFromCartSlice,
-} from "../store/cart/cartSlice";
-
+import { useSelector } from "react-redux";
+import { cartTotalPrice } from "../store/cartSlice";
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
+import { useCallback } from "react";
 
 const ShoppingCart = () => {
-  const dispatch = useDispatch();
-
-  const { loading, error, products, removeItem, sendRequest } =
+  const { loading, error, products, cartRemoveRecord, cartChangeQuantity } =
     useGetProductsByItems();
 
   const totalPrice = useSelector((state) => cartTotalPrice(state, products));
 
   const changeQuantityHandler = useCallback(
     (data) => {
-      dispatch(changeQuantity(data));
+      cartChangeQuantity(data);
     },
-    [dispatch]
+    [cartChangeQuantity]
   );
 
-  const removeItemHandler = useCallback(
+  const removeProductHandler = useCallback(
     (data) => {
       const { id } = data;
-      removeItem(id);
-      dispatch(removeItemFromCartSlice(id));
+      cartRemoveRecord(id);
     },
-    [removeItem, dispatch]
+    [cartRemoveRecord]
   );
 
   return (
@@ -40,7 +32,7 @@ const ShoppingCart = () => {
         <CartList
           products={products}
           changeQuantityHandler={changeQuantityHandler}
-          removeItemHandler={removeItemHandler}
+          removeProductHandler={removeProductHandler}
         />
         <CartTotalPrice totalPrice={totalPrice} />
       </Loading>

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
-import { cartTotalQuantity } from "../../../../store/cart/cartSlice";
+import { cartTotalQuantity } from "../../../../store/cartSlice";
 import { CartDrop } from "../..";
 
 import shoppingCartImg from "../../../../assets/shopping-card.svg";
@@ -35,10 +35,6 @@ const CartHeaderLogo = () => {
     if (!openCartDrop) return;
 
     const handler = (event) => {
-      if (!divEl.current) {
-        return;
-      }
-
       if (!divEl.current.contains(event.target)) {
         closeCartDrop();
       }
@@ -46,7 +42,7 @@ const CartHeaderLogo = () => {
     document.addEventListener("click", handler, true);
 
     return () => {
-      document.addEventListener("click", handler, true);
+      document.removeEventListener("click", handler);
     };
   }, [closeCartDrop, openCartDrop]);
 

@@ -1,13 +1,14 @@
 import { useSelector } from "react-redux";
-import { itemQuantityById } from "../../../../store/cart/cartSlice";
+import { itemQuantityById } from "../../../../store/cartSlice";
+
 import Product from "../../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const CartItem = ({ data, changeQuantityHandler, removeItemHandler }) => {
-  const { cartItem, cartItemSelection } = styles;
-  const quantity = useSelector((state) => itemQuantityById(state, data.id));
+const { cartItem, cartItemSelection } = styles;
 
+const CartItem = ({ data, changeQuantityHandler, removeProductHandler }) => {
+  const quantity = useSelector((state) => itemQuantityById(state, data.id));
   const options = Array(data.max)
     .fill(1)
     .map((_, idx) => {
@@ -18,14 +19,13 @@ const CartItem = ({ data, changeQuantityHandler, removeItemHandler }) => {
         </option>
       );
     });
-
   return (
     <div className={cartItem}>
       <Product
         btnText="Remove"
         actionType="remove"
         {...data}
-        selectedItem={removeItemHandler}
+        selectedProduct={removeProductHandler}
       />
       <div className={cartItemSelection}>
         <Form.Select

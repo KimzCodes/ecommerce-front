@@ -1,45 +1,66 @@
 import { useState, useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { removeItem, changeQuantity } from "../store/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const useGetProductsByItems = () => {
-  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
+  const cartItemsID = useSelector((state) => state.cart.items);
 
-  const sendRequest = useCallback(async () => {
-    if (!Object.keys(cartItems).length) {
+  const cartLoadProducts = useCallback(async () => {
+    if (!Object.keys(cartItemsID).length) {
       setLoading(false);
       return;
     }
 
-    const ids = Object.keys(cartItems)
+    const ids = Object.keys(cartItemsID)
       .map((el) => `id=${el}`)
       .join("&");
-
+    setLoading(true);
+    setError(null);
     try {
       setError(null);
       setLoading(true);
       const res = await fetch(`http://localhost:5009/items?${ids}`);
       const data = await res.json();
-
       setProducts(data);
     } catch (error) {
       setError(error.message || "Can not get items full data");
     }
-
     setLoading(false);
-  }, [cartItems]);
+  }, [cartItemsID]);
 
-  const removeItem = useCallback((id) => {
-    setProducts((prev) => prev.filter((el) => el.id !== id));
-  }, []);
+  const cartRemoveRecord = useCallback(
+    (id) => {
+      setProducts((prev) => prev.filter((el) => el.id !== id));
+      dispatch(removeItem(id));
+    },
+    [dispatch]
+  );
+
+  const cartChangeQuantity = useCallback(
+    (data) => {
+      dispatch(changeQuantity(data));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
+    if (products.length > 0) return;
+    cartLoadProducts();
+  }, [cartLoadProducts, products]);
 
-  return { loading, error, products, cartItems, removeItem, sendRequest };
+  return {
+    loading,
+    error,
+    products,
+    cartItemsID,
+    cartLoadProducts,
+    cartRemoveRecord,
+    cartChangeQuantity,
+  };
 };
 
 export default useGetProductsByItems;
