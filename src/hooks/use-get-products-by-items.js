@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { removeItem, changeQuantity } from "../store/cartSlice";
+import { removeItem, changeQuantity } from "../store/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const useGetProductsByItems = () => {

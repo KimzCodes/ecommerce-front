@@ -1,6 +1,6 @@
 import useGetProductsByItems from "../hooks/use-get-products-by-items";
 import { useSelector } from "react-redux";
-import { cartTotalPrice } from "../store/cartSlice";
+import { cartTotalPrice } from "../store/cart/cartSlice";
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 import { useCallback } from "react";
@@ -36,7 +36,6 @@ const ShoppingCart = () => {
         />
         <CartTotalPrice totalPrice={totalPrice} />
       </Loading>
-      <button onClick={sendRequest}>try</button>
     </div>
   );
 };

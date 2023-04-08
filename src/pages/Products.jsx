@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../store/cartSlice";
-import { filterProducts, cleanRecords } from "../store/productSlice";
+import { addToCart } from "../store/cart/cartSlice";
+import { filterProducts, cleanRecords } from "../store/products/productsSlice";
 import { useParams } from "react-router-dom";
 import { Product } from "../components/ecom-ui";
 import { GridList } from "../components/Layout";
