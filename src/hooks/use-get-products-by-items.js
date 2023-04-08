@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { removeItem } from "../store/cartSlice";
+import { removeItem, changeQuantity } from "../store/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const useGetProductsByItems = () => {
@@ -9,7 +9,7 @@ const useGetProductsByItems = () => {
   const [products, setProducts] = useState([]);
   const cartItemsID = useSelector((state) => state.cart.items);
 
-  const sendRequest = useCallback(async () => {
+  const cartLoadProducts = useCallback(async () => {
     if (!Object.keys(cartItemsID).length) {
       setLoading(false);
       return;
@@ -30,7 +30,7 @@ const useGetProductsByItems = () => {
     setLoading(false);
   }, [cartItemsID]);
 
-  const removeRecord = useCallback(
+  const cartRemoveRecord = useCallback(
     (id) => {
       setProducts((prev) => prev.filter((el) => el.id !== id));
       dispatch(removeItem(id));
@@ -38,11 +38,27 @@ const useGetProductsByItems = () => {
     [dispatch]
   );
 
-  useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
+  const cartChangeQuantity = useCallback(
+    (data) => {
+      dispatch(changeQuantity(data));
+    },
+    [dispatch]
+  );
 
-  return { loading, error, products, cartItemsID, sendRequest, removeRecord };
+  useEffect(() => {
+    if (products.length > 0) return;
+    cartLoadProducts();
+  }, [cartLoadProducts, products]);
+
+  return {
+    loading,
+    error,
+    products,
+    cartItemsID,
+    cartLoadProducts,
+    cartRemoveRecord,
+    cartChangeQuantity,
+  };
 };
 
 export default useGetProductsByItems;

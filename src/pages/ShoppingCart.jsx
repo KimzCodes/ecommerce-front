@@ -1,34 +1,35 @@
-import { useCallback } from "react";
 import useGetProductsByItems from "../hooks/use-get-products-by-items";
-import { useDispatch, useSelector } from "react-redux";
-import { changeQuantity, cartTotalPrice } from "../store/cartSlice";
+import { useSelector } from "react-redux";
+import { cartTotalPrice } from "../store/cartSlice";
 import { CartList, CartTotalPrice } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
+import { useCallback } from "react";
 
 const ShoppingCart = () => {
-  const dispatch = useDispatch();
-  const { loading, error, products, cartItemsID, removeRecord } =
+  const { loading, error, products, cartRemoveRecord, cartChangeQuantity } =
     useGetProductsByItems();
 
   const totalPrice = useSelector((state) => cartTotalPrice(state, products));
 
   const changeQuantityHandler = useCallback(
     (data) => {
-      dispatch(changeQuantity(data));
+      cartChangeQuantity(data);
     },
-    [dispatch]
+    [cartChangeQuantity]
   );
 
-  const removeProductHandler = (data) => {
-    const { id } = data;
-    removeRecord(id);
-  };
+  const removeProductHandler = useCallback(
+    (data) => {
+      const { id } = data;
+      cartRemoveRecord(id);
+    },
+    [cartRemoveRecord]
+  );
 
   return (
     <div>
       <Loading loading={loading} error={error}>
         <CartList
-          items={cartItemsID}
           products={products}
           changeQuantityHandler={changeQuantityHandler}
           removeProductHandler={removeProductHandler}

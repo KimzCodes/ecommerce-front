@@ -61,6 +61,14 @@ export const cartTotalPrice = createSelector(
   }
 );
 
+export const itemQuantityById = createSelector(
+  (state) => state.cart.items,
+  (_, id) => id,
+  (items, id) => {
+    return items[id];
+  }
+);
+
 export const { closeReachToMax, addToCart, changeQuantity, removeItem } =
   cartSlice.actions;
 
