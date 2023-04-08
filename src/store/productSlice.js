@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { removeItem } from "./cartSlice";
 
 export const filterProducts = createAsyncThunk(
   "products/filterProducts",
