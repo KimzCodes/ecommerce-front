@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeReachToMax } from "../../../store/cartSlice";
+import { closeReachToMax } from "../../../store/cart/cartSlice";
 import { Alert } from "react-bootstrap";
 
 import styles from "./styles.module.css";

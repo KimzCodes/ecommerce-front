@@ -11,9 +11,9 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import categories from "./categorySlice";
-import products from "./productSlice";
-import cart from "./cartSlice";
+import categories from "./category/categorySlice";
+import products from "./product/productSlice";
+import cart from "./cart/cartSlice";
 
 const persistConfig = {
   key: "ecom",

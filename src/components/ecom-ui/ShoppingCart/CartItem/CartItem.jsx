@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { itemQuantityById } from "../../../../store/cartSlice";
+import { itemQuantityById } from "../../../../store/cart/cartSlice";
 
 import Product from "../../Product/Product";
 import { Form } from "react-bootstrap";
