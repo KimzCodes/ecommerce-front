@@ -35,10 +35,6 @@ const CartHeaderIcon = () => {
     if (!openCartDrop) return;
 
     const handler = (event) => {
-      if (!divEl.current) {
-        return;
-      }
-
       if (!divEl.current.contains(event.target)) {
         closeCartDrop();
       }
@@ -46,7 +42,7 @@ const CartHeaderIcon = () => {
     document.addEventListener("click", handler, true);
 
     return () => {
-      document.addEventListener("click", handler, true);
+      document.removeEventListener("click", handler);
     };
   }, [closeCartDrop, openCartDrop]);
 

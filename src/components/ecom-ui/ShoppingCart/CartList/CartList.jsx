@@ -1,17 +1,25 @@
 import { memo } from "react";
 import CartItem from "../CartItem/CartItem";
 
-const CartList = ({ products, changeQuantityHandler, removeItemHandler }) => {
-  const shoppingCartList = products.map((el) => {
-    return (
-      <CartItem
-        key={el.id}
-        data={el}
-        changeQuantityHandler={changeQuantityHandler}
-        removeItemHandler={removeItemHandler}
-      />
-    );
-  });
+const CartList = ({
+  products,
+
+  changeQuantityHandler,
+  removeProductHandler,
+}) => {
+  console.log("list");
+  const shoppingCartList = products.length
+    ? products.map((el) => {
+        return (
+          <CartItem
+            key={el.id}
+            data={el}
+            changeQuantityHandler={changeQuantityHandler}
+            removeProductHandler={removeProductHandler}
+          />
+        );
+      })
+    : "Your cart is empty";
 
   return <div>{shoppingCartList}</div>;
 };

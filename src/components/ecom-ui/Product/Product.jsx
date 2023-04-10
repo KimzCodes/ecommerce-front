@@ -10,7 +10,7 @@ const Product = ({
   max,
   btnText,
   actionType = "add",
-  selectedItem,
+  selectedProduct,
 }) => {
   const { item, button } = styles;
   const [disabled, setDisabled] = useState(false);
@@ -30,11 +30,12 @@ const Product = ({
 
   const clickActionHandler = () => {
     if (actionType === "add") {
+      selectedProduct({ id, max, actionType: "add" });
       setBtnClicked((prev) => prev + 1);
-      selectedItem({ id, max, actionType: "add" });
     }
+
     if (actionType === "remove") {
-      selectedItem({ id, actionType: "remove" });
+      selectedProduct({ id, actionType: "remove" });
     }
   };
 
