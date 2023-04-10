@@ -16,6 +16,9 @@
   height: 240px;
   display: flex;
   flex-direction: column;
+}
+
+.cartListWithScroll {
   overflow-y: scroll;
 }
 

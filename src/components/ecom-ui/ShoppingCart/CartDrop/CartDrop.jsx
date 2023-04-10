@@ -6,12 +6,15 @@ import { Loading } from "../../../Layout";
 import CartEmpty from "../CartEmpty/CartEmpty";
 import styles from "./styles.module.css";
 
-const { container, button, cartList, cartItem } = styles;
+const { container, button, cartList, cartListWithScroll, cartItem } = styles;
 
 const CartDrop = ({ close }) => {
   const navigate = useNavigate();
 
   const { loading, error, products, cartItemsID } = useGetProductsByItems();
+  const cartListScrollStatus = !products.length
+    ? cartList
+    : `${cartList} ${cartListWithScroll}`;
 
   const navigateHandler = () => {
     close();
@@ -40,7 +43,7 @@ const CartDrop = ({ close }) => {
   return (
     <div className={container} id="cartDrop">
       <Loading loading={loading} error={error}>
-        <div className={cartList}> {itemsList}</div>
+        <div className={cartListScrollStatus}> {itemsList}</div>
       </Loading>
       <Button className={button} variant="dark" onClick={navigateHandler}>
         Go to checkout
