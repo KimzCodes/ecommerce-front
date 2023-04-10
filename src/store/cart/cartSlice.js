@@ -1,5 +1,6 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import initialState from "./initialState";
+import { cartTotalQuantity, totalPrice, itemQuantityById } from "./selectors";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -36,39 +37,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const cartTotalQuantity = createSelector(
-  (state) => state.cart.items,
-  (items) => {
-    let totalQuantity = 0;
-
-    for (const id in items) {
-      totalQuantity += items[id];
-    }
-    return totalQuantity;
-  }
-);
-
-export const totalPrice = createSelector(
-  (state) => state.cart.items,
-  (_, records) => records,
-  (items, records) => {
-    let price = 0;
-    for (const record of records) {
-      price += record.price * items[record.id];
-    }
-    return price.toFixed(2);
-  }
-);
-
-export const itemQuantityById = createSelector(
-  (state) => state.cart.items,
-  (_, id) => id,
-  (items, id) => {
-    return items[id];
-  }
-);
-
 export const { closeReachToMax, addToCart, changeQuantity, removeItem } =
   cartSlice.actions;
-
+export { cartTotalQuantity, totalPrice, itemQuantityById };
 export default cartSlice.reducer;

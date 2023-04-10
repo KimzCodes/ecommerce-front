@@ -1,6 +1,7 @@
 const initialState = {
-  items: {},
-  reachToMax: false,
+  loading: false,
+  error: null,
+  records: [],
 };
 
 export default initialState;
