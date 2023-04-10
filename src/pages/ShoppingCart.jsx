@@ -1,5 +1,5 @@
 import useGetProductsByItems from "../hooks/use-get-products-by-items";
-import { CartList, CartTotalPrice } from "../components/ecom-ui";
+import { CartList, CartTotalPrice, CartEmpty } from "../components/ecom-ui";
 import { Loading } from "../components/Layout";
 import { useCallback } from "react";
 
@@ -28,15 +28,23 @@ const ShoppingCart = () => {
     [cartRemoveRecord]
   );
 
+  const renderShoppingCart = !products.length ? (
+    <CartEmpty />
+  ) : (
+    <>
+      <CartList
+        products={products}
+        changeQuantityHandler={changeQuantityHandler}
+        removeProductHandler={removeProductHandler}
+      />
+      <CartTotalPrice totalPrice={cartTotalPrice} />
+    </>
+  );
+
   return (
     <div>
       <Loading loading={loading} error={error}>
-        <CartList
-          products={products}
-          changeQuantityHandler={changeQuantityHandler}
-          removeProductHandler={removeProductHandler}
-        />
-        <CartTotalPrice totalPrice={cartTotalPrice} />
+        {renderShoppingCart}
       </Loading>
     </div>
   );

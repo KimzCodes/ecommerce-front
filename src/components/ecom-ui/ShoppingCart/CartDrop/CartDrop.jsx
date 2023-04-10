@@ -20,7 +20,7 @@ const CartDrop = ({ close }) => {
 
   const itemsList =
     products.length === 0 ? (
-      <div>Your cart is empty</div>
+      <CartEmpty size="small" />
     ) : (
       products.map((el) => {
         const quantity = cartItemsID[el.id];
@@ -35,8 +35,6 @@ const CartDrop = ({ close }) => {
           </div>
         );
       })
-    ) : (
-      <CartEmpty size="small" />
     );
 
   return (

@@ -7,7 +7,6 @@ const CartList = ({
   changeQuantityHandler,
   removeProductHandler,
 }) => {
-  console.log("list");
   const shoppingCartList = products.length
     ? products.map((el) => {
         return (
@@ -19,7 +18,7 @@ const CartList = ({
           />
         );
       })
-    : "Your cart is empty";
+    : null;
 
   return <div>{shoppingCartList}</div>;
 };
