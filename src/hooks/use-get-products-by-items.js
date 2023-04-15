@@ -24,14 +24,17 @@ const useGetProductsByItems = () => {
     const ids = Object.keys(cartItemsID)
       .map((el) => `id=${el}`)
       .join("&");
+
     setLoading(true);
     setError(null);
+
     try {
       const { data } = await axios.get(`/items?${ids}`);
       setProducts(data);
     } catch (error) {
       setError(error.message || "Can not get items full data");
     }
+
     setLoading(false);
   }, [cartItemsID]);
 
