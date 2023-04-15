@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import shoppingCartEmpty from "../../../../assets/lottie/shoppingCartEmpty";
+import shoppingCartEmpty from "../../../../assets/lottie/emptyBox.json";
 import styles from "./styles.module.css";
 
 const CartEmpty = ({ size = "large" }) => {

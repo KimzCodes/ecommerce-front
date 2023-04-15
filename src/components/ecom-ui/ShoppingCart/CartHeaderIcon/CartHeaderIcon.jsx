@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../../store/cart/cartSlice";
 import { CartDrop } from "../..";
 
-import { ReactComponent as ReactLogo } from "../../../../assets/shopping-cart/logo.svg";
+import { ReactComponent as ReactLogo } from "../../../../assets/shopping-cart.svg";
 import styles from "./styles.module.css";
 
 const CartHeaderIcon = () => {
