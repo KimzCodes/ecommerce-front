@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const customAPI = axios.create({
+const catAPI = axios.create({
   baseURL: "http://localhost:5005",
   header: {
     "Content-Type": "application/json",
   },
 });
 
-export { customAPI };
+export { catAPI };
