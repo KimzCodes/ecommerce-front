@@ -8,6 +8,8 @@ const Login = () => {
       email: "",
       password: "",
     },
+    validateOnChange: true,
+    validateOnBlur: true,
     validationSchema: loginSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
@@ -20,14 +22,15 @@ const Login = () => {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
-              type="email"
+              type="name"
               name="email"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
               isInvalid={formik.touched.email && formik.errors.email}
             />
             <Form.Control.Feedback type="invalid">
-              {formik.errors.email}
+              {formik.errors.password}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -37,8 +40,9 @@ const Login = () => {
               type="password"
               name="password"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.password}
-              isInvalid={formik.errors.password && formik.errors.password}
+              isInvalid={formik.touched.password && formik.errors.password}
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.password}
