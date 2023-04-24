@@ -1,35 +1,45 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { tracking } from "../store/global/globalSlice";
+import { actPostTracking } from "../store/global/globalSlice";
 import axios from "axios";
 
 const AxiosInterceptor = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const myInterceptor = axios.interceptors.response.use(
-      (response) => {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
-        return response;
-      },
-      async (error) => {
-        try {
-          if (error.config.url.includes("tracking")) {
-            return Promise.reject(error);
-          } else {
-            dispatch(tracking(error));
-            return Promise.reject(error);
-          }
-        } catch (error) {
-          console.log(error);
-          return Promise.reject(error);
+    // Add a request interceptor
+    const requestInterceptor = axios.interceptors.request.use(
+      (config) => {
+        // Do something before request is sent
+        if (config.url.includes("items")) {
+          config.url = `${config.url}&fireEvent=true`;
         }
+        return config;
+      },
+      (error) => {
+        // Do something with request error
+        return Promise.reject(error);
       }
     );
 
+    // Add a response interceptor
+    const responseInterceptor = axios.interceptors.response.use(
+      null,
+      async (error) => {
+        if (!error.config.url.includes("tracking") && !axios.isCancel(error)) {
+          dispatch(actPostTracking(error));
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    //url -> items -> failed`
+    //error handler -> url !==  tracking -> api tracking
+    //error handler -> url ? (tracking) skip
+
     return () => {
-      axios.interceptors.request.eject(myInterceptor);
+      axios.interceptors.request.eject(requestInterceptor);
+      axios.interceptors.response.eject(responseInterceptor);
     };
   }, [dispatch]);
   return <div>{children}</div>;
