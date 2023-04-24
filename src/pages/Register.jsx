@@ -11,6 +11,8 @@ const Register = () => {
       password: "",
       passwordConf: "",
     },
+    validateOnChange: true,
+    validateOnBlur: true,
     validationSchema: registerSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
@@ -27,6 +29,7 @@ const Register = () => {
               name="fname"
               type="text"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.fname}
               isInvalid={formik.touched.fname && formik.errors.fname}
             />
@@ -40,6 +43,7 @@ const Register = () => {
               name="lname"
               type="text"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.lname}
               isInvalid={formik.touched.lname && formik.errors.lname}
             />
@@ -53,6 +57,7 @@ const Register = () => {
               type="email"
               name="email"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.email}
               isInvalid={formik.touched.email && formik.errors.email}
             />
@@ -67,6 +72,7 @@ const Register = () => {
               type="password"
               name="password"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.password}
               isInvalid={formik.touched.password && formik.errors.password}
             />
@@ -81,6 +87,7 @@ const Register = () => {
               type="password"
               name="passwordConf"
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               value={formik.values.passwordConf}
               isInvalid={
                 formik.touched.passwordConf && formik.errors.passwordConf
