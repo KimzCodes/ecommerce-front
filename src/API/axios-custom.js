@@ -8,15 +8,19 @@ const customAPI = axios.create({
 });
 
 customAPI.interceptors.response.use(
-  function (response) {
+  (response) => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log("cat");
     return response;
   },
-  function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
+  async (error) => {
+    await axios.post("http://localhost:5006/tracking", {
+      message: error.message,
+      endPoint: error.config.url,
+    });
+    if (!error.config.url.includes("tracking") && !axios.isCancel(error)) {
+    }
+
     return Promise.reject(error);
   }
 );
