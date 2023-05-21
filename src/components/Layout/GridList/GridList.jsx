@@ -3,14 +3,14 @@ import Loading from "../Loading/Loading";
 
 import styles from "./styles.module.css";
 
-const GridList = ({ children, records, error, loading, selectedItem }) => {
+const GridList = ({ children, records, selectedProduct, error, loading }) => {
   const { grid } = styles;
 
   const renderElements = records.map((record) =>
     cloneElement(children, {
       key: record.id,
       ...record,
-      selectedItem,
+      selectedProduct,
     })
   );
 

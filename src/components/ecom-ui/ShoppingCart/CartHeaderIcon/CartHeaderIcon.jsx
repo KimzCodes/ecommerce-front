@@ -1,9 +1,9 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { cartTotalQuantity } from "../../../../store/cart/cartSlice";
 import { CartDrop } from "../..";
 
-import { ReactComponent as ReactLogo } from "../../../../assets/shopping-cart/logo.svg";
+import { ReactComponent as ReactLogo } from "../../../../assets/shopping-cart.svg";
 import styles from "./styles.module.css";
 
 const CartHeaderIcon = () => {
@@ -12,8 +12,40 @@ const CartHeaderIcon = () => {
   const [openCartDrop, setOpenCartDrop] = useState(false);
   const [isAnimateCart, setIsAnimateCart] = useState(false);
   const totalQuantity = useSelector(cartTotalQuantity);
-
   const cartClasses = `${shoppingCartCounter} ${isAnimateCart ? bumpCart : ""}`;
+
+  const closeCartDrop = useCallback(() => {
+    setOpenCartDrop(false);
+  }, []);
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (!divEl.current.contains(event.target)) {
+        closeCartDrop();
+      }
+    };
+    document.addEventListener("click", handler, true);
+
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, [closeCartDrop]);
+
+  useEffect(() => {
+    if (!openCartDrop) return;
+
+    const handler = (event) => {
+      if (!divEl.current.contains(event.target)) {
+        closeCartDrop();
+      }
+    };
+
+    document.addEventListener("click", handler, true);
+
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, [closeCartDrop, openCartDrop]);
 
   useEffect(() => {
     if (totalQuantity === 0) return;
@@ -26,30 +58,6 @@ const CartHeaderIcon = () => {
       clearTimeout(debounce);
     };
   }, [totalQuantity]);
-
-  const closeCartDrop = useCallback(() => {
-    setOpenCartDrop(false);
-  }, []);
-
-  useEffect(() => {
-    if (!openCartDrop) return;
-
-    const handler = (event) => {
-      if (!divEl.current) {
-        return;
-      }
-
-      if (!divEl.current.contains(event.target)) {
-        closeCartDrop();
-      }
-    };
-
-    document.addEventListener("click", handler, true);
-
-    return () => {
-      document.addEventListener("click", handler, true);
-    };
-  }, [closeCartDrop, openCartDrop]);
 
   return (
     <div id="shopping-cart-icon" ref={divEl}>
