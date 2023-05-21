@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const filterProducts = createAsyncThunk(
-  "products/filterProducts",
+const actFilterProducts = createAsyncThunk(
+  "products/actFilterProducts",
   async (prefix, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -13,3 +13,5 @@ export const filterProducts = createAsyncThunk(
     }
   }
 );
+
+export default actFilterProducts;
