@@ -14,7 +14,6 @@ export {
   CartItem,
   CartDrop,
   CartTotalPrice,
-  CartDrop,
   CartHeaderIcon,
   CartEmpty,
 };
