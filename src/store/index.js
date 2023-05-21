@@ -11,8 +11,8 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import categories from "./categories/categoriesSlice";
-import products from "./products/productsSlice";
+import categories from "./category/categorySlice";
+import products from "./product/productSlice";
 import cart from "./cart/cartSlice";
 import global from "./global/globalSlice";
 
