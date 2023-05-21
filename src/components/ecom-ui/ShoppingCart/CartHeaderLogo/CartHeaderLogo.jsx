@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { cartTotalQuantity } from "../../../../store/cartSlice";
+import { cartTotalQuantity } from "../../../../store/cart/cartSlice";
 import { CartDrop } from "../../";
 import shoppingCartImg from "../../../../assets/shopping-card.svg";
 import styles from "./styles.module.css";
