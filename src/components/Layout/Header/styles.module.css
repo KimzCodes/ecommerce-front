@@ -1,6 +1,7 @@
 .header {
   margin-top: 10px;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .headerTop {
