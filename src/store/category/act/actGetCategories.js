@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { customAPI } from "../../API/axios-custom";
+import { customAPI } from "../../../API/axios-custom";
 
 export const actGetCategories = createAsyncThunk(
   "categories/actGetCategories",
