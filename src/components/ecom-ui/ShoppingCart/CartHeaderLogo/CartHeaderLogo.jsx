@@ -31,10 +31,6 @@ const CartHeaderLogo = () => {
     };
   }, [closeCartDrop]);
 
-  const closeCartDrop = useCallback(() => {
-    setOpenCartDrop(false);
-  }, []);
-
   useEffect(() => {
     if (!openCartDrop) return;
 
