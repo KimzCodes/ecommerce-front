@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { customAPI } from "../../API/axios-custom";
 
-export const getCategories = createAsyncThunk(
-  "categories/getCategories",
+export const actGetCategories = createAsyncThunk(
+  "categories/actGetCategories",
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
@@ -13,3 +13,5 @@ export const getCategories = createAsyncThunk(
     }
   }
 );
+
+export default actGetCategories;
