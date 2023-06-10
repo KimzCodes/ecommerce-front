@@ -5,8 +5,8 @@ import { registerSchema } from "../util/validationSchema";
 const Register = () => {
   const formik = useFormik({
     initialValues: {
-      fname: "",
-      lname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       passwordConf: "",
@@ -23,32 +23,32 @@ const Register = () => {
     <Row className="justify-content-md-center">
       <Col xs={6} span={3}>
         <Form onSubmit={formik.handleSubmit}>
-          <Form.Group className="mb-3" controlId="fname">
+          <Form.Group className="mb-3" controlId="firstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control
-              name="fname"
+              name="firstName"
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.fname}
-              isInvalid={formik.touched.fname && formik.errors.fname}
+              value={formik.values.firstName}
+              isInvalid={formik.touched.firstName && formik.errors.firstName}
             />
             <Form.Control.Feedback type="invalid">
-              {formik.errors.fname}
+              {formik.errors.firstName}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="lname">
+          <Form.Group className="mb-3" controlId="lastName">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
-              name="lname"
+              name="lastName"
               type="text"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.lname}
-              isInvalid={formik.touched.lname && formik.errors.lname}
+              value={formik.values.lastName}
+              isInvalid={formik.touched.lastName && formik.errors.lastName}
             />
             <Form.Control.Feedback type="invalid">
-              {formik.errors.lname}
+              {formik.errors.lastName}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="email">
