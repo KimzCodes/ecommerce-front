@@ -15,6 +15,7 @@ const Login = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
   return (
     <Row className="justify-content-md-center">
       <Col xs={6} span={3}>
@@ -30,7 +31,7 @@ const Login = () => {
               isInvalid={formik.touched.email && formik.errors.email}
             />
             <Form.Control.Feedback type="invalid">
-              {formik.errors.password}
+              {formik.errors.email}
             </Form.Control.Feedback>
           </Form.Group>
 
