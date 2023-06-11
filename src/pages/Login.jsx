@@ -1,5 +1,5 @@
-import { Button, Form, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
+import { Button, Form, Row, Col } from "react-bootstrap";
 import { loginSchema } from "../util/validationSchema";
 
 const Login = () => {
@@ -30,6 +30,7 @@ const Login = () => {
               value={formik.values.email}
               isInvalid={formik.touched.email && formik.errors.email}
             />
+
             <Form.Control.Feedback type="invalid">
               {formik.errors.email}
             </Form.Control.Feedback>
