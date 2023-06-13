@@ -12,7 +12,7 @@ const categorySlice = createSlice({
     });
     builder.addCase(actGetCategories.fulfilled, (state, action) => {
       state.loading = false;
-      state.records = action.payload;
+      // state.records = action.payload;
     });
     builder.addCase(actGetCategories.rejected, (state, action) => {
       state.loading = false;
