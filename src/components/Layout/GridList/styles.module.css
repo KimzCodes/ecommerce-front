@@ -4,8 +4,3 @@
   row-gap: 50px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
-
-.errorMessage {
-  text-align: center;
-  font-size: 20px;
-}

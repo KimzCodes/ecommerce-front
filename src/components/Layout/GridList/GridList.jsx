@@ -1,13 +1,19 @@
 import { cloneElement } from "react";
-import Lottie from "lottie-react";
 import Loading from "../Loading/Loading";
-import fixingBugs from "../../../assets/lottie/fixingBugs.json";
+import LottieAnimation from "../LottieAnimation/LottieAnimation";
 
 import styles from "./styles.module.css";
 
-const GridList = ({ children, records, selectedProduct, error, loading }) => {
-  const { grid, errorMessage } = styles;
+const { grid } = styles;
 
+const GridList = ({
+  children,
+  records,
+  selectedProduct,
+  error,
+  loading,
+  lottieAnimation,
+}) => {
   const renderElements =
     records.length > 0 ? (
       <div className={grid}>
@@ -20,15 +26,7 @@ const GridList = ({ children, records, selectedProduct, error, loading }) => {
         )}
       </div>
     ) : (
-      <>
-        <Lottie
-          animationData={fixingBugs}
-          style={{ maxWidth: "500px", margin: "0 auto" }}
-        />
-        <p className={errorMessage}>
-          We are facing technical issues, please try after sometime.
-        </p>
-      </>
+      <LottieAnimation animationData={lottieAnimation} />
     );
   return (
     <Loading error={error} loading={loading}>

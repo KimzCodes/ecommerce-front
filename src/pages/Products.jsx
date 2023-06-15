@@ -32,6 +32,7 @@ const Products = () => {
         loading={loading}
         records={records}
         selectedProduct={selectedProduct}
+        lottieAnimation="notFound"
       >
         <Product />
       </GridList>
