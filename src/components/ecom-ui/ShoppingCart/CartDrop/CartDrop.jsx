@@ -2,8 +2,7 @@ import useGetProductsByItems from "../../../../hooks/use-get-products-by-items";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
-import { Loading } from "../../../Layout";
-import CartEmpty from "../CartEmpty/CartEmpty";
+import { Loading, LottieAnimation } from "../../../Layout";
 import styles from "./styles.module.css";
 
 const { container, button, cartList, cartListWithScroll, cartItem } = styles;
@@ -23,7 +22,7 @@ const CartDrop = ({ close }) => {
 
   const itemsList =
     products.length === 0 ? (
-      <CartEmpty size="small" />
+      <LottieAnimation animationData="cartEmptySmall" />
     ) : (
       products.map((el) => {
         const quantity = cartItemsID[el.id];

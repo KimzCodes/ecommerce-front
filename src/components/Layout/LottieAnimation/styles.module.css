@@ -1,4 +1,32 @@
-.message {
-  text-align: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lottieDefault {
+  width: 500px;
+  margin-bottom: -30px;
+  margin-top: -30px;
+}
+
+.lottieLarge {
+  width: 500px;
+  margin-bottom: -100px;
+  margin-top: -100px;
+}
+
+.lottieDefault + p,
+.lottieLarge + p {
   font-size: 20px;
+}
+
+.lottieSmall {
+  width: 200px;
+  margin-bottom: -30px;
+}
+
+.lottieSmall + p {
+  font-size: 13px;
 }
