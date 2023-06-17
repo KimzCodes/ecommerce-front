@@ -5,7 +5,6 @@ import CartItem from "./ShoppingCart/CartItem/CartItem";
 import CartTotalPrice from "./ShoppingCart/CartTotalPrice/CartTotalPrice";
 import CartDrop from "./ShoppingCart/CartDrop/CartDrop";
 import CartHeaderIcon from "./ShoppingCart/CartHeaderIcon/CartHeaderIcon";
-import CartEmpty from "./ShoppingCart/CartEmpty/CartEmpty";
 
 export {
   Category,
@@ -15,5 +14,4 @@ export {
   CartDrop,
   CartTotalPrice,
   CartHeaderIcon,
-  CartEmpty,
 };

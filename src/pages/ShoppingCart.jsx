@@ -1,6 +1,6 @@
 import useGetProductsByItems from "../hooks/use-get-products-by-items";
-import { CartList, CartTotalPrice, CartEmpty } from "../components/ecom-ui";
-import { Loading } from "../components/Layout";
+import { CartList, CartTotalPrice } from "../components/ecom-ui";
+import { Loading, LottieAnimation } from "../components/Layout";
 import { useCallback } from "react";
 
 const ShoppingCart = () => {
@@ -29,7 +29,7 @@ const ShoppingCart = () => {
   );
 
   const renderShoppingCart = !products.length ? (
-    <CartEmpty />
+    <LottieAnimation animationData="cartEmptyLarge" />
   ) : (
     <>
       <CartList
