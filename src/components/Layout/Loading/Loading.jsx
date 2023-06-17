@@ -1,22 +1,12 @@
-import Lottie from "lottie-react";
-import loadingAnimation from "../../../assets/lottie/loadingAnimation.json";
-import connectionError from "../../../assets/lottie/connectionError.json";
-import styles from "./styles.module.css";
-
-const { lottieAnimation } = styles;
+import LottieAnimation from "../LottieAnimation/LottieAnimation";
 
 const Loading = ({ children, loading, error }) => {
   return (
     <>
       {loading ? (
-        <div className={lottieAnimation}>
-          <Lottie animationData={loadingAnimation} loop={true} />
-        </div>
+        <LottieAnimation animationData="loading" />
       ) : error ? (
-        <div className={lottieAnimation}>
-          <Lottie animationData={connectionError} loop={true} />
-          <h2>OOPs! Something went wrong</h2>
-        </div>
+        <LottieAnimation animationData="error" />
       ) : (
         children
       )}

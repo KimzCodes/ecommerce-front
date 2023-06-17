@@ -14,7 +14,12 @@ const Categories = () => {
 
   return (
     <div>
-      <GridList records={records} loading={loading} error={error}>
+      <GridList
+        records={records}
+        loading={loading}
+        error={error}
+        lottieAnimation="fixing"
+      >
         <Category />
       </GridList>
     </div>
