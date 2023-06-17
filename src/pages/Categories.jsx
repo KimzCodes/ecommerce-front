@@ -9,7 +9,8 @@ const Categories = () => {
   const { loading, error, records } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    dispatch(actGetCategories());
+    const promise = dispatch(actGetCategories());
+    return () => promise.abort();
   }, [dispatch]);
 
   return (
