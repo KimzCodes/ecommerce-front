@@ -1,23 +1,21 @@
-import Lottie from "lottie-react";
-import { useRouteError } from "react-router-dom";
+import { useRouteError, useNavigate } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
-import errorPage from "../assets/lottie/errorPage.json";
+import { LottieAnimation } from "../components/Layout";
 
 const ErrorPage = () => {
   const error = useRouteError();
-
+  const navigate = useNavigate();
   return (
     <Container>
       <div className="notFound">
-        <Lottie
-          animationData={errorPage}
-          style={{ maxWidth: "500px", margin: "0 auto" }}
-        />
+        <LottieAnimation animationData="errorPage" />
 
         <h1>{error.status}</h1>
         <p>{error.statusText}</p>
 
-        <Button variant="link">Go Back</Button>
+        <Button variant="link" onClick={() => navigate("/", { replace: true })}>
+          Go Back
+        </Button>
       </div>
     </Container>
   );
