@@ -5,11 +5,7 @@ import actFilterProducts from "./act/actFilterProducts";
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {
-    cleanRecords(state) {
-      state.records = [];
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     //filter by category
     builder.addCase(actFilterProducts.pending, (state) => {
@@ -27,5 +23,4 @@ const productSlice = createSlice({
   },
 });
 export { actFilterProducts };
-export const { cleanRecords } = productSlice.actions;
 export default productSlice.reducer;

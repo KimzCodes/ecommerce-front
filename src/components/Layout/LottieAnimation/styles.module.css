@@ -5,21 +5,28 @@
   justify-content: center;
 }
 
-.large {
-  width: 500px;
+.lottieDefault {
+  max-width: 500px;
+  margin-bottom: -30px;
+  margin-top: -30px;
+}
+
+.lottieLarge {
+  max-width: 500px;
   margin-bottom: -100px;
   margin-top: -100px;
 }
 
-.large + p {
+.lottieDefault + p,
+.lottieLarge + p {
   font-size: 20px;
 }
 
-.small {
-  width: 200px;
+.lottieSmall {
+  max-width: 200px;
   margin-bottom: -30px;
 }
 
-.small + p {
+.lottieSmall + p {
   font-size: 13px;
 }
