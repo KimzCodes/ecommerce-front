@@ -1,14 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { loginSchema } from "../util/validationSchema";
 import { useDispatch } from "react-redux";
-import { login } from "../store/auth/authSlice";
+import { actLogin } from "../store/auth/authSlice";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [serverError, setServerError] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,10 +19,18 @@ const Login = () => {
     validateOnBlur: true,
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      dispatch(login(values))
+      setServerError("");
+      dispatch(actLogin(values))
         .unwrap()
         .then(() => {
           navigate("/");
+        })
+        .catch((error) => {
+          if (error === 400) {
+            setServerError("Email or password is incorrect");
+          } else {
+            setServerError("Error from server");
+          }
         });
     },
   });
@@ -63,6 +72,9 @@ const Login = () => {
           <Button variant="primary" type="submit">
             Submit
           </Button>
+          <div className={`invalid-feedback ${serverError ? "d-block" : ""}`}>
+            {serverError}
+          </div>
         </Form>
       </Col>
     </Row>

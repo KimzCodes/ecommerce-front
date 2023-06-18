@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const login = createAsyncThunk(
-  "auth/login",
+const actLogin = createAsyncThunk(
+  "auth/actLogin",
   async (userInfo, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
 
@@ -15,7 +15,9 @@ export const login = createAsyncThunk(
       delete data.user.id;
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.status);
     }
   }
 );
+
+export default actLogin;
