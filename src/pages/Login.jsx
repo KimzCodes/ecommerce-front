@@ -25,6 +25,7 @@ const Login = () => {
         });
     },
   });
+
   return (
     <Row className="justify-content-md-center">
       <Col xs={6} span={3}>
@@ -32,15 +33,16 @@ const Login = () => {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
-              type="name"
+              type="text"
               name="email"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
               isInvalid={formik.touched.email && formik.errors.email}
             />
+
             <Form.Control.Feedback type="invalid">
-              {formik.errors.password}
+              {formik.errors.email}
             </Form.Control.Feedback>
           </Form.Group>
 

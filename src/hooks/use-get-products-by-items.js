@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import {
   removeItem,
   changeQuantity,
@@ -14,6 +14,7 @@ const useGetProductsByItems = () => {
   const [products, setProducts] = useState([]);
   const cartItemsID = useSelector((state) => state.cart.items);
   const cartTotalPrice = useSelector((state) => totalPrice(state, products));
+  const controller = useMemo(() => new AbortController(), []);
 
   const cartLoadProducts = useCallback(async () => {
     if (!Object.keys(cartItemsID).length) {
@@ -29,14 +30,16 @@ const useGetProductsByItems = () => {
     setError(null);
 
     try {
-      const { data } = await axios.get(`/items?${ids}`);
+      const { data } = await axios.get(`/items?${ids}`, {
+        signal: controller.signal,
+      });
       setProducts(data);
     } catch (error) {
       setError(error.message || "Can not get items full data");
     }
 
     setLoading(false);
-  }, [cartItemsID]);
+  }, [cartItemsID, controller]);
 
   const cartRemoveRecord = useCallback(
     (id) => {
@@ -56,7 +59,9 @@ const useGetProductsByItems = () => {
   useEffect(() => {
     if (products.length > 0) return;
     cartLoadProducts();
-  }, [cartLoadProducts, products]);
+
+    return () => controller.abort();
+  }, [cartLoadProducts, products, controller]);
 
   return {
     loading,

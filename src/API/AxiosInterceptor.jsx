@@ -29,6 +29,7 @@ const AxiosInterceptor = ({ children }) => {
         if (!error.config.url.includes("tracking") && !axios.isCancel(error)) {
           dispatch(actPostTracking(error));
         }
+
         return Promise.reject(error);
       }
     );
