@@ -30,7 +30,6 @@ const messagesMapping = {
   loading: (
     <>
       <Lottie animationData={loadingAnimation} className={lottieDefault} />
-      <p>Please wait</p>
     </>
   ),
   serverError: (
