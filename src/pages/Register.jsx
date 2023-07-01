@@ -4,6 +4,7 @@ const Register = () => {
   return (
     <Row className="justify-content-md-center">
       <Col xs={6} span={3}>
+        <h2 className="mt-3 mb-3">Register</h2>
         <Form>
           <Form.Group className="mb-3" controlId="fname">
             <Form.Label>First Name</Form.Label>
