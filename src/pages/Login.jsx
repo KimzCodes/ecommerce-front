@@ -19,6 +19,7 @@ const Login = () => {
   return (
     <Row className="justify-content-md-center">
       <Col xs={6} span={3}>
+        <h2 className="mt-3 mb-3">Login</h2>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>

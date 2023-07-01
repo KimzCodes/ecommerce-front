@@ -1,6 +1,6 @@
-import { Button, Form, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
 import { registerSchema } from "../util/validationSchema";
+import { Button, Form, Row, Col } from "react-bootstrap";
 
 const Register = () => {
   const formik = useFormik({
@@ -22,6 +22,7 @@ const Register = () => {
   return (
     <Row className="justify-content-md-center">
       <Col xs={6} span={3}>
+        <h2 className="mt-3 mb-3">Register</h2>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3" controlId="firstName">
             <Form.Label>First Name</Form.Label>
@@ -32,6 +33,7 @@ const Register = () => {
               onBlur={formik.handleBlur}
               value={formik.values.firstName}
               isInvalid={formik.touched.firstName && formik.errors.firstName}
+              autoComplete="off"
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.firstName}
@@ -46,6 +48,7 @@ const Register = () => {
               onBlur={formik.handleBlur}
               value={formik.values.lastName}
               isInvalid={formik.touched.lastName && formik.errors.lastName}
+              autoComplete="off"
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.lastName}
@@ -60,12 +63,12 @@ const Register = () => {
               onBlur={formik.handleBlur}
               value={formik.values.email}
               isInvalid={formik.touched.email && formik.errors.email}
+              autoComplete="off"
             />
             <Form.Control.Feedback type="invalid">
               {formik.errors.email}
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group className="mb-3" controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control
