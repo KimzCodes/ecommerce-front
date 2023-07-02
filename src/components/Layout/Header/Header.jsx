@@ -3,10 +3,11 @@ import { Badge } from "react-bootstrap";
 
 import styles from "./styles.module.css";
 import { CartHeaderIcon } from "../../ecom-ui";
+import HeaderAuth from "../HeaderAuth/HeaderAuth";
+
+const { headerTop, header, mainNav, activeLink } = styles;
 
 const Header = () => {
-  const { headerTop, header, mainNav, secNav, activeLink } = styles;
-
   return (
     <header className={header}>
       <div className={headerTop}>
@@ -42,14 +43,7 @@ const Header = () => {
             </NavLink>
           </li>
         </ul>
-        <ul className={secNav}>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/register">Register</NavLink>
-          </li>
-        </ul>
+        <HeaderAuth />
       </nav>
     </header>
   );
