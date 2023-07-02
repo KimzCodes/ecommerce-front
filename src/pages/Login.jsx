@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import { useFormik } from "formik";
-import { Button, Form, Row, Col } from "react-bootstrap";
 import { loginSchema } from "../util/validationSchema";
+import useAuth from "../hooks/use-auth";
+import { Button, Form, Row, Col } from "react-bootstrap";
 
 const Login = () => {
+  const { loading, error, actType, login, resetUI } = useAuth();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -12,9 +16,13 @@ const Login = () => {
     validateOnBlur: true,
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      login(values);
     },
   });
+
+  useEffect(() => {
+    return () => resetUI();
+  }, [resetUI]);
 
   return (
     <Row className="justify-content-md-center">
@@ -51,9 +59,16 @@ const Login = () => {
               {formik.errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={actType === "login" && loading}
+          >
+            {actType === "login" && loading ? "Loading" : "Submit"}
           </Button>
+          {actType === "login" && error ? (
+            <div className="invalid-feedback d-block mt-4">{error}</div>
+          ) : null}
         </Form>
       </Col>
     </Row>

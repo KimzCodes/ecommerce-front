@@ -1,8 +1,12 @@
+import { useEffect } from "react";
 import { useFormik } from "formik";
+import useAuth from "../hooks/use-auth";
 import { registerSchema } from "../util/validationSchema";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
 const Register = () => {
+  const { loading, error, actType, register, resetUI } = useAuth();
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -15,9 +19,13 @@ const Register = () => {
     validateOnBlur: true,
     validationSchema: registerSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      register(values);
     },
   });
+
+  useEffect(() => {
+    return () => resetUI();
+  }, [resetUI]);
 
   return (
     <Row className="justify-content-md-center">
@@ -101,9 +109,16 @@ const Register = () => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={actType === "register" && loading}
+          >
+            {actType === "register" && loading ? "Loading" : "Submit"}
           </Button>
+          {actType === "register" && error ? (
+            <div className="invalid-feedback d-block mt-4">{error}</div>
+          ) : null}
         </Form>
       </Col>
     </Row>

@@ -15,17 +15,30 @@ import categories from "./category/categorySlice";
 import products from "./product/productSlice";
 import cart from "./cart/cartSlice";
 import global from "./global/globalSlice";
+import auth from "./auth/authSlice";
 
-const persistConfig = {
-  key: "ecom",
+const rootPersistConfig = {
+  key: "root",
   version: 1,
   storage,
   whitelist: ["cart"],
 };
 
-const rootReducer = combineReducers({ categories, products, cart, global });
+const authPersistConfig = {
+  key: "auth",
+  storage: storage,
+  blacklist: ["loading", "error", "actType"],
+};
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const rootReducer = combineReducers({
+  categories,
+  products,
+  cart,
+  global,
+  auth: persistReducer(authPersistConfig, auth),
+});
+
+const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
