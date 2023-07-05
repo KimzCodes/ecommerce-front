@@ -16,3 +16,12 @@
   text-decoration: none;
   font-size: 14px;
 }
+
+.authNav li button {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+}
