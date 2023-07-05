@@ -38,6 +38,12 @@ const messagesMapping = {
       <p style={{ color: "red" }}>OOPs! Something went wrong.</p>
     </>
   ),
+  orderEmpty: (
+    <>
+      <Lottie className={lottieLarge} animationData={shoppingCartEmpty} />
+      <p>You have no previous orders</p>
+    </>
+  ),
   cartEmptyLarge: (
     <>
       <Lottie className={lottieLarge} animationData={shoppingCartEmpty} />
