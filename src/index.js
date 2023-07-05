@@ -19,7 +19,9 @@ import ErrorPage from "./pages/ErrorPage";
 import NewCollections from "./pages/NewCollections";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
+import ProfileLayout from "./pages/profile/Layout";
+import Account from "./pages/profile/Account";
+import Orders from "./pages/profile/Orders";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,8 +30,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "new-collections", element: <NewCollections /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
       { path: "shopping-cart", element: <ShoppingCart /> },
       {
         path: "categories",
@@ -46,6 +46,17 @@ const router = createBrowserRouter([
             });
           }
         },
+      },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+      {
+        path: "profile",
+        element: <ProfileLayout />,
+        children: [
+          { index: true, element: <Account /> },
+          { path: "account", element: <Account /> },
+          { path: "orders", element: <Orders /> },
+        ],
       },
     ],
   },
