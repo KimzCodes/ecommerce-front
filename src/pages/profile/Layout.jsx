@@ -19,6 +19,16 @@ const Layout = () => {
             Your Account Info
           </NavLink>
           <NavLink
+            to="account-update"
+            className={({ isActive }) =>
+              isActive
+                ? "list-group-item list-group-item-action active"
+                : "list-group-item list-group-item-action"
+            }
+          >
+            Update Account Info
+          </NavLink>
+          <NavLink
             to="orders"
             className={({ isActive }) =>
               isActive

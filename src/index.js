@@ -21,7 +21,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProfileLayout from "./pages/profile/Layout";
 import Account from "./pages/profile/Account";
+import AccountUpdate from "./pages/profile/AccountUpdate";
 import Orders from "./pages/profile/Orders";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +57,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Account /> },
           { path: "account", element: <Account /> },
+          { path: "account-update", element: <AccountUpdate /> },
           { path: "orders", element: <Orders /> },
         ],
       },
