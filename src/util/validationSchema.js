@@ -41,3 +41,15 @@ export const registerSchema = yup.object({
     .required("Please retype your password")
     .oneOf([yup.ref("password")], "Your passwords do not match"),
 });
+
+export const updateAccountInfo = yup.object({
+  firstName: yup
+    .string()
+    .required("First name is required")
+    .max(30, "First name should be maximum 30 characters"),
+  lastName: yup
+    .string()
+    .required("Last name is required")
+    .max(30, "Last name should be maximum 30 characters"),
+  password: yup.string("Enter your password").required("Password is required"),
+});
