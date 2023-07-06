@@ -6,7 +6,6 @@ const Account = () => {
   const { userInfo } = useAuth();
   return (
     <div>
-      <h2 className="mt-3 mb-3">Your Information:</h2>
       <ul>
         <li>First Name:{userInfo.firstName}</li>
         <li>Last Name:{userInfo.lastName}</li>
