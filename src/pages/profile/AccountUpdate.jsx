@@ -5,7 +5,8 @@ import { updateAccountInfo } from "../../util/validationSchema";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
 const AccountUpdate = () => {
-  const { loading, error, userInfo, updateAccount } = useAuth();
+  const { loading, error, userInfo, actType, updateAccount, resetUI } =
+    useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -21,6 +22,10 @@ const AccountUpdate = () => {
       updateAccount(values);
     },
   });
+
+  useEffect(() => {
+    return () => resetUI();
+  }, [resetUI]);
 
   return (
     <Row>
@@ -72,10 +77,14 @@ const AccountUpdate = () => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? "Loading" : "Submit"}
+          <Button
+            variant="primary"
+            type="submit"
+            disabled={actType === "updateAccount" && loading}
+          >
+            {actType === "updateAccount" && loading ? "Loading" : "Submit"}
           </Button>
-          {error ? (
+          {actType === "updateAccount" && error ? (
             <div className="invalid-feedback d-block mt-4">{error}</div>
           ) : null}
         </Form>

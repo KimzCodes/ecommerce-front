@@ -28,7 +28,11 @@ const actUpdateAccount = createAsyncThunk(
         }
       );
     } catch (error) {
-      console.log(error);
+      if (error.code === "ERR_NETWORK") {
+        return rejectWithValue("Error from network");
+      } else {
+        return rejectWithValue(error.response.data);
+      }
     }
   }
 );

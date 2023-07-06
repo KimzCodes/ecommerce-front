@@ -41,7 +41,14 @@ const useAuth = () => {
   };
 
   const updateAccount = (values) => {
-    dispatch(actUpdateAccount(values));
+    dispatch(actUpdateAccount(values))
+      .unwrap()
+      .then(() => {})
+      .catch((error) => {
+        if (error === "jwt expired") {
+          logout("/login?message=session_expired");
+        }
+      });
   };
 
   const resetUI = useCallback(() => {

@@ -52,6 +52,24 @@ const authSlice = createSlice({
       state.error = action.payload;
       state.actType = "register";
     });
+
+    //update account
+    builder.addCase(actUpdateAccount.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+      state.actType = "updateAccount";
+    });
+    builder.addCase(actUpdateAccount.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
+      state.actType = null;
+    });
+    builder.addCase(actUpdateAccount.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      state.actType = "updateAccount";
+    });
   },
 });
 
