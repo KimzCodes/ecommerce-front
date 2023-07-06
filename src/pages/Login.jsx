@@ -1,10 +1,17 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import { loginSchema } from "../util/validationSchema";
+import { useSearchParams } from "react-router-dom";
 import useAuth from "../hooks/use-auth";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
+const messageLookup = {
+  session_expired: "Your session has expired, please log in again",
+};
+
 const Login = () => {
+  const searchParams = useSearchParams()[0];
+
   const { loading, error, actType, login, resetUI } = useAuth();
 
   const formik = useFormik({
@@ -66,8 +73,10 @@ const Login = () => {
           >
             {actType === "login" && loading ? "Loading" : "Submit"}
           </Button>
-          {actType === "login" && error ? (
-            <div className="invalid-feedback d-block mt-4">{error}</div>
+          {(actType === "login" && error) || searchParams.get("message") ? (
+            <div className="invalid-feedback d-block mt-4">
+              {error || messageLookup[searchParams.get("message")]}
+            </div>
           ) : null}
         </Form>
       </Col>
