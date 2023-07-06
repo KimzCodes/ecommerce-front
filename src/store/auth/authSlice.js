@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import initialState from "./initialState";
 import actLogin from "./act/actLogin";
 import actRegister from "./act/actRegister";
+import actUpdateAccount from "./act/actUpdateAccount";
 
 const authSlice = createSlice({
   name: "auth",
@@ -54,7 +55,7 @@ const authSlice = createSlice({
   },
 });
 
-export { actLogin, actRegister };
+export { actLogin, actRegister, actUpdateAccount };
 
 export const { resetUIState, logout } = authSlice.actions;
 

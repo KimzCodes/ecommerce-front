@@ -5,7 +5,7 @@ import { updateAccountInfo } from "../../util/validationSchema";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
 const AccountUpdate = () => {
-  const { loading, error, userInfo } = useAuth();
+  const { loading, error, userInfo, updateAccount } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -17,7 +17,9 @@ const AccountUpdate = () => {
     validateOnChange: true,
     validateOnBlur: true,
     validationSchema: updateAccountInfo,
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      updateAccount(values);
+    },
   });
 
   return (

@@ -5,6 +5,7 @@ import {
   actRegister,
   resetUIState,
   logout as logoutUser,
+  actUpdateAccount,
 } from "../store/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -39,6 +40,10 @@ const useAuth = () => {
       .then(() => navigate(nav));
   };
 
+  const updateAccount = (values) => {
+    dispatch(actUpdateAccount(values));
+  };
+
   const resetUI = useCallback(() => {
     dispatch(resetUIState());
   }, [dispatch]);
@@ -49,6 +54,7 @@ const useAuth = () => {
     actType,
     login,
     register,
+    updateAccount,
     logout,
     resetUI,
     accessToken,
