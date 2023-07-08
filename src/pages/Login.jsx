@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { loginSchema } from "../util/validationSchema";
 import { useSearchParams } from "react-router-dom";
@@ -10,7 +10,8 @@ const messageLookup = {
 };
 
 const Login = () => {
-  const searchParams = useSearchParams()[0];
+  const [toggleExpiryError, setToggleExpiryError] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { loading, error, actType, login, resetUI } = useAuth();
 
@@ -30,6 +31,12 @@ const Login = () => {
   useEffect(() => {
     return () => resetUI();
   }, [resetUI]);
+
+  useEffect(() => {
+    if (formik.isSubmitting && searchParams.get("message")) {
+      setSearchParams("");
+    }
+  }, [formik, searchParams, setSearchParams]);
 
   return (
     <Row className="justify-content-md-center">
