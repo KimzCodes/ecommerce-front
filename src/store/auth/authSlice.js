@@ -61,8 +61,7 @@ const authSlice = createSlice({
     });
     builder.addCase(actUpdateAccount.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action.payload.user;
-      state.accessToken = action.payload.accessToken;
+      state.user = { ...state.user, ...action.payload };
       state.actType = null;
     });
     builder.addCase(actUpdateAccount.rejected, (state, action) => {

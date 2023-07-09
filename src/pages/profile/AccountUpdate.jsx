@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import useAuth from "../../hooks/use-auth";
 import { updateAccountInfo } from "../../util/validationSchema";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
 const AccountUpdate = () => {
+  const [nameChanged, setNameChanged] = useState(false);
   const { loading, error, userInfo, actType, updateAccount, resetUI } =
     useAuth();
 
@@ -26,6 +27,22 @@ const AccountUpdate = () => {
   useEffect(() => {
     return () => resetUI();
   }, [resetUI]);
+
+  useEffect(() => {
+    if (
+      formik.values.firstName !== userInfo?.firstName ||
+      formik.values.lastName !== userInfo?.lastName
+    ) {
+      setNameChanged(true);
+    } else {
+      setNameChanged(false);
+    }
+  }, [
+    formik.values.firstName,
+    formik.values.lastName,
+    userInfo?.lastName,
+    userInfo?.firstName,
+  ]);
 
   return (
     <Row>
@@ -80,7 +97,7 @@ const AccountUpdate = () => {
           <Button
             variant="primary"
             type="submit"
-            disabled={actType === "updateAccount" && loading}
+            disabled={(actType === "updateAccount" && loading) || !nameChanged}
           >
             {actType === "updateAccount" && loading ? "Loading" : "Submit"}
           </Button>

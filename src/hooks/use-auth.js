@@ -43,7 +43,7 @@ const useAuth = () => {
   const updateAccount = (values) => {
     dispatch(actUpdateAccount(values))
       .unwrap()
-      .then(() => {})
+      .then(() => navigate("/profile"))
       .catch((error) => {
         if (error === "jwt expired") {
           logout("/login?message=session_expired");

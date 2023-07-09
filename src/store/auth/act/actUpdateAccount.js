@@ -27,6 +27,8 @@ const actUpdateAccount = createAsyncThunk(
           },
         }
       );
+
+      return { firstName: formData.firstName, lastName: formData.lastName };
     } catch (error) {
       if (error.code === "ERR_NETWORK") {
         return rejectWithValue("Error from network");
