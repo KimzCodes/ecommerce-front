@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import { loginSchema } from "../util/validationSchema";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/use-auth";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
@@ -10,9 +10,10 @@ const messageLookup = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { loading, error, actType, login, resetUI } = useAuth();
+  const { loading, error, actType, accessToken, login, resetUI } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -36,6 +37,12 @@ const Login = () => {
       setSearchParams("");
     }
   }, [formik, searchParams, setSearchParams]);
+
+  useEffect(() => {
+    if (accessToken) {
+      navigate("/", { replace: true });
+    }
+  }, [accessToken, navigate]);
 
   return (
     <Row className="justify-content-md-center">
