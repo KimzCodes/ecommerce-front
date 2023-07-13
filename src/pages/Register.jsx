@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
+import { registerSchema } from "../util/validationSchema";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/use-auth";
-import { registerSchema } from "../util/validationSchema";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
 const Register = () => {
   const navigate = useNavigate();
-
   const { loading, error, actType, accessToken, register, resetUI } = useAuth();
 
   const formik = useFormik({
