@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFormik } from "formik";
 import { loginSchema } from "../util/validationSchema";
 import { useSearchParams } from "react-router-dom";
@@ -10,7 +10,6 @@ const messageLookup = {
 };
 
 const Login = () => {
-  const [toggleExpiryError, setToggleExpiryError] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { loading, error, actType, login, resetUI } = useAuth();
