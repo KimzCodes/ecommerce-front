@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const Product = ({ btnText, btnAction }) => {
+const Product = ({ btnText, actionType = "add" }) => {
   const { item, itemImg } = styles;
 
   return (
@@ -14,8 +14,8 @@ const Product = ({ btnText, btnAction }) => {
       </div>
       <h2>Title</h2>
       <h3>10 EGP</h3>
-      <Button variant="info" onClick={btnAction}>
-        {btnText || "Add to card"}
+      <Button variant="info" onClick={actionType}>
+        {btnText || "Add to cart"}
       </Button>
     </div>
   );
