@@ -74,11 +74,7 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: (
-          <AuthRoute>
-            <ProfileLayout />
-          </AuthRoute>
-        ),
+        element: <ProfileLayout />,
         children: [
           { index: true, element: <Account /> },
           { path: "account", element: <Account /> },
