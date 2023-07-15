@@ -7,7 +7,7 @@ const Item = ({ btnText, btnAction }) => {
   return (
     <div className={item}>
       <img
-        src="https://eg.hm.com/assets/styles/HNM/14317182/04b7fbc49993d530655ebdea0a19b98f006ad467/1/image-thumb__3199024__product_zoom_medium_606x504/04b7fbc49993d530655ebdea0a19b98f006ad467.jpg"
+        src="https://cdn-eu.dynamicyield.com/api/9876644/images/244c68ad42d8b__hp-w12-22032022-h_m-women_shirts-blouses.jpg"
         alt=""
       />
       <h2>Title</h2>
