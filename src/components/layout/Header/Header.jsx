@@ -1,5 +1,5 @@
 import { Badge } from "react-bootstrap";
-import shoppingCardImg from "../../../assets/shopping-card.svg";
+import shoppingCartImg from "../../../assets/shopping-cart.svg";
 
 import styles from "./header.module.css";
 
@@ -20,7 +20,7 @@ const Header = () => {
           Our <Badge bg="info">Ecom</Badge>
         </h1>
         <div className={shoppingCart}>
-          <img alt="" src={shoppingCardImg} width="30" />
+          <img alt="" src={shoppingCartImg} width="30" />
           <div className={shoppingCartCounter}>0</div>
         </div>
       </div>
