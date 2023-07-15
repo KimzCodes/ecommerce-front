@@ -1,0 +1,26 @@
+.item {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.itemImg img {
+  width: 100%;
+  background-color: #f2f2f2;
+  display: block;
+}
+
+.item h2,
+.item h3 {
+  font-size: 13px;
+}
+
+.item h2 {
+  margin-bottom: 15px;
+  margin-top: 9px;
+}
+
+.button {
+  width: 100%;
+}

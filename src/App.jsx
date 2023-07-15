@@ -1,13 +1,13 @@
 import { Container, Button } from "react-bootstrap";
 import Header from "./components/layout/Header";
 
-import { ShoppingCardItem, Item, Category } from "./components/ecom-ui";
+import { CartItem, Product, Category } from "./components/ecom-ui";
 function App() {
   return (
     <Container>
       <Header />
       <h2>Shopping cart</h2>
-      <ShoppingCardItem />
+      <CartItem />
       <br /> <br /> <br />
       <hr />
       <h2>Categories</h2>
@@ -25,13 +25,13 @@ function App() {
       <hr />
       <h2>Item </h2>
       <div className="grid">
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
-        <Item />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
+        <Product />
       </div>
       <br /> <br /> <br />
       <div className="notFound">

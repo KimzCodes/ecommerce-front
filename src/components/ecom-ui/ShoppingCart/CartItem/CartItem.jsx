@@ -1,12 +1,12 @@
-import Item from "../Item/Item";
+import Product from "../../Product/Product";
 import { Form } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const ShoppingCardItem = () => {
+const CartItem = () => {
   const { cardItem, cardItemSelection } = styles;
   return (
     <div className={cardItem}>
-      <Item btnText="Remove" />
+      <Product btnText="Remove" />
       <div className={cardItemSelection}>
         <Form.Select aria-label="Default select example">
           <option value="1">1</option>
@@ -18,4 +18,4 @@ const ShoppingCardItem = () => {
   );
 };
 
-export default ShoppingCardItem;
+export default CartItem;

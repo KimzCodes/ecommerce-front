@@ -1,5 +1,5 @@
 import Category from "./Category/Category";
-import ShoppingCardItem from "./ShoppingCardItem/ShoppingCardItem";
-import Item from "./Item/Item";
+import CartItem from "./ShoppingCart/CartItem/CartItem";
+import Product from "./Product/Product";
 
-export { Category, ShoppingCardItem, Item };
+export { Category, CartItem, Product };
