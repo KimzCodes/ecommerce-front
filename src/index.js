@@ -76,10 +76,38 @@ const router = createBrowserRouter([
         path: "profile",
         element: <ProfileLayout />,
         children: [
-          { index: true, element: <Account /> },
-          { path: "account", element: <Account /> },
-          { path: "account-update", element: <AccountUpdate /> },
-          { path: "orders", element: <Orders /> },
+          {
+            index: true,
+            element: (
+              <AuthRoute>
+                <Account />
+              </AuthRoute>
+            ),
+          },
+          {
+            path: "account",
+            element: (
+              <AuthRoute>
+                <Account />
+              </AuthRoute>
+            ),
+          },
+          {
+            path: "account-update",
+            element: (
+              <AuthRoute>
+                <AccountUpdate />
+              </AuthRoute>
+            ),
+          },
+          {
+            path: "orders",
+            element: (
+              <AuthRoute>
+                <Orders />
+              </AuthRoute>
+            ),
+          },
         ],
       },
     ],

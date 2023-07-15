@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import useAuth from "../../hooks/use-auth";
 import { updateAccountInfo } from "../../util/validationSchema";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
-const AccountUpdate = () => {
+const AccountUpdate = ({
+  loading,
+  error,
+  userInfo,
+  actType,
+  updateAccount,
+  resetUI,
+}) => {
   const [nameChanged, setNameChanged] = useState(false);
-  const { loading, error, userInfo, actType, updateAccount, resetUI } =
-    useAuth();
 
   const formik = useFormik({
     initialValues: {

@@ -1,9 +1,4 @@
-import React from "react";
-
-import useAuth from "../../hooks/use-auth";
-
-const Account = () => {
-  const { userInfo } = useAuth();
+const Account = ({ userInfo }) => {
   return (
     <div>
       <h3 className="align-self-baseline">Account Information:</h3>
