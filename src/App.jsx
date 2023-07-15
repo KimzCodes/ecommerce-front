@@ -23,7 +23,7 @@ function App() {
       <br /> <br /> <br />
       <br />
       <hr />
-      <h2>Item </h2>
+      <h2>Product </h2>
       <div className="grid">
         <Product />
         <Product />

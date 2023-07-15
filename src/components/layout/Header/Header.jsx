@@ -5,12 +5,13 @@ import styles from "./header.module.css";
 
 const Header = () => {
   const {
-    shoppingCard,
+    shoppingCart,
     shoppingCartCounter,
     headerTop,
     header,
     mainNav,
     secNav,
+    activeLink,
   } = styles;
   return (
     <header className={header}>
@@ -18,7 +19,7 @@ const Header = () => {
         <h1>
           Our <Badge bg="info">Ecom</Badge>
         </h1>
-        <div className={shoppingCard}>
+        <div className={shoppingCart}>
           <img alt="" src={shoppingCardImg} width="30" />
           <div className={shoppingCartCounter}>0</div>
         </div>
@@ -27,7 +28,9 @@ const Header = () => {
       <nav>
         <ul className={mainNav}>
           <li>
-            <a href="/">Home</a>
+            <a href="/" className={activeLink}>
+              Home
+            </a>
           </li>
           <li>
             <a href="/">Shopping</a>
