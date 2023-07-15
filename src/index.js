@@ -6,10 +6,17 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 import "./API/axios-global";
 
-import AxiosInterceptor from "./API/AxiosInterceptor";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
+// API
+import AxiosInterceptor from "./API/AxiosInterceptor";
+
+// guards
+import GuestRoute from "./components/guards/GuestRoute";
+import AuthRoute from "./components/guards/AuthRoute";
+
+// pages
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
@@ -49,11 +56,29 @@ const router = createBrowserRouter([
           }
         },
       },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
+      {
+        path: "login",
+        element: (
+          <GuestRoute>
+            <Login />
+          </GuestRoute>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <GuestRoute>
+            <Register />
+          </GuestRoute>
+        ),
+      },
       {
         path: "profile",
-        element: <ProfileLayout />,
+        element: (
+          <AuthRoute>
+            <ProfileLayout />
+          </AuthRoute>
+        ),
         children: [
           { index: true, element: <Account /> },
           { path: "account", element: <Account /> },

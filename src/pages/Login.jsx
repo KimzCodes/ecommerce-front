@@ -1,19 +1,16 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import { loginSchema } from "../util/validationSchema";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import useAuth from "../hooks/use-auth";
+import { useSearchParams } from "react-router-dom";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
 const messageLookup = {
   session_expired: "Your session has expired, please log in again",
+  login_required: "Please login first",
 };
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = ({ loading, error, actType, login, resetUI }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const { loading, error, actType, accessToken, login, resetUI } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -37,12 +34,6 @@ const Login = () => {
       setSearchParams("");
     }
   }, [formik, searchParams, setSearchParams]);
-
-  useEffect(() => {
-    if (accessToken) {
-      navigate("/", { replace: true });
-    }
-  }, [accessToken, navigate]);
 
   return (
     <Row className="justify-content-md-center">

@@ -1,14 +1,9 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import { registerSchema } from "../util/validationSchema";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/use-auth";
 import { Button, Form, Row, Col } from "react-bootstrap";
 
-const Register = () => {
-  const navigate = useNavigate();
-  const { loading, error, actType, accessToken, register, resetUI } = useAuth();
-
+const Register = ({ loading, error, actType, register, resetUI }) => {
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -28,12 +23,6 @@ const Register = () => {
   useEffect(() => {
     return () => resetUI();
   }, [resetUI]);
-
-  useEffect(() => {
-    if (accessToken) {
-      navigate("/", { replace: true });
-    }
-  }, [accessToken, navigate]);
 
   return (
     <Row className="justify-content-md-center">
