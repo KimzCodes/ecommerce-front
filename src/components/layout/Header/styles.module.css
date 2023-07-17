@@ -1,32 +1,13 @@
 .header {
   margin-top: 10px;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .headerTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.shoppingCart {
-  position: relative;
-}
-.shoppingCartCounter {
-  background-color: #0dcaf0;
-  height: 20px;
-  width: 20px;
-  border-radius: 10px;
-  text-align: center;
-  border: 1px solid;
-  position: absolute;
-  top: -15px;
-  right: 11px;
-  font-size: 12px;
-}
-
-.topnav h1 {
-  font-size: 28px;
 }
 
 nav {
@@ -47,6 +28,7 @@ nav {
 .secNav li {
   padding: 10px 0 10px 0;
   margin: 0px 5px 0 5px;
+  position: relative;
 }
 
 .mainNav li a,
@@ -56,7 +38,31 @@ nav {
   font-size: 14px;
 }
 
-.mainNav li a:hover,
-.secNav li a:hover {
-  text-decoration: underline;
+.mainNav li a:hover::after,
+.secNav li a:hover::after,
+.activeLink::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: white;
+  height: 2px;
+  width: 100%;
+  bottom: 2;
+}
+
+.shoppingCart {
+  position: relative;
+}
+
+.shoppingCartCounter {
+  background-color: #0dcaf0;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid;
+  position: absolute;
+  top: -15px;
+  right: 11px;
+  font-size: 12px;
 }

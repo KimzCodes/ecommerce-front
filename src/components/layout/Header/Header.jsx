@@ -1,7 +1,7 @@
 import { Badge } from "react-bootstrap";
 import shoppingCartImg from "../../../assets/shopping-cart.svg";
 
-import styles from "./header.module.css";
+import styles from "./styles.module.css";
 
 const Header = () => {
   const {
