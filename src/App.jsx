@@ -2,6 +2,7 @@ import { Container, Button } from "react-bootstrap";
 import { Header } from "./components/layout";
 
 import { CartItem, Product, Category } from "./components/ecom-ui";
+
 function App() {
   return (
     <Container>
