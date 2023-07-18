@@ -1,4 +1,3 @@
-import { Link, NavLink } from "react-router-dom";
 import { Badge } from "react-bootstrap";
 import shoppingCartImg from "../../../assets/shopping-cart.svg";
 
@@ -12,18 +11,15 @@ const {
   mainNav,
   secNav,
   activeLink,
-  headerLogo,
 } = styles;
 
 const Header = () => {
   return (
     <header className={header}>
       <div className={headerTop}>
-        <Link to="/" className={headerLogo}>
-          <h1>
-            Our <Badge bg="info">Ecom</Badge>
-          </h1>
-        </Link>
+        <h1>
+          Our <Badge bg="info">Ecom</Badge>
+        </h1>
 
         <div className={shoppingCart}>
           <img alt="" src={shoppingCartImg} width="30" />
