@@ -34,23 +34,47 @@ const Header = () => {
       <nav>
         <ul className={mainNav}>
           <li>
-            <a href="/" className={activeLink}>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? activeLink : "")}
+              end
+            >
               Home
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="/categories">Categories</a>
+            <NavLink
+              to="/categories"
+              className={({ isActive }) => (isActive ? activeLink : "")}
+            >
+              Categories
+            </NavLink>
           </li>
           <li>
-            <a href="/new-collections">New collections</a>
+            <NavLink
+              to="/new-collections"
+              className={({ isActive }) => (isActive ? activeLink : "")}
+            >
+              New collections
+            </NavLink>
           </li>
         </ul>
         <ul className={secNav}>
           <li>
-            <a href="/">Login</a>
+            <NavLink
+              to="/login"
+              className={({ isActive }) => (isActive ? activeLink : "")}
+            >
+              Login
+            </NavLink>
           </li>
           <li>
-            <a href="/">Register</a>
+            <NavLink
+              to="/register"
+              className={({ isActive }) => (isActive ? activeLink : "")}
+            >
+              Register
+            </NavLink>
           </li>
         </ul>
       </nav>
