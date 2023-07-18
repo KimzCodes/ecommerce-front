@@ -10,6 +10,15 @@
   justify-content: space-between;
 }
 
+.headerLogo {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.headerLogo:hover {
+  color: inherit;
+}
+
 nav {
   background-color: black;
   display: flex;
