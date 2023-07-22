@@ -17,3 +17,14 @@
   font-size: 14px;
   margin-top: 10px;
 }
+
+.categoryLink {
+  text-decoration: none;
+  color: #0dcaf0;
+  text-transform: capitalize;
+}
+
+.categoryLink:hover {
+  color: #0dcaf0;
+  text-decoration: underline;
+}
