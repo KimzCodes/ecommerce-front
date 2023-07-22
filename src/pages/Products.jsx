@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterProducts } from "../store/productSlice";
 import { useParams } from "react-router-dom";
 import { Product } from "../components/ecom-ui";
+import { Loading } from "../components/layout";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -19,15 +20,11 @@ const Products = () => {
       ? records.map((record) => <Product key={record.id} {...record} />)
       : "There is no records available";
 
-  if (loading) {
-    return <div>Loading please wait</div>;
-  }
-
-  if (error) {
-    return <div>Error from server</div>;
-  }
-
-  return <div className="grid">{renderProducts}</div>;
+  return (
+    <Loading loading={loading} error={error}>
+      <div className="grid">{renderProducts}</div>
+    </Loading>
+  );
 };
 
 export default Products;
