@@ -14,9 +14,10 @@ const Products = () => {
     dispatch(filterProducts(prefix));
   }, [prefix, dispatch]);
 
-  const renderProducts = records.map((record) => (
-    <Product key={record.id} {...record} />
-  ));
+  const renderProducts =
+    records.length > 0
+      ? records.map((record) => <Product key={record.id} {...record} />)
+      : "There is no records available";
 
   if (loading) {
     return <div>Loading please wait</div>;
