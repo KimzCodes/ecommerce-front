@@ -1,19 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
+import { CartHeaderIcon } from "../../ecom-ui";
 import { Badge } from "react-bootstrap";
-import shoppingCartImg from "../../../assets/shopping-cart.svg";
 
 import styles from "./styles.module.css";
 
-const {
-  shoppingCart,
-  shoppingCartCounter,
-  headerTop,
-  header,
-  mainNav,
-  secNav,
-  activeLink,
-  headerLogo,
-} = styles;
+const { headerTop, header, mainNav, secNav, activeLink, headerLogo } = styles;
 
 const Header = () => {
   return (
@@ -25,10 +16,7 @@ const Header = () => {
           </h1>
         </Link>
 
-        <div className={shoppingCart}>
-          <img alt="" src={shoppingCartImg} width="30" />
-          <div className={shoppingCartCounter}>0</div>
-        </div>
+        <CartHeaderIcon />
       </div>
 
       <nav>
