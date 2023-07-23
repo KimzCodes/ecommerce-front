@@ -11,9 +11,7 @@ const Product = ({ id, title, price, img, btnText, actionType = "add" }) => {
       </div>
       <h2>{title}</h2>
       <h3>{price} EGP</h3>
-      <Button variant="info" onClick={actionType}>
-        {btnText || "Add to cart"}
-      </Button>
+      <Button variant="info">{btnText || "Add to cart"}</Button>
     </div>
   );
 };

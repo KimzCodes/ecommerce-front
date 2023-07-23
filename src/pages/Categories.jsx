@@ -13,9 +13,12 @@ const Categories = () => {
   }, [dispatch]);
 
   return (
-    <GridList records={records} loading={loading} error={error}>
-      <Category />
-    </GridList>
+    <GridList
+      records={records}
+      loading={loading}
+      error={error}
+      renderChild={(record) => <Category key={record.id} {...record} />}
+    />
   );
 };
 

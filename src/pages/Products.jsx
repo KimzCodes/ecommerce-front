@@ -16,9 +16,12 @@ const Products = () => {
   }, [prefix, dispatch]);
 
   return (
-    <GridList records={records} loading={loading} error={error}>
-      <Product />
-    </GridList>
+    <GridList
+      records={records}
+      loading={loading}
+      error={error}
+      renderChild={(record) => <Product key={record.id} {...record} />}
+    />
   );
 };
 
