@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterProducts } from "../store/productSlice";
 import { useParams } from "react-router-dom";
 import { Product } from "../components/ecom-ui";
-import { Loading, GridList } from "../components/layout";
+import { GridList } from "../components/layout";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -16,11 +16,9 @@ const Products = () => {
   }, [prefix, dispatch]);
 
   return (
-    <Loading loading={loading} error={error}>
-      <GridList records={records}>
-        <Product />
-      </GridList>
-    </Loading>
+    <GridList records={records} loading={loading} error={error}>
+      <Product />
+    </GridList>
   );
 };
 
