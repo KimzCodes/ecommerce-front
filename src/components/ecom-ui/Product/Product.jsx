@@ -3,7 +3,15 @@ import styles from "./styles.module.css";
 
 const { item, itemImg } = styles;
 
-const Product = ({ id, title, price, img, btnText, actionType = "add" }) => {
+const Product = ({
+  id,
+  title,
+  price,
+  img,
+  selectedProduct,
+  btnText,
+  actionType = "add",
+}) => {
   return (
     <div className={item}>
       <div className={itemImg}>
@@ -11,7 +19,7 @@ const Product = ({ id, title, price, img, btnText, actionType = "add" }) => {
       </div>
       <h2>{title}</h2>
       <h3>{price} EGP</h3>
-      <Button variant="info" onClick={actionType}>
+      <Button variant="info" onClick={() => selectedProduct(id)}>
         {btnText || "Add to cart"}
       </Button>
     </div>
