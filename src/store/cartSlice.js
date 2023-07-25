@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
   items: {},
@@ -24,15 +24,18 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const cartTotalQuantity = (state) => {
-  console.log("fired");
-  const items = state.cart.items;
-  let totalQuantity = 0;
-  for (const id in items) {
-    totalQuantity += items[id];
+export const cartTotalQuantity = createSelector(
+  (state) => state.cart.items,
+  (items) => {
+    console.log("fired");
+
+    let totalQuantity = 0;
+    for (const id in items) {
+      totalQuantity += items[id];
+    }
+    return totalQuantity;
   }
-  return totalQuantity;
-};
+);
 
 export const { addToCart } = cartSlice.actions;
 export default cartSlice.reducer;
