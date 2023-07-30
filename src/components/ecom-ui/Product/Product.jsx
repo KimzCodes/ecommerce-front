@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
@@ -14,19 +14,18 @@ const Product = ({
   actionType = "add",
 }) => {
   const [btnClicked, setBtnClicked] = useState(0);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     if (btnClicked === 0) return;
-    setIsDisabled(true);
+
+    setDisabled(true);
 
     const debounce = setTimeout(() => {
-      setIsDisabled(false);
+      setDisabled(false);
     }, 400);
 
-    return () => {
-      clearTimeout(debounce);
-    };
+    return () => clearTimeout(debounce);
   }, [btnClicked]);
 
   const clickActionHandler = () => {
@@ -41,8 +40,8 @@ const Product = ({
       </div>
       <h2>{title}</h2>
       <h3>{price} EGP</h3>
-      <Button variant="info" onClick={clickActionHandler} disabled={isDisabled}>
-        {isDisabled ? (
+      <Button variant="info" onClick={clickActionHandler} disabled={disabled}>
+        {disabled ? (
           <>
             <Spinner animation="border" size="sm" /> Loading...
           </>
