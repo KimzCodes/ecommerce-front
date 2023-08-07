@@ -7,7 +7,7 @@ const { shoppingCart, shoppingCartCounter } = styles;
 
 const CartHeaderIcon = () => {
   const totalQuantity = useSelector(cartTotalQuantity);
-
+  console.log("component");
   return (
     <div className={shoppingCart}>
       <img alt="" src={shoppingCartImg} width="30" />
