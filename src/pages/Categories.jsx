@@ -7,6 +7,7 @@ import { GridList } from "../components/layout";
 const Categories = () => {
   const { records, loading, error } = useSelector((state) => state.category);
   const dispatch = useDispatch();
+  console.log("cat");
 
   useEffect(() => {
     dispatch(getCategories());

@@ -24,9 +24,9 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const cartTotalQuantity = (state) => {
+export const cartTotalQuantity = (items) => {
   console.log("fire");
-  const items = state.cart.items;
+
   let totalQuantity = 0;
   for (const id in items) {
     totalQuantity += items[id];
