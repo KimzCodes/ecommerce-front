@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { checkAddToCartAvailability } from "../../../store/cartSlice";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
@@ -9,24 +11,31 @@ const Product = ({
   title,
   price,
   img,
+  max,
   selectedProduct,
   btnText,
   actionType = "add",
 }) => {
   const [btnClicked, setBtnClicked] = useState(0);
   const [disabled, setDisabled] = useState(false);
+  const cartItems = useSelector((state) =>
+    checkAddToCartAvailability(state, id, max)
+  );
 
-  useEffect(() => {
-    if (btnClicked === 0) return;
+  console.log("render", cartItems);
+  //useSelector -> selector -> state.cart.items return items
+  //filter by id -> items[id] -> quantity
+  //calculate -> max - quantity -> remaining quantity
 
-    setDisabled(true);
+  // useEffect(() => {
+  //   if (btnClicked === 0) return;
+  //   setDisabled(true);
 
-    const debounce = setTimeout(() => {
-      setDisabled(false);
-    }, 400);
-
-    return () => clearTimeout(debounce);
-  }, [btnClicked]);
+  //   const debounce = setTimeout(() => {
+  //     setDisabled(false);
+  //   }, 400);
+  //   return () => clearTimeout(debounce);
+  // }, [btnClicked]);
 
   const clickActionHandler = () => {
     setBtnClicked((prev) => prev + 1);

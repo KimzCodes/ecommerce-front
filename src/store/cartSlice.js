@@ -35,5 +35,16 @@ export const cartTotalQuantity = createSelector(
   }
 );
 
+export const checkAddToCartAvailability = createSelector(
+  (state) => state.cart.items,
+  (_, itemId) => itemId,
+  (_, __, max) => max,
+  (items, itemId, max) => {
+    const currentQuantity = items[itemId] || 0;
+    const AvailableQuantity = max - currentQuantity;
+    return AvailableQuantity;
+  }
+);
+
 export const { addToCart } = cartSlice.actions;
 export default cartSlice.reducer;
