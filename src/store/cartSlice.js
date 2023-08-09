@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 
 const initialState = {
   items: {},
@@ -24,15 +24,21 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const cartTotalQuantity = (items) => {
-  console.log("fire");
+//init -> state ->  state.cart.items memoize({}) -> result fn -> invoke -> return 0 memoize(0)
+//cat.pending state -> state.cart.items memoize(prev {} vs {}) -> return 0
+//cat.fulfilled state -> state.cart.items memoize(prev {} vs {}) -> return 0
 
-  let totalQuantity = 0;
-  for (const id in items) {
-    totalQuantity += items[id];
+export const cartTotalQuantity = createSelector(
+  (state) => state.cart.items,
+  (items) => {
+    console.log("fire");
+    let totalQuantity = 0;
+    for (const id in items) {
+      totalQuantity += items[id];
+    }
+    return totalQuantity;
   }
-  return totalQuantity;
-};
+);
 
 export const { addToCart } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -6,9 +6,7 @@ import styles from "./styles.module.css";
 const { shoppingCart, shoppingCartCounter } = styles;
 
 const CartHeaderIcon = () => {
-  const totalQuantity = useSelector((state) =>
-    cartTotalQuantity(state.cart.items)
-  );
+  const totalQuantity = useSelector(cartTotalQuantity);
 
   console.log("component");
 
