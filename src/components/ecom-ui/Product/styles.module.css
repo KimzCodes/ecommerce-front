@@ -12,16 +12,25 @@
   display: block;
 }
 
-.item h2,
-.item h3 {
+.item h2 {
   font-size: 13px;
+  margin-top: 9px;
+  margin-bottom: 12px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.item h2 {
-  margin-bottom: 15px;
-  margin-top: 9px;
+.item h3 {
+  font-size: 12px;
 }
 
 .button {
   width: 100%;
+}
+
+.maximumNotice {
+  font-size: 10px;
+  margin-bottom: 7px;
 }

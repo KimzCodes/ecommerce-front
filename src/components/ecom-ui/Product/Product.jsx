@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const { item, itemImg } = styles;
+const { item, itemImg, maximumNotice } = styles;
 
 const Product = ({
   id,
@@ -36,10 +36,11 @@ const Product = ({
   return (
     <div className={item}>
       <div className={itemImg}>
-        <img src={img} alt={title} />
+        <img src={img} alt={title} title={title} />
       </div>
-      <h2>{title}</h2>
+      <h2 title={title}>{title}</h2>
       <h3>{price} EGP</h3>
+      <p className={maximumNotice}>You can add 3 item(s)</p>
       <Button variant="info" onClick={clickActionHandler} disabled={disabled}>
         {disabled ? (
           <>
