@@ -48,11 +48,23 @@ const Product = ({
 
   const clickActionHandler = () => {
     setBtnClicked((prev) => prev + 1);
-    const type = Math.floor(Math.random() * 3);
-    const typesMap = { 0: "primary", 1: "success", 2: "warning", 3: "danger" };
+    const type = Math.floor(Math.random() * 10);
+
+    const typesMap = {
+      0: "primary",
+      1: "success",
+      2: "warning",
+      3: "danger",
+      4: "danger",
+      5: "primary",
+      6: "warning",
+      7: "success",
+      8: "success",
+      9: "danger",
+      10: "danger",
+    };
     dispatch(
       addToast({
-        title: "Item Added",
         description: `${title} Added to your cart`,
         type: typesMap[type],
       })

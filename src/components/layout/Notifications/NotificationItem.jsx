@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { removeToast } from "../../../store/toastSlice";
 import { useDispatch } from "react-redux";
 import { Button, Placeholder } from "react-bootstrap";
@@ -7,7 +8,7 @@ import styles from "./styles.module.css";
 
 const { notification, indicator } = styles;
 
-const Notification = ({ id, title, description, type }) => {
+const NotificationItem = ({ id, title, description, type }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(0);
 
@@ -28,19 +29,24 @@ const Notification = ({ id, title, description, type }) => {
 
         return newValue;
       });
-    }, 50);
+    }, 70);
   }, []);
 
   useEffect(() => {
     const autoClose = setTimeout(() => {
       closeHandler(id);
-    }, 5000);
+    }, 7000);
 
     return () => clearTimeout(autoClose);
   }, [closeHandler, id]);
 
   return (
-    <div className={`alert alert-${type} ${notification}`}>
+    <motion.div
+      initial={{ x: 300, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: -300, opacity: 0 }}
+      className={`alert alert-${type} ${notification}`}
+    >
       <h5>{title}</h5>
       <p>{description}</p>
       <Button className="btn-close" onClick={() => closeHandler(id)}></Button>
@@ -48,8 +54,8 @@ const Notification = ({ id, title, description, type }) => {
       <div className={indicator} style={{ width: `${loading}%` }}>
         <Placeholder xs={12} bg={type} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-export default Notification;
+export default NotificationItem;

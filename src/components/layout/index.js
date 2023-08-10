@@ -1,6 +1,6 @@
 import Header from "./Header/Header";
 import Loading from "./Loading/Loading";
 import GridList from "./GridList/GridList";
-import NotificationsHandler from "./Notifications/NotificationsHandler";
+import Notifications from "./Notifications/Notifications";
 
-export { Header, Loading, GridList, NotificationsHandler };
+export { Header, Loading, GridList, Notifications };
