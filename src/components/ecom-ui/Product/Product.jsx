@@ -22,20 +22,27 @@ const Product = ({
     checkAddToCartAvailability(state, id, max)
   );
 
-  console.log("render", cartItems);
-  //useSelector -> selector -> state.cart.items return items
-  //filter by id -> items[id] -> quantity
-  //calculate -> max - quantity -> remaining quantity
+  //1
+  //init->store -> useSelector->AvailabilityFn({},1,3)->memo->invoke { items[1] || 0 -> 3-0 = 3} -> memo(3)-> memo(3) -> render
+  //addCart->store->useSelector->AvailabilityFn({1:1},1,3)->memo->invoke {items[1]->1 -> 3-1 = 2} -> memo(3 != 2) -> memo(3!=2) ->render
 
-  // useEffect(() => {
-  //   if (btnClicked === 0) return;
-  //   setDisabled(true);
+  //2
+  //init->store -> useSelector->AvailabilityFn({},2,4)->memo->invoke { items[2] || 0 -> 4-0 = 4} -> memo(4)-> memo(4) -> render
+  //addCart->store->useSelector->AvailabilityFn({1:1},2,4)->memo->invoke { items[2] || 0 -> 4-0 = 4} -> memo(4 === 4) -> memo(4 === 4) !=render
 
-  //   const debounce = setTimeout(() => {
-  //     setDisabled(false);
-  //   }, 400);
-  //   return () => clearTimeout(debounce);
-  // }, [btnClicked]);
+  //3
+  //init->store -> useSelector->AvailabilityFn({},3,3)->memo->invoke { items[3] || 0 -> 3-0 = 3} -> memo(3)-> memo(3) -> render
+  //addCart->store->useSelector->AvailabilityFn({1:1},3,3)->memo->invoke {items[3] || 0 -> 3-0 = 3} -> memo(3 == 3)-> memo(3 ==3 )!render
+
+  useEffect(() => {
+    if (btnClicked === 0) return;
+    setDisabled(true);
+
+    const debounce = setTimeout(() => {
+      setDisabled(false);
+    }, 400);
+    return () => clearTimeout(debounce);
+  }, [btnClicked]);
 
   const clickActionHandler = () => {
     setBtnClicked((prev) => prev + 1);
