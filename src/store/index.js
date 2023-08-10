@@ -14,6 +14,7 @@ import storage from "redux-persist/lib/storage";
 import category from "./categorySlice";
 import product from "./productSlice";
 import cart from "./cartSlice";
+import toast from "./toastSlice";
 
 const rootPersistConfig = {
   key: "root",
@@ -30,6 +31,7 @@ const cartPersistConfig = {
 const rootReducer = combineReducers({
   category,
   product,
+  toast,
   cart: persistReducer(cartPersistConfig, cart),
 });
 

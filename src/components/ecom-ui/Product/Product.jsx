@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { checkAddToCartAvailability } from "../../../store/cartSlice";
+import { addToast } from "../../../store/toastSlice";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
@@ -16,6 +17,7 @@ const Product = ({
   btnText,
   actionType = "add",
 }) => {
+  const dispatch = useDispatch();
   const [btnClicked, setBtnClicked] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const cartItems = useSelector((state) =>
@@ -46,6 +48,15 @@ const Product = ({
 
   const clickActionHandler = () => {
     setBtnClicked((prev) => prev + 1);
+    const type = Math.floor(Math.random() * 3);
+    const typesMap = { 0: "primary", 1: "success", 2: "warning", 3: "danger" };
+    dispatch(
+      addToast({
+        title: "Item Added",
+        description: `${title} Added to your cart`,
+        type: typesMap[type],
+      })
+    );
     selectedProduct(id);
   };
 
