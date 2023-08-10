@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { removeToast } from "../../../store/toastSlice";
 import { useDispatch } from "react-redux";
-import { Button, Placeholder } from "react-bootstrap";
+import { Placeholder } from "react-bootstrap";
 
 import styles from "./styles.module.css";
 
@@ -29,13 +29,13 @@ const NotificationItem = ({ id, title, description, type }) => {
 
         return newValue;
       });
-    }, 70);
+    }, 50);
   }, []);
 
   useEffect(() => {
     const autoClose = setTimeout(() => {
       closeHandler(id);
-    }, 7000);
+    }, 5000);
 
     return () => clearTimeout(autoClose);
   }, [closeHandler, id]);
@@ -47,9 +47,9 @@ const NotificationItem = ({ id, title, description, type }) => {
       exit={{ x: -300, opacity: 0 }}
       className={`alert alert-${type} ${notification}`}
     >
-      <h5>{title}</h5>
+      <h6>{title}</h6>
       <p>{description}</p>
-      <Button className="btn-close" onClick={() => closeHandler(id)}></Button>
+      <button className="btn-close" onClick={() => closeHandler(id)}></button>
 
       <div className={indicator} style={{ width: `${loading}%` }}>
         <Placeholder xs={12} bg={type} />
