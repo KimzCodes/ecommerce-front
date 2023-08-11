@@ -29,7 +29,7 @@ const NotificationItem = ({ id, title, description, type }) => {
 
         return newValue;
       });
-    }, 50);
+    }, 49);
   }, []);
 
   useEffect(() => {
