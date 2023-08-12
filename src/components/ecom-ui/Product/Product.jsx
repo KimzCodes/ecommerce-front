@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { checkAddToCartAvailability } from "../../../store/cartSlice";
+import { addToCartAvailability } from "../../../store/cartSlice";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
@@ -18,9 +18,11 @@ const Product = ({
 }) => {
   const [btnClicked, setBtnClicked] = useState(0);
   const [disabled, setDisabled] = useState(false);
-  const cartItems = useSelector((state) =>
-    checkAddToCartAvailability(state, id, max)
+  const availableQuantity = useSelector((state) =>
+    addToCartAvailability(state, id, max)
   );
+
+  const reachedToMax = availableQuantity > 0 ? false : true;
 
   //1
   //init->store -> useSelector->AvailabilityFn({},1,3)->memo->invoke { items[1] || 0 -> 3-0 = 3} -> memo(3)-> memo(3) -> render
@@ -56,8 +58,16 @@ const Product = ({
       </div>
       <h2 title={title}>{title}</h2>
       <h3>{price} EGP</h3>
-      <p className={maximumNotice}>You can add 3 item(s)</p>
-      <Button variant="info" onClick={clickActionHandler} disabled={disabled}>
+      <p className={maximumNotice}>
+        {reachedToMax
+          ? "You reached to the limit"
+          : `You can add ${availableQuantity} item(s)`}
+      </p>
+      <Button
+        variant="info"
+        onClick={clickActionHandler}
+        disabled={disabled || reachedToMax}
+      >
         {disabled ? (
           <>
             <Spinner animation="border" size="sm" /> Loading...

@@ -35,14 +35,14 @@ export const cartTotalQuantity = createSelector(
   }
 );
 
-export const checkAddToCartAvailability = createSelector(
+export const addToCartAvailability = createSelector(
   (state) => state.cart.items,
   (_, itemId) => itemId,
   (_, __, max) => max,
   (items, itemId, max) => {
     const currentQuantity = items[itemId] || 0;
-    const AvailableQuantity = max - currentQuantity;
-    return AvailableQuantity;
+    const availableQuantity = max - currentQuantity;
+    return availableQuantity;
   }
 );
 
