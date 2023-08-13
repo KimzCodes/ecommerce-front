@@ -24,10 +24,9 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-//init -> state ->  state.cart.items memoize({}) -> result fn -> invoke -> return 0 memoize(0)
-//cat.pending state -> state.cart.items memoize(prev {} vs {}) -> return 0
-//cat.fulfilled state -> state.cart.items memoize(prev {} vs {}) -> return 0
-
+//init -> useSelector -> state -> fn(createSelector) -> selector(state.cart.items) -> memoize({}) ->result fn -> execute -> memoize(0) -> return 0
+//cat.pending ->  useSelector -> state -> fn(createSelector) -> selector(state.cart.items) -> memoize(prev {} vs {}) skip execute-> return (prev result 0 )
+//cat.fulfilled ->  useSelector -> state -> fn(createSelector)-> selector(state.cart.items) -> memoize(prev {} vs {}) skip execute-> return (prev result 0 )
 export const cartTotalQuantity = createSelector(
   (state) => state.cart.items,
   (items) => {
