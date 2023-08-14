@@ -7,9 +7,6 @@ import styles from "./styles.module.css";
 const { shoppingCart, shoppingCartCounter, pumpCart } = styles;
 
 const CartHeaderIcon = () => {
-  //init -> define -> useEffect (skip) -> render -> useEffect -> return (send to memory)
-  //re evaluate -> skip useEffect -> render -> execute return (clear set time from memory) -> useEffect -> return (send to memory)
-  //re evaluate -> skip useEffect -> render -> execute return -> useEffect -> return (send to memory)
   const [isAnimate, setIsAnimate] = useState(false);
   const totalQuantity = useSelector(cartTotalQuantity);
   const cartClass = `${shoppingCartCounter} ${isAnimate ? pumpCart : ""}`;
