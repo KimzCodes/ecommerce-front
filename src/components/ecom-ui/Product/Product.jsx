@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { addToCartAvailability } from "../../../store/cartSlice";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
@@ -18,23 +17,11 @@ const Product = ({
 }) => {
   const [btnClicked, setBtnClicked] = useState(0);
   const [disabled, setDisabled] = useState(false);
-  const availableQuantity = useSelector((state) =>
-    addToCartAvailability(state, id, max)
-  );
+  const cartItems = useSelector((state) => state.cart.items);
 
-  const reachedToMax = availableQuantity > 0 ? false : true;
-
-  //1
-  //init->store -> useSelector->AvailabilityFn({},1,3)->memo->invoke { items[1] || 0 -> 3-0 = 3} -> memo(3)-> memo(3) -> render
-  //addCart->store->useSelector->AvailabilityFn({1:1},1,3)->memo->invoke {items[1]->1 -> 3-1 = 2} -> memo(3 != 2) -> memo(3!=2) ->render
-
-  //2
-  //init->store -> useSelector->AvailabilityFn({},2,4)->memo->invoke { items[2] || 0 -> 4-0 = 4} -> memo(4)-> memo(4) -> render
-  //addCart->store->useSelector->AvailabilityFn({1:1},2,4)->memo->invoke { items[2] || 0 -> 4-0 = 4} -> memo(4 === 4) -> memo(4 === 4) !=render
-
-  //3
-  //init->store -> useSelector->AvailabilityFn({},3,3)->memo->invoke { items[3] || 0 -> 3-0 = 3} -> memo(3)-> memo(3) -> render
-  //addCart->store->useSelector->AvailabilityFn({1:1},3,3)->memo->invoke {items[3] || 0 -> 3-0 = 3} -> memo(3 == 3)-> memo(3 ==3 )!render
+  //useSelector -> selector -> state.cart.items return items
+  //filter by id -> items[id] -> quantity
+  //calculate -> max - quantity
 
   useEffect(() => {
     if (btnClicked === 0) return;
@@ -58,16 +45,8 @@ const Product = ({
       </div>
       <h2 title={title}>{title}</h2>
       <h3>{price} EGP</h3>
-      <p className={maximumNotice}>
-        {reachedToMax
-          ? "You reached to the limit"
-          : `You can add ${availableQuantity} item(s)`}
-      </p>
-      <Button
-        variant="info"
-        onClick={clickActionHandler}
-        disabled={disabled || reachedToMax}
-      >
+      <p className={maximumNotice}>You can add 3 item(s)</p>
+      <Button variant="info" onClick={clickActionHandler} disabled={disabled}>
         {disabled ? (
           <>
             <Spinner animation="border" size="sm" /> Loading...
