@@ -42,9 +42,9 @@ const NotificationItem = ({ id, title, description, type }) => {
 
   return (
     <motion.div
-      initial={{ x: 300, opacity: 0 }}
+      initial={{ x: 200, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      exit={{ x: -300, opacity: 0 }}
+      exit={{ x: -200, opacity: 0 }}
       className={`alert alert-${type} ${notification}`}
     >
       <h6>{title}</h6>

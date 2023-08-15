@@ -13,7 +13,7 @@ const toastSlice = createSlice({
       const id = nanoid(9);
       const type = action.payload?.type || "primary";
       const title = action.payload?.title || "Notification";
-      state.notifications.unshift({ id, title, type, ...action.payload });
+      state.notifications.push({ id, title, type, ...action.payload });
     },
     removeToast: (state, action) => {
       const id = action.payload;
