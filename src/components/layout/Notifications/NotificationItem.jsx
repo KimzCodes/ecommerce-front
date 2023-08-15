@@ -19,26 +19,26 @@ const NotificationItem = ({ id, title, description, type }) => {
     [dispatch]
   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLoading((prev) => {
-        const newValue = prev + 1;
-        if (newValue === 100) {
-          clearInterval(interval);
-        }
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setLoading((prev) => {
+  //       const newValue = prev + 1;
+  //       if (newValue === 100) {
+  //         clearInterval(interval);
+  //       }
 
-        return newValue;
-      });
-    }, 49);
-  }, []);
+  //       return newValue;
+  //     });
+  //   }, 70);
+  // }, []);
 
-  useEffect(() => {
-    const autoClose = setTimeout(() => {
-      closeHandler(id);
-    }, 5000);
+  // useEffect(() => {
+  //   const autoClose = setTimeout(() => {
+  //     closeHandler(id);
+  //   }, 7000);
 
-    return () => clearTimeout(autoClose);
-  }, [closeHandler, id]);
+  //   return () => clearTimeout(autoClose);
+  // }, [closeHandler, id]);
 
   return (
     <motion.div
