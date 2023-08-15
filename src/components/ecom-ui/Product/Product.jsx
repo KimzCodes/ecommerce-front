@@ -1,41 +1,33 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../../store/cartSlice";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 
-const { item, itemImg, maximumNotice } = styles;
+const { item, itemImg, button, maximumNotice } = styles;
 
-const Product = ({
-  id,
-  title,
-  price,
-  img,
-  max,
-  selectedProduct,
-  btnText,
-  actionType = "add",
-}) => {
+const Product = ({ id, title, price, img, max }) => {
+  const dispatch = useDispatch();
+
   const [btnClicked, setBtnClicked] = useState(0);
-  const [disabled, setDisabled] = useState(false);
-  const cartItems = useSelector((state) => state.cart.items);
-
-  //useSelector -> selector -> state.cart.items return items
-  //filter by id -> items[id] -> quantity
-  //calculate -> max - quantity
+  const [btnDisabled, setBtnDisabled] = useState(false);
+  const currentQuantity = useSelector((state) => state.cart.items[id] || 0);
+  const remainingQuantity = max - currentQuantity;
+  const reachedToMax = remainingQuantity <= 0 ? true : false;
 
   useEffect(() => {
     if (btnClicked === 0) return;
-    setDisabled(true);
+    setBtnDisabled(true);
 
     const debounce = setTimeout(() => {
-      setDisabled(false);
+      setBtnDisabled(false);
     }, 400);
     return () => clearTimeout(debounce);
   }, [btnClicked]);
 
   const clickActionHandler = () => {
     setBtnClicked((prev) => prev + 1);
-    selectedProduct(id);
+    dispatch(addToCart(id));
   };
 
   return (
@@ -45,14 +37,23 @@ const Product = ({
       </div>
       <h2 title={title}>{title}</h2>
       <h3>{price} EGP</h3>
-      <p className={maximumNotice}>You can add 3 item(s)</p>
-      <Button variant="info" onClick={clickActionHandler} disabled={disabled}>
-        {disabled ? (
+      <p className={maximumNotice}>
+        {reachedToMax
+          ? "You reached to the limit"
+          : `You can add ${remainingQuantity} item(s)`}
+      </p>
+      <Button
+        variant="info"
+        onClick={clickActionHandler}
+        disabled={btnDisabled || reachedToMax}
+        className={button}
+      >
+        {btnDisabled ? (
           <>
             <Spinner animation="border" size="sm" /> Loading...
           </>
         ) : (
-          btnText || "Add to cart"
+          "Add to cart"
         )}
       </Button>
     </div>

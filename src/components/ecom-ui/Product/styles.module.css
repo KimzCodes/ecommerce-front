@@ -28,6 +28,14 @@
 
 .button {
   width: 100%;
+  font-size: 15px;
+  padding: 5px;
+  color: white;
+}
+
+.button:disabled,
+.button:active {
+  color: white !important;
 }
 
 .maximumNotice {
