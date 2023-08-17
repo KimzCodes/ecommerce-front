@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-//types: success/info/warning/alert
+//types: success/info/warning/danger
 
 const initialState = {
   items: [
@@ -14,7 +14,7 @@ const initialState = {
       id: 2,
       title: "Notification",
       description: "This is notification description two",
-      type: "alert",
+      type: "danger",
     },
   ],
 };
