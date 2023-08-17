@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { Header } from "../components/layout";
+import { Header, Notifications } from "../components/layout";
 
 const Layout = () => {
   return (
@@ -9,6 +9,7 @@ const Layout = () => {
       <div>
         <Outlet />
       </div>
+      <Notifications />
     </Container>
   );
 };
