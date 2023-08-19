@@ -24,7 +24,10 @@ const notificationSlice = createSlice({
   initialState,
   reducers: {
     addNotification: (state, action) => {},
-    removeNotification: (state, action) => {},
+    removeNotification: (state, action) => {
+      const id = action.payload;
+      state.items = state.items.filter((el) => el.id !== id);
+    },
   },
 });
 
