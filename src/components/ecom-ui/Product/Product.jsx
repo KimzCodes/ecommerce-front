@@ -67,6 +67,9 @@ const Product = ({
       addToast({
         description: `${title} Added to your cart`,
         type: typesMap[type],
+        onClose: () => {
+          console.log("fired");
+        },
       })
     );
     selectedProduct(id);

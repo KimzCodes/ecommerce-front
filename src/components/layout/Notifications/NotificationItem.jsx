@@ -6,23 +6,26 @@ import { Placeholder } from "react-bootstrap";
 
 import styles from "./styles.module.css";
 
-const { notification, indicator } = styles;
+const { notification, indicator, hovering } = styles;
 
-const NotificationItem = ({ id, title, description, type }) => {
+const NotificationItem = ({ id, title, description, type, delay, onClose }) => {
   const dispatch = useDispatch();
 
   const [progress, setProgress] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [delayAnimation, setDelayAnimation] = useState(false);
 
   const closeHandler = useCallback(() => {
     dispatch(removeToast(id));
-  }, [dispatch, id]);
+    onClose();
+  }, [dispatch, id, onClose]);
 
   const handleMouseEvent = () => {
     setPaused((prevState) => !prevState);
   };
 
   useEffect(() => {
+    if (delayAnimation) return;
     let timerId = setInterval(() => {
       if (!paused) {
         setProgress((prevProgress) => {
@@ -35,8 +38,22 @@ const NotificationItem = ({ id, title, description, type }) => {
       }
     }, 50);
 
-    return () => clearTimeout(timerId);
-  }, [paused]);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [paused, delayAnimation, onClose]);
+
+  useEffect(() => {
+    if (delay > 0) {
+      setDelayAnimation(true);
+
+      const timerId = setTimeout(() => {
+        setDelayAnimation(false);
+      }, delay);
+
+      return () => clearTimeout(timerId);
+    }
+  }, [delay]);
 
   useEffect(() => {
     if (progress === 100) {
@@ -44,12 +61,16 @@ const NotificationItem = ({ id, title, description, type }) => {
     }
   }, [progress, closeHandler]);
 
+  if (delayAnimation) return;
+
   return (
     <motion.div
       initial={{ x: 200, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: -200, opacity: 0 }}
-      className={`alert alert-${type} ${notification}`}
+      className={`alert alert-${type} ${notification} ${
+        paused ? hovering : ""
+      }`}
       onMouseEnter={handleMouseEvent}
       onMouseLeave={handleMouseEvent}
     >
