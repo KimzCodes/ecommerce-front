@@ -13,9 +13,15 @@ const toastSlice = createSlice({
       const id = nanoid(9);
       const type = action.payload?.type || "primary";
       const title = action.payload?.title || "Notification";
-      const delay = 3000;
+      const delay = 1000;
 
-      state.notifications.push({ id, title, type, delay, ...action.payload });
+      state.notifications.push({
+        id,
+        title,
+        type,
+        delay,
+        ...action.payload,
+      });
     },
     removeToast: (state, action) => {
       const id = action.payload;
