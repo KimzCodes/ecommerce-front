@@ -14,7 +14,6 @@ import storage from "redux-persist/lib/storage";
 import category from "./categorySlice";
 import product from "./productSlice";
 import cart from "./cartSlice";
-import notification from "./notificationSlice";
 
 const rootPersistConfig = {
   key: "root",
@@ -32,7 +31,6 @@ const rootReducer = combineReducers({
   category,
   product,
   cart: persistReducer(cartPersistConfig, cart),
-  notification,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
