@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeNotification } from "../../../store/notificationSlice";
 import Placeholder from "react-bootstrap/Placeholder";
@@ -7,6 +8,22 @@ const { notificationItem, indicator } = styles;
 
 const NotificationItem = ({ id, title, type, description }) => {
   const dispatch = useDispatch();
+  const [progress, setProgress] = useState(0);
+  const duration = 5000;
+  const progressInterval = duration / 100;
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setProgress((prevState) => {
+        if (prevState < 100) {
+          return prevState + 1;
+        }
+        return prevState;
+      });
+    }, progressInterval);
+
+    return () => clearInterval(timerId);
+  }, [progressInterval]);
 
   const closeHandler = () => {
     dispatch(removeNotification(id));
@@ -17,7 +34,14 @@ const NotificationItem = ({ id, title, type, description }) => {
       <h6>{title}</h6>
       <p>{description}</p>
       <button className="btn-close" onClick={closeHandler}></button>
-      <Placeholder bg={type} style={{ width: "80%" }} className={indicator} />
+      <Placeholder
+        bg={type}
+        style={{
+          width: `${progress}%`,
+          transition: `width ${progressInterval}sm linear`,
+        }}
+        className={indicator}
+      />
     </div>
   );
 };
